@@ -1,0 +1,22 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+@import "../../../styles.scss";
+.example-spacer {
+  flex: 1 1 auto;
+}
+.opacity-50 {
+  background-color: mat.get-color-from-palette($primary);
+}
+.width {
+  width: 1000px;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+.sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+}

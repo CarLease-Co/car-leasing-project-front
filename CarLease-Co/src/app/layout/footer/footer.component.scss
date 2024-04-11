@@ -1,5 +1,8 @@
+@use "@angular/material" as mat;
+@include mat.core();
+@import "../../../styles.scss";
 .custom-footer {
-  background-color: #9fa8da;
+  background-color: mat.get-color-from-palette($primary);
   position: fixed;
   left: 0;
   bottom: 0;
@@ -11,6 +14,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px;
+  width: 900px;
+  display: flex;
+  margin: auto;
 }
 
 .copyright {
