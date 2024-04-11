@@ -1,0 +1,27 @@
+<div color="primary" class="opacity-50 wrapper sticky">
+  <mat-toolbar color="primary" class="opacity-50 width">
+    <h1>CarLess</h1>
+    <span class="example-spacer"></span>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="goToLeases()">
+        <mat-icon>home</mat-icon>
+        <span>My Leases</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>add</mat-icon>
+        <span>New Lease</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>logout</mat-icon>
+        <span>Log out</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</div>
