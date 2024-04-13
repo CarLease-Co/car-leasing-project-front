@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
-import {
-  MatFormFieldControl,
-  MatFormFieldModule,
-} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-lease-application-form',
@@ -19,6 +17,7 @@ import { MatSliderModule } from '@angular/material/slider';
     MatOption,
     MatSelectModule,
     MatSliderModule,
+    MatButtonModule,
   ],
   templateUrl: './lease-application-form.component.html',
   styleUrl: './lease-application-form.component.scss',

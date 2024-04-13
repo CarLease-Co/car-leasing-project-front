@@ -1,12 +1,51 @@
-.loan-application-form {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+@use "@angular/material" as mat;
+@import "../../../styles.scss";
+@include mat.core();
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.full-width-form-field {
-  width: 100%;
-  margin-bottom: 20px;
+.loan-application-form {
+  max-width: 600px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .full-width-form-field {
+    width: 100%;
+    margin-bottom: 20px;
+
+    mat-form-field {
+      width: 100%;
+      padding: 10px;
+
+      input {
+        font-size: 16px;
+      }
+
+      textarea {
+        min-height: 150px;
+        resize: vertical;
+        font-size: 16px;
+      }
+
+      mat-select {
+        font-size: 16px;
+      }
+    }
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  @media screen and (max-width: 600px) {
+    max-width: 90%;
+  }
 }
