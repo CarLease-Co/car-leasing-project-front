@@ -3,46 +3,40 @@
 @include mat.core();
 
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  padding-top: 40px;
   height: 100vh;
+}
+
+.lease-form-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #615d5d;
+  text-align: center;
 }
 
 .loan-application-form {
   max-width: 600px;
+  margin: 0px auto;
   padding: 20px;
-  background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   .full-width-form-field {
-    width: 100%;
+    width: calc(100%);
     margin-bottom: 20px;
+  }
 
-    mat-form-field {
-      width: 100%;
-      padding: 10px;
-
-      input {
-        font-size: 16px;
-      }
-
-      textarea {
-        min-height: 150px;
-        resize: vertical;
-        font-size: 16px;
-      }
-
-      mat-select {
-        font-size: 16px;
-      }
-    }
+  .button-container {
+    display: flex;
+    justify-content: flex-start;
   }
 
   button[type="submit"] {
-    width: 100%;
     margin-top: 10px;
+    background-color: mat.get-color-from-palette($primary);
+    color: white;
   }
 
   @media screen and (max-width: 600px) {
