@@ -4,7 +4,6 @@ import {
   FormControl,
   Validators,
   ReactiveFormsModule,
-  FormsModule,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,7 +17,6 @@ import { MatButtonModule } from '@angular/material/button';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
