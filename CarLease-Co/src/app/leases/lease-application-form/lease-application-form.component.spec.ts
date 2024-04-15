@@ -8,10 +8,9 @@ describe('LeaseApplicationFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LeaseApplicationFormComponent]
-    })
-    .compileComponents();
-    
+      imports: [LeaseApplicationFormComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(LeaseApplicationFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
