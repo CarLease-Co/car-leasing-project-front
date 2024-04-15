@@ -10,4 +10,9 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 $primary: mat.define-palette(mat.$indigo-palette, 200);
+
+
+$primary-color: #3f51b5;
+
 $primary-hover: mat.define-palette(mat.$indigo-palette, 100);
+
