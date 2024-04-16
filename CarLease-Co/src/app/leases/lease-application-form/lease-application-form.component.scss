@@ -4,8 +4,9 @@
 
 .container {
   position: relative;
-  padding-top: 40px;
-  height: 100vh;
+  padding: 50px;
+  min-height: 100vh;
+  margin-bottom: 20px;
 }
 
 .lease-form-header {
@@ -19,6 +20,7 @@
 .loan-application-form {
   max-width: 600px;
   margin: 0 auto;
+
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -64,7 +66,8 @@
     display: flex;
     justify-content: flex-start;
     button[type="submit"] {
-      margin-top: 10px;
+      padding: 5px 50px;
+      margin-top: 5px;
       background-color: mat.get-color-from-palette($primary);
       color: white;
     }
