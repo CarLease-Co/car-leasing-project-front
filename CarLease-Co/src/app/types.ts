@@ -1,16 +1,23 @@
 export interface LeaseApplication {
-  id: number;
-  applicantId: number;
+  applicationId: number;
+  user: User;
   userName: string;
   userSurname: string;
   monthlyIncome: number;
   financialObligations: number;
-  carBrand: string;
-  carModel: string;
-  carYear: number;
+  carId: number;
   loanAmount: number;
-  loanDuration: number;
-  freeTextDesc: string;
-  isSubmitted: boolean;
+  loanDurationInMonths: number;
+  textExplanation: string;
+  submitted: boolean;
+  endDate: Date;
+  startDate: Date;
+  status: string;
 }
 export type LeaseApplications = LeaseApplication[];
+export interface User {
+  name: string;
+  role: string;
+  surname: string;
+  userId: number;
+}

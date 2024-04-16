@@ -3,7 +3,7 @@
 @include mat.core();
 @import "../../../styles.scss";
 .max-width {
-  width: 1000px;
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -15,4 +15,7 @@
 tr:hover {
   background-color: mat.get-color-from-palette($primary-hover);
   transition: 0.5s;
+}
+table {
+  max-width: 100%;
 }
