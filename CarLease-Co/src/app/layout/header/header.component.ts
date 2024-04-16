@@ -17,4 +17,8 @@ export class HeaderComponent {
   goToLeaseList(): void {
     this.router.navigate(['applications']);
   }
+
+  goToLeaseForm(): void {
+    this.router.navigate(['new-application']);
+  }
 }
