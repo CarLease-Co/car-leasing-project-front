@@ -19,3 +19,13 @@ tr:hover {
 table {
   max-width: 100%;
 }
+th,
+tr {
+  text-align: start;
+}
+@media only screen and (max-width: 700px) {
+  .table-width {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
