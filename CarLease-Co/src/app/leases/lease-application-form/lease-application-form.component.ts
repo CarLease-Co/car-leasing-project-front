@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormGroup,
   FormControl,
   Validators,
   ReactiveFormsModule,
+  AbstractControl,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -11,6 +12,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
+import { ApplicationListService } from '../../services/application-list.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-lease-application-form',
@@ -38,10 +42,13 @@ export class LeaseApplicationFormComponent {
       Validators.min(1),
     ]),
     carMake: new FormControl('', Validators.required),
-    carModel: new FormControl('', Validators.required),
-    carYear: new FormControl(1925, [
+    carModel: new FormControl(
+      { value: '', disabled: true },
+      Validators.required
+    ),
+    carYear: new FormControl(1994, [
       Validators.required,
-      Validators.min(1925),
+      Validators.min(1994),
       Validators.max(2024),
     ]),
     duration: new FormControl(3, [
@@ -55,6 +62,25 @@ export class LeaseApplicationFormComponent {
     ]),
     explanation: new FormControl(''),
   });
+  private readonly router = inject(Router);
+  readonly service = inject(ApplicationListService);
+  get makeControl(): AbstractControl<string | null, string | null> | null {
+    return this.leaseForm.get('carMake');
+  }
+  get modelControl(): AbstractControl<string | null, string | null> | null {
+    return this.leaseForm.get('carModel');
+  }
+
+  ngOnInit(): void {
+    this.service.getCars();
+    this.makeControl?.valueChanges
+      .pipe(
+        tap((make) => {
+          make ? this.modelControl?.enable() : this.modelControl?.disable();
+        })
+      )
+      .subscribe();
+  }
 
   onSubmit() {
     console.log('Form submitted:', this.leaseForm.value);

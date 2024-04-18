@@ -6,7 +6,7 @@
     class="loan-application-form"
   >
     <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Monthly Income *</mat-label>
+      <mat-label>Monthly Income</mat-label>
       <input
         matInput
         type="number"
@@ -17,7 +17,7 @@
     </mat-form-field>
 
     <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Monthly Financial Obligations *</mat-label>
+      <mat-label>Monthly Financial Obligations</mat-label>
       <input
         matInput
         type="number"
@@ -28,32 +28,32 @@
     </mat-form-field>
 
     <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Car Brand *</mat-label>
+      <mat-label>Car Brand</mat-label>
       <mat-select
         placeholder="Select Car Brand"
         formControlName="carMake"
         required
       >
-        <mat-option value="brand1">Make 1</mat-option>
-        <mat-option value="brand2">Make 2</mat-option>
+        @for (car of this.service.cars$.value; track car.make) {
+        <mat-option [value]="car.make">{{ car.make }}</mat-option
+        >}
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Car Model *</mat-label>
+      <mat-label>Car Model</mat-label>
       <mat-select
         placeholder="Select Car Model"
         formControlName="carModel"
         required
-      >
-        <mat-option value="model1">Model 1</mat-option>
-        <mat-option value="model2">Model 2</mat-option>
-        <mat-option value="model3">Model 3</mat-option>
+        >@for (car of this.service.cars$.value; track car) {
+        <mat-option [value]="car.model">{{ car.model }}</mat-option
+        >}
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Leasing Amount *</mat-label>
+      <mat-label>Leasing Amount</mat-label>
       <input
         matInput
         type="number"
@@ -64,8 +64,8 @@
     </mat-form-field>
 
     <div class="slider-container">
-      <label class="slider-label">Car Year *</label>
-      <mat-slider min="1925" max="2024" step="1"
+      <label class="slider-label">Car Year</label>
+      <mat-slider min="1994" max="2024" step="1" discrete
         ><input matSliderThumb formControlName="carYear"
       /></mat-slider>
       <div class="slider-info">
@@ -77,8 +77,15 @@
     </div>
 
     <div class="slider-container">
-      <label class="slider-label">Duration of Loan (months) *</label>
-      <mat-slider min="3" max="68" step="1" thumbLabel tickInterval="5">
+      <label class="slider-label">Duration of Loan (months)</label>
+      <mat-slider
+        min="3"
+        max="68"
+        step="1"
+        discrete
+        thumbLabel
+        tickInterval="5"
+      >
         <input matSliderThumb formControlName="duration"
       /></mat-slider>
       <div class="slider-info">

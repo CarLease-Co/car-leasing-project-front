@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, map, tap } from 'rxjs';
-import { LeaseApplication, LeaseApplications } from '../types';
+import { Car, LeaseApplication, LeaseApplications } from '../types';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +9,7 @@ import { LeaseApplication, LeaseApplications } from '../types';
 export class ApplicationListService {
   private readonly httpClient = inject(HttpClient);
   private applicationsSubject = new BehaviorSubject<LeaseApplication[]>([]);
+  cars$ = new BehaviorSubject<Car[]>([]);
   applications$ = this.applicationsSubject.asObservable();
   application$ = new BehaviorSubject<LeaseApplication | null>(null);
   getApplications(): void {
@@ -30,6 +31,17 @@ export class ApplicationListService {
       .pipe(
         tap(console.log),
         tap((application) => this.application$.next(application))
+      )
+      .subscribe();
+  }
+  getCars(): void {
+    this.httpClient
+      .get<Car>(
+        'https://car-leasing-project-back-sandbox.onrender.com/api/v1/cars'
+      )
+      .pipe(
+        tap(console.log),
+        tap((cars) => this.cars$.next(cars))
       )
       .subscribe();
   }
