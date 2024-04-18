@@ -1,11 +1,12 @@
 export interface LeaseApplication {
-  applicationId: number;
+  id: number;
   user: User;
   userName: string;
   userSurname: string;
   monthlyIncome: number;
   financialObligations: number;
-  carId: number;
+  car: Car;
+  manufactureDate: number;
   loanAmount: number;
   loanDurationInMonths: number;
   textExplanation: string;
@@ -20,4 +21,11 @@ export interface User {
   role: string;
   surname: string;
   userId: number;
+}
+export interface Car {
+  id: number;
+  make: string;
+  model: string;
+  priceFrom: number;
+  priceTo: number;
 }

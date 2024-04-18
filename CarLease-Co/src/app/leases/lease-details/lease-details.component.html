@@ -1,9 +1,7 @@
 @if (service.application$.getValue(); as application) {
 <mat-card class="example-card">
   <mat-card-header>
-    <mat-card-title
-      >Application ID {{ application.applicationId }}</mat-card-title
-    >
+    <mat-card-title>Application ID {{ application.id }}</mat-card-title>
     <mat-card-subtitle>
       USER ID {{ application.user.userId }}</mat-card-subtitle
     >
@@ -12,7 +10,9 @@
     <mat-card-content>
       <h3>Applicant name</h3>
       <h3>Applicant surname</h3>
-      <h3>Car ID</h3>
+      <h3>Car Brand</h3>
+      <h3>Car Model</h3>
+      <h3>Car Manufacture Year</h3>
       <h3>Application start date</h3>
       <h3>Application end date</h3>
       <h3>Financial obligations</h3>
@@ -26,7 +26,9 @@
     <mat-card-content style="padding: 0">
       <h3>{{ application.user.name }}</h3>
       <h3>{{ application.user.surname }}</h3>
-      <h3>{{ application.carId }}</h3>
+      <h3>{{ application.car.make }}</h3>
+      <h3>{{ application.car.model }}</h3>
+      <h3>{{ application.manufactureDate }}</h3>
       <h3>{{ application.startDate }}</h3>
       <h3>{{ application.endDate }}</h3>
       <h3>{{ application.financialObligations }}</h3>
