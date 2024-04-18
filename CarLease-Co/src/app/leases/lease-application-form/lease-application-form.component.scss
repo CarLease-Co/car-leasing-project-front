@@ -72,6 +72,10 @@
       background-color: mat.get-color-from-palette($primary);
       color: white;
     }
+    button:hover {
+      cursor: pointer;
+      background-color: mat.get-color-from-palette($primary-row);
+    }
   }
 
   @media screen and (max-width: 600px) {

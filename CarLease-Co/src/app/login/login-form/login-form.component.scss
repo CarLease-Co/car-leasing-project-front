@@ -1,0 +1,38 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+@import "../../../styles.scss";
+.container {
+  margin: 100px auto;
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  height: 450px;
+  border-radius: 40px;
+}
+mat-form-field {
+  margin-bottom: 25px;
+}
+.welcome-wrapper,
+.login-wrapper {
+  width: 50%;
+  text-align: center;
+  align-content: center;
+}
+.welcome-wrapper {
+  background-color: mat.get-color-from-palette($primary);
+  border-radius: 40px;
+}
+
+.button-container {
+  button[type="submit"] {
+    padding: 5px 50px;
+    margin-top: 5px;
+    background-color: mat.get-color-from-palette($primary);
+    color: white;
+  }
+  button:hover {
+    background-color: mat.get-color-from-palette($primary-hover);
+  }
+}
