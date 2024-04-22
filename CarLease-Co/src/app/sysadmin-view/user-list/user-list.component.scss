@@ -1,24 +1,29 @@
+
+
 @use "@angular/material" as mat;
 
 @include mat.core();
 @import "../../../styles.scss";
+
+.user-list {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
 .max-width {
   max-width: 1000px;
   display: flex;
   flex-direction: column;
   margin: auto;
 }
-.margin-top {
-  margin-top: 64px;
-}
 .mat-mdc-form-field {
   font-size: 14px;
   width: 100%;
 }
 tr:hover {
-  background-color: mat.get-color-from-palette($primary-row);
+  background-color: mat.get-color-from-palette($primary-hover);
   transition: 0.5s;
-  cursor: pointer;
 }
 table {
   max-width: 100%;

@@ -1,0 +1,93 @@
+import {EMPLOYEE_ROLE} from "../enums";
+import {Employee} from "../types";
+
+export const employeeList: Employee[] = [
+  {
+    userId: 1,
+    name: "Jonas",
+    surname: "Petraitis",
+    role: EMPLOYEE_ROLE.APPROVER,
+    email: "jonas.petraitis@example.com",
+    password: "pass1234",
+  },
+  {
+    userId: 2,
+    name: "Ona",
+    surname: "Jonaitė",
+    role: EMPLOYEE_ROLE.REVIEWER,
+    email: "ona.jonaite@example.com",
+    password: "pass2345",
+  },
+  {
+    userId: 3,
+    name: "Petras",
+    surname: "Kazlauskas",
+    role: EMPLOYEE_ROLE.SYSTEM_ADMIN,
+    email: "petras.kazlauskas@example.com",
+    password: "pass3456",
+  },
+  {
+    userId: 4,
+    name: "Ieva",
+    surname: "Juškaitė",
+    role: EMPLOYEE_ROLE.APPROVER,
+    email: "ieva.juskaite@example.com",
+    password: "pass4567",
+  },
+  {
+    userId: 5,
+    name: "Marius",
+    surname: "Grigaitis",
+    role: EMPLOYEE_ROLE.REVIEWER,
+    email: "marius.grigaitis@example.com",
+    password: "pass5678",
+  },
+  {
+    userId: 6,
+    name: "Eglė",
+    surname: "Kavaliauskaitė",
+    role: EMPLOYEE_ROLE.APPROVER,
+    email: "egle.kavaliauskaite@example.com",
+    password: "pass6789",
+  },
+  {
+    userId: 7,
+    name: "Tomas",
+    surname: "Žukauskas",
+    role: EMPLOYEE_ROLE.BUSINESS_ADMIN,
+    email: "tomas.zukauskas@example.com",
+    password: "pass7890",
+  },
+  {
+    userId: 8,
+    name: "Simona",
+    surname: "Narbutaitė",
+    role: EMPLOYEE_ROLE.SYSTEM_ADMIN,
+    email: "simona.narbutaite@example.com",
+    password: "pass8901",
+  },
+  {
+    userId: 9,
+    name: "Vytas",
+    surname: "Simanaitis",
+    role: EMPLOYEE_ROLE.REVIEWER,
+    email: "vytas.simanaitis@example.com",
+    password: "pass9012",
+  },
+  {
+    userId: 10,
+    name: "Dalia",
+    surname: "Gedvilaitė",
+    role: EMPLOYEE_ROLE.APPROVER,
+    email: "dalia.gedvilaite@example.com",
+    password: "pass0123",
+  },
+  {
+    userId: 11,
+    name: "Arūnas",
+    surname: "Valinskas",
+    role: EMPLOYEE_ROLE.BUSINESS_ADMIN,
+    email: "arunas.valinskas@example.com",
+    password: "pass1235",
+  }
+]

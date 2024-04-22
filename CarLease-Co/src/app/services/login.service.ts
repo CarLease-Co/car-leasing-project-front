@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, map, tap } from 'rxjs';
-import { LoginResponse, User } from '../types';
+import { BehaviorSubject, tap } from 'rxjs';
+import { LoginResponse } from '../types';
 
 @Injectable({
   providedIn: 'root',
@@ -11,13 +11,14 @@ export class LoginService {
   loginResponse$ = new BehaviorSubject<LoginResponse | null>(null);
   login(username: string, password: string): void {
     this.httpClient
-      .post<LoginResponse>(
-        'https://car-leasing-project-back-sandbox.onrender.com/api/v1/users',
-        { username, password }
+      .get<LoginResponse>(
+        'https://car-leasing-project-back-sandbox.onrender.com/api/v1/users/login',
+        { params: { username, password } }
       )
       .pipe(
-        tap((response) => this.loginResponse$.next(response)),
-        tap(console.log)
+        tap((response) =>
+          localStorage.setItem('loginResponse', JSON.stringify(response))
+        )
       )
       .subscribe();
   }

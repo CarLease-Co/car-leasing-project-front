@@ -4,15 +4,19 @@ import { LeaseDetailsComponent } from './leases/lease-details/lease-details.comp
 import { LeaseApplicationFormComponent } from './leases/lease-application-form/lease-application-form.component';
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import { loginAccessGuard } from './guards/login-access.guard';
+import { ViewComponent } from './sysadmin-view/view/view.component';
+import { AppComponent } from './app.component';
+import { sysadminLoginGuard } from './guards/sysadmin-login.guard';
 
 export const routes: Routes = [
+  { path: '', component: AppComponent },
   {
     path: 'applications',
     component: LeaseApplicationsListComponent,
     canActivate: [loginAccessGuard],
   },
   {
-    path: 'applications/details/:id',
+    path: 'applications/application-details/:id',
     component: LeaseDetailsComponent,
     canActivate: [loginAccessGuard],
   },
@@ -22,4 +26,9 @@ export const routes: Routes = [
     canActivate: [loginAccessGuard],
   },
   { path: 'login', component: LoginFormComponent },
+  {
+    path: 'sysadmin-view',
+    component: ViewComponent,
+    canActivate: [sysadminLoginGuard],
+  },
 ];

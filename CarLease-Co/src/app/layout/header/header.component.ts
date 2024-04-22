@@ -14,21 +14,22 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   private readonly router = inject(Router);
-  // role: string | null = '';
-  // ngOnInit() {
-  //   const jwt = localStorage.getItem('jwt');
-  //   if (jwt) {
-  //     this.role = JSON.parse(jwt).role;
-  //   }
-
-  //   console.log(this.role);
-  // }
+  role: string | null = '';
+  ngOnInit() {
+    const loginResponse = localStorage.getItem('loginResponse');
+    if (loginResponse) {
+      this.role = JSON.parse(loginResponse).role;
+    }
+  }
   goToLeaseList(): void {
     this.router.navigate(['applications']);
   }
 
   goToLeaseForm(): void {
     this.router.navigate(['new-application']);
+  }
+  goToSysAdminView(): void {
+    this.router.navigate(['sysadmin-view']);
   }
   logout() {
     localStorage.clear();
