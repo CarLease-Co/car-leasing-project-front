@@ -7,6 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ApplicationListService } from '../../services/application-list.service';
 import { Router } from '@angular/router';
+import { LoginService } from '../../services/login.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-lease-applications-list',
@@ -17,6 +19,7 @@ import { Router } from '@angular/router';
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
   ],
   templateUrl: './lease-applications-list.component.html',
   styleUrl: './lease-applications-list.component.scss',
@@ -28,23 +31,39 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
     'applicationDate',
     'loanAmount',
     'loanDuration',
-    'isSubmitted',
     'status',
   ];
+
+  role!: string | null;
+  userId!: number | null;
+  private readonly router = inject(Router);
+  loginService = inject(LoginService);
+
   dataSource: MatTableDataSource<LeaseApplication> =
     new MatTableDataSource<LeaseApplication>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  private readonly router = inject(Router);
 
   constructor(private applicationsService: ApplicationListService) {}
   ngOnInit(): void {
-    this.applicationsService.applications$.subscribe((applications) => {
-      this.dataSource.data = applications;
-      this.leaseApplications = applications;
-    });
+    const loginResponse = JSON.parse(localStorage.getItem('loginResponse')!);
+    this.role = loginResponse.role;
+    this.userId = loginResponse.userId;
     this.applicationsService.getApplications();
+    this.applicationsService.applications$.subscribe((applications) => {
+      if (this.role === 'APPLICANT') {
+        this.dataSource.data = applications.filter(
+          (application) => application.user.userId === +this.userId!
+        );
+        this.leaseApplications = applications;
+      } else if (this.role === 'REVIEWER' || this.role === 'APPROVER') {
+        this.dataSource.data = applications.filter(
+          (application) => application.status !== 'DRAFT'
+        );
+        this.leaseApplications = applications;
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -60,6 +79,9 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
     const selectedApplication = this.leaseApplications.find(
       (application) => application.id === id
     );
-    this.router.navigate(['application-details', selectedApplication?.id]);
+    this.router.navigate([
+      'applications/application-details',
+      selectedApplication?.id,
+    ]);
   }
 }
