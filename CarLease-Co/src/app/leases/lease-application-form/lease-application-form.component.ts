@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { Car } from '../../types';
 import {
   FormGroup,
   FormControl,
@@ -14,7 +15,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { ApplicationListService } from '../../services/application-list.service';
-import {map, Observable, tap} from 'rxjs';
+import {filter, map, Observable, tap} from 'rxjs';
+import {AsyncPipe} from "@angular/common";
 
 @Component({
   selector: 'app-lease-application-form',
@@ -27,13 +29,15 @@ import {map, Observable, tap} from 'rxjs';
     MatOptionModule,
     MatSliderModule,
     MatButtonModule,
+    AsyncPipe,
   ],
   templateUrl: './lease-application-form.component.html',
   styleUrls: ['./lease-application-form.component.scss'],
 })
 export class LeaseApplicationFormComponent {
-  uniqueCarBrands!: Observable<string[]>;
 
+  uniqueCarBrands$!: Observable<string[]>;
+  filteredModels$!: Observable<string[]>;
   leaseForm = new FormGroup({
     userId: new FormControl(1),
     monthlyIncome: new FormControl('', [
@@ -84,10 +88,19 @@ export class LeaseApplicationFormComponent {
         })
       )
       .subscribe();
-    this.uniqueCarBrands = this.service.cars$.pipe(
-      map(cars => cars.map(car => car.make)), // Extract brands
-      map(brands => Array.from(new Set(brands))) // Remove duplicates and create an array from the Set
+    this.uniqueCarBrands$ = this.service.cars$.pipe(
+      map(cars => cars.map(car => car.make)),
+      map(brands => Array.from(new Set(brands)))
     );
+
+    this.leaseForm.controls.carMake.valueChanges.subscribe(make => {
+      this.filteredModels$ = this.service.cars$.pipe(
+        map(cars => cars.filter(car => car.make === make)
+          .map(car => car.model)
+
+      ));
+    });
+
   }
 
   onSubmit() {
