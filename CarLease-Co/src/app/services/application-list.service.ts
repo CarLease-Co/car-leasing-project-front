@@ -15,7 +15,7 @@ export class ApplicationListService {
   getApplications(): void {
     this.httpClient
       .get<LeaseApplications>(
-        'https://car-leasing-project-back-sandbox.onrender.com/api/v1/applications'
+        'localhost:8080/api/v1/applications'
       )
       .pipe(
         tap(console.log),
@@ -26,7 +26,7 @@ export class ApplicationListService {
   getApplicationById(id: number): void {
     this.httpClient
       .get<LeaseApplication>(
-        `https://car-leasing-project-back-sandbox.onrender.com/api/v1/applications/${id}`
+        `localhost:8080/api/v1/applications/${id}`
       )
       .pipe(
         tap(console.log),
