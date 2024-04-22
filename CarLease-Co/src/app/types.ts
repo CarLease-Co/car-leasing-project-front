@@ -1,3 +1,5 @@
+import {EMPLOYEE_ROLE} from "./enums";
+
 export interface LeaseApplication {
   applicationId: number;
   user: User;
@@ -20,4 +22,13 @@ export interface User {
   role: string;
   surname: string;
   userId: number;
+}
+
+export interface Employee {
+  userId: number;
+  name: string;
+  surname: string;
+  role: EMPLOYEE_ROLE;
+  email: string;
+  password: string;
 }
