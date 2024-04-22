@@ -24,7 +24,7 @@ import { Router } from '@angular/router';
 export class LeaseApplicationsListComponent implements AfterViewInit {
   leaseApplications: LeaseApplication[] = [];
   displayedColumns: string[] = [
-    'applicationId',
+    'id',
     'applicationDate',
     'loanAmount',
     'loanDuration',
@@ -58,11 +58,8 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
   }
   onApplication(id: number): void {
     const selectedApplication = this.leaseApplications.find(
-      (application) => application.applicationId === id
+      (application) => application.id === id
     );
-    this.router.navigate([
-      'application-details',
-      selectedApplication?.applicationId,
-    ]);
+    this.router.navigate(['application-details', selectedApplication?.id]);
   }
 }

@@ -29,31 +29,19 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class AutosuggestorFormComponent {
   autosuggestorForm = new FormGroup({
-    monthlyIncome: new FormControl('', [
+    interestPercentage: new FormControl('', [
+      Validators.required,
+      Validators.min(1),
+      Validators.max(100),
+    ]),
+    minCarPriceRange: new FormControl('', [
       Validators.required,
       Validators.min(1),
     ]),
-    monthlyObligations: new FormControl('', [
+    maxCarPriceRange: new FormControl('', [
       Validators.required,
       Validators.min(1),
     ]),
-    carMake: new FormControl('', Validators.required),
-    carModel: new FormControl('', Validators.required),
-    carYear: new FormControl(1925, [
-      Validators.required,
-      Validators.min(1925),
-      Validators.max(2024),
-    ]),
-    duration: new FormControl(3, [
-      Validators.required,
-      Validators.min(3),
-      Validators.max(68),
-    ]),
-    leasingAmount: new FormControl('', [
-      Validators.required,
-      Validators.min(1),
-    ]),
-    explanation: new FormControl(''),
   });
   onSubmit() {}
 }

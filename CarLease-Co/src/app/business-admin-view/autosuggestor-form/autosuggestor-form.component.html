@@ -1,106 +1,46 @@
 <div class="container">
-  <h3 class="lease-form-header">Lease application form</h3>
+  <h3 class="autosuggestor-form-header">Autosuggestor values form</h3>
   <form
     [formGroup]="autosuggestorForm"
     (ngSubmit)="onSubmit()"
-    class="loan-application-form"
+    class="autosuggestor-application-form"
   >
     <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Monthly Income *</mat-label>
+      <mat-label>Interest Percentage</mat-label>
       <input
         matInput
         type="number"
-        placeholder="Enter Monthly Income"
-        formControlName="monthlyIncome"
+        min="0"
+        placeholder="Enter Interest Percentage"
+        formControlName="interestPercentage"
         required
       />
     </mat-form-field>
 
-    <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Monthly Financial Obligations *</mat-label>
-      <input
-        matInput
-        type="number"
-        placeholder="Enter Monthly Financial Obligations"
-        formControlName="monthlyObligations"
-        required
-      />
-    </mat-form-field>
-
-    <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Car Brand *</mat-label>
-      <mat-select
-        placeholder="Select Car Brand"
-        formControlName="carMake"
-        required
-      >
-        <mat-option value="brand1">Make 1</mat-option>
-        <mat-option value="brand2">Make 2</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Car Model *</mat-label>
-      <mat-select
-        placeholder="Select Car Model"
-        formControlName="carModel"
-        required
-      >
-        <mat-option value="model1">Model 1</mat-option>
-        <mat-option value="model2">Model 2</mat-option>
-        <mat-option value="model3">Model 3</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Leasing Amount *</mat-label>
-      <input
-        matInput
-        type="number"
-        placeholder="Enter Leasing Amount"
-        formControlName="leasingAmount"
-        required
-      />
-    </mat-form-field>
-
-    <div class="slider-container">
-      <label class="slider-label">Car Year *</label>
-      <mat-slider min="1925" max="2024" step="1"
-        ><input matSliderThumb formControlName="carYear"
-      /></mat-slider>
-      <div class="slider-info">
-        <span class="slider-value">{{
-          autosuggestorForm.get("carYear")?.value ?? "Not set"
-        }}</span>
-        <span class="slider-max">2024</span>
-      </div>
+    <div class="full-width-form-field">
+      <mat-form-field class="half-width-form-field" appearance="outline">
+        <mat-label>Min Car Price</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          placeholder="Enter Car Min Price Range"
+          formControlName="minCarPriceRange"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field class="half-width-form-field" appearance="outline">
+        <mat-label>Max Car Price</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          placeholder="Enter Car Min Price Range"
+          formControlName="maxCarPriceRange"
+          required
+        />
+      </mat-form-field>
     </div>
-
-    <div class="slider-container">
-      <label class="slider-label">Duration of Loan (months) *</label>
-      <mat-slider min="3" max="68" step="1" thumbLabel tickInterval="5">
-        <input matSliderThumb formControlName="duration"
-      /></mat-slider>
-      <div class="slider-info">
-        <span class="slider-value"
-          >{{
-            autosuggestorForm.get("duration")?.value ?? "Not set"
-          }}
-          months</span
-        >
-        <span class="slider-max">68 months</span>
-      </div>
-    </div>
-
-    <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Explanation</mat-label>
-      <textarea
-        matInput
-        placeholder="Enter Explanation (up to 420 characters)"
-        formControlName="explanation"
-        maxlength="420"
-      ></textarea>
-    </mat-form-field>
 
     <div class="button-container">
       <button
