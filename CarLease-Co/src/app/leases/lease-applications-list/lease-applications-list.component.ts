@@ -27,7 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class LeaseApplicationsListComponent implements AfterViewInit {
   leaseApplications: LeaseApplication[] = [];
   displayedColumns: string[] = [
-    'applicationId',
+    'id',
     'applicationDate',
     'loanAmount',
     'loanDuration',

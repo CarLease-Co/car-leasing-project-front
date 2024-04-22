@@ -6,6 +6,7 @@ import { LoginFormComponent } from './login/login-form/login-form.component';
 import { loginAccessGuard } from './guards/login-access.guard';
 import { ViewComponent } from './sysadmin-view/view/view.component';
 import { AppComponent } from './app.component';
+import { AutosuggestorFormComponent } from './business-admin-view/autosuggestor-form/autosuggestor-form.component';
 import { sysadminLoginGuard } from './guards/sysadmin-login.guard';
 
 export const routes: Routes = [
@@ -31,4 +32,6 @@ export const routes: Routes = [
     component: ViewComponent,
     canActivate: [sysadminLoginGuard],
   },
+    
+  { path: 'autosuggestor-form', component: AutosuggestorFormComponent },
 ];
