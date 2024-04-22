@@ -1,5 +1,5 @@
 export interface LeaseApplication {
-  applicationId: number;
+  id: number;
   user: User;
   userName: string;
   userSurname: string;
@@ -16,8 +16,16 @@ export interface LeaseApplication {
 }
 export type LeaseApplications = LeaseApplication[];
 export interface User {
+  id: number;
   name: string;
-  role: string;
   surname: string;
-  userId: number;
+  role: string;
+  username: string;
+  email: string;
+  jwt: string;
+  password: string;
+}
+export interface LoginResponse {
+  id: number;
+  role: string;
 }

@@ -10,7 +10,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           Application ID
         </th>
-        <td mat-cell *matCellDef="let row">{{ row.applicationId }}</td>
+        <td mat-cell *matCellDef="let row">{{ row.id }}</td>
       </ng-container>
       <ng-container matColumnDef="applicationDate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -30,8 +30,9 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           Submitted/ Drafted
         </th>
+
         <td mat-cell *matCellDef="let row">
-          @if (row.isSubmitted){ Submitted } @else { Drafted }
+          @if (row.submitted){ {{ submitted }} } @else { {{ drafted }} }
         </td>
       </ng-container>
       <ng-container matColumnDef="status">
@@ -43,7 +44,7 @@
       <tr
         mat-row
         *matRowDef="let row; columns: displayedColumns"
-        (click)="onApplication(row.applicationId)"
+        (click)="onApplication(row.id)"
       ></tr>
       <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="4">

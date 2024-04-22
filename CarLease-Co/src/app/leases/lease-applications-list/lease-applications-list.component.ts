@@ -7,6 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ApplicationListService } from '../../services/application-list.service';
 import { Router } from '@angular/router';
+import { userInfo } from 'os';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-lease-applications-list',
@@ -31,18 +33,44 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
     'isSubmitted',
     'status',
   ];
+
+  role: any;
+  userId: any;
+  drafted: string = 'drafted';
+  submitted: string = 'submitted';
+  private readonly router = inject(Router);
+  loginService = inject(LoginService);
+
   dataSource: MatTableDataSource<LeaseApplication> =
     new MatTableDataSource<LeaseApplication>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  private readonly router = inject(Router);
 
   constructor(private applicationsService: ApplicationListService) {}
   ngOnInit(): void {
+    role = this.loginService.loginResponse$.role;
+    userId = this.loginService.loginResponse$.userId;
+    console.log(this.role);
+    console.log(this.userId);
     this.applicationsService.applications$.subscribe((applications) => {
+      // if (this.role === 'APPLICANT') {
+      //   this.dataSource.data = applications.filter(
+      //     (application) => application.user.id === +this.userId!
+      //   );
+      //   this.leaseApplications = applications;
+      // } else if (this.role === 'REVIEWER' || this.role === 'APPROVER') {
+      //   this.dataSource.data = applications.filter(
+      //     (application) => application.submitted === true
+      //   );
+      //   this.leaseApplications = applications;
+      // } else {
+      //   this.dataSource.data = applications;
+      //   this.leaseApplications = applications;
+      // }
       this.dataSource.data = applications;
       this.leaseApplications = applications;
+      console.log('ap', this.leaseApplications);
     });
     this.applicationsService.getApplications();
   }
@@ -58,11 +86,8 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
   }
   onApplication(id: number): void {
     const selectedApplication = this.leaseApplications.find(
-      (application) => application.applicationId === id
+      (application) => application.id === id
     );
-    this.router.navigate([
-      'application-details',
-      selectedApplication?.applicationId,
-    ]);
+    this.router.navigate(['application-details', selectedApplication?.id]);
   }
 }
