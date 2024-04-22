@@ -1,0 +1,51 @@
+@use "@angular/material" as mat;
+@import "../../../styles.scss";
+@include mat.core();
+
+.container {
+  position: relative;
+  padding: 50px;
+  min-height: 100vh;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+.autosuggestor-form-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #615d5d;
+  text-align: center;
+}
+
+.autosuggestor-application-form {
+  max-width: 600px;
+  margin: 0 auto;
+
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .full-width-form-field {
+    width: calc(100%);
+    margin-bottom: 20px;
+    .half-width-form-field {
+      width: calc(50%);
+    }
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-start;
+    button[type="submit"] {
+      padding: 5px 50px;
+      margin-top: 5px;
+      background-color: mat.get-color-from-palette($primary);
+      color: white;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    max-width: 90%;
+  }
+}
