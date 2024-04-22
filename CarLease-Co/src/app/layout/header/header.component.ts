@@ -31,6 +31,9 @@ export class HeaderComponent {
   goToSysAdminView(): void {
     this.router.navigate(['sysadmin-view']);
   }
+  goToBusAdminView(): void {
+    this.router.navigate(['autosuggestor-form']);
+  }
   logout() {
     localStorage.clear();
     this.router.navigate(['login']);

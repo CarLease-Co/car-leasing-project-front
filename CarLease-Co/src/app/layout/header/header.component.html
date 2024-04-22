@@ -20,7 +20,11 @@
         <mat-icon>manage_search</mat-icon>
         <span>User List</span>
       </button>
-
+      } @if (role==='BUSINESS_ADMIN'){
+      <button mat-menu-item (click)="goToBusAdminView()">
+        <mat-icon>admin_panel_settings</mat-icon>
+        <span>User List</span>
+      </button>
       } @if (role === 'APPLICANT') {
       <button mat-menu-item (click)="goToLeaseForm()">
         <mat-icon>add</mat-icon>
