@@ -22,7 +22,7 @@
         matInput
         type="number"
         placeholder="Enter Monthly Financial Obligations"
-        formControlName="monthlyObligations"
+        formControlName="financialObligations"
         required
       />
     </mat-form-field>
@@ -46,19 +46,19 @@
         placeholder="Select Car Model"
         formControlName="carModel"
         required
-        >@for (car of this.service.cars$.value; track car) {
+        >@for (car of uniqueCarBrands; track car) {
         <mat-option [value]="car.model">{{ car.model }}</mat-option
         >}
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Leasing Amount</mat-label>
+      <mat-label>Loan Amount</mat-label>
       <input
         matInput
         type="number"
         placeholder="Enter Leasing Amount"
-        formControlName="leasingAmount"
+        formControlName="loanAmount"
         required
       />
     </mat-form-field>
@@ -66,11 +66,11 @@
     <div class="slider-container">
       <label class="slider-label">Car Year</label>
       <mat-slider min="1994" max="2024" step="1" discrete
-        ><input matSliderThumb formControlName="carYear"
+        ><input matSliderThumb formControlName="manufactureDate"
       /></mat-slider>
       <div class="slider-info">
         <span class="slider-value">{{
-          leaseForm.get("carYear")?.value ?? "Not set"
+          leaseForm.get("manufactureDate")?.value ?? "Not set"
         }}</span>
         <span class="slider-max">2024</span>
       </div>
@@ -86,22 +86,22 @@
         thumbLabel
         tickInterval="5"
       >
-        <input matSliderThumb formControlName="duration"
+        <input matSliderThumb formControlName="loanDuration"
       /></mat-slider>
       <div class="slider-info">
         <span class="slider-value"
-          >{{ leaseForm.get("duration")?.value ?? "Not set" }} months</span
+          >{{ leaseForm.get("loanDuration")?.value ?? "Not set" }} months</span
         >
         <span class="slider-max">68 months</span>
       </div>
     </div>
 
     <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Explanation</mat-label>
+      <mat-label>textExplanation</mat-label>
       <textarea
         matInput
         placeholder="Enter Explanation (up to 420 characters)"
-        formControlName="explanation"
+        formControlName="textExplanation"
         maxlength="420"
       ></textarea>
     </mat-form-field>

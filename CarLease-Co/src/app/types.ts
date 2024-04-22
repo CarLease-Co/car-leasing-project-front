@@ -39,3 +39,18 @@ export interface Employee {
   email: string;
   password: string;
 }
+
+
+export interface LeaseApplicationForm {
+   userId: number;
+   monthlyIncome: number;
+   financialObligations: number;
+   carMake: string;
+   carModel: string;
+   manufactureDate: number;
+   textExplanation: string;
+   loanDuration: number;
+   loanAmount: number;
+   startDate: Date;
+
+}
