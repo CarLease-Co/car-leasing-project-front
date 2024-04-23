@@ -8,13 +8,17 @@
   flex-direction: column;
   margin: auto;
 }
+.margin-top {
+  margin-top: 64px;
+}
 .mat-mdc-form-field {
   font-size: 14px;
   width: 100%;
 }
 tr:hover {
-  background-color: mat.get-color-from-palette($primary-hover);
+  background-color: mat.get-color-from-palette($primary-row);
   transition: 0.5s;
+  cursor: pointer;
 }
 table {
   max-width: 100%;

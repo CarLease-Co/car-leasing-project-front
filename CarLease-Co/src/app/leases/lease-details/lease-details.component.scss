@@ -23,5 +23,5 @@ h3 {
   height: 40px;
 }
 h3:nth-child(even) {
-  background-color: mat.get-color-from-palette($primary-hover);
+  background-color: mat.get-color-from-palette($primary-row);
 }

@@ -1,4 +1,4 @@
-import {EMPLOYEE_ROLE} from "./enums";
+import { EMPLOYEE_ROLE } from './enums';
 
 export interface LeaseApplication {
   id: number;
@@ -10,7 +10,7 @@ export interface LeaseApplication {
   car: Car;
   manufactureDate: number;
   loanAmount: number;
-  loanDurationInMonths: number;
+  loanDuration: number;
   textExplanation: string;
   submitted: boolean;
   endDate: Date;
@@ -19,10 +19,17 @@ export interface LeaseApplication {
 }
 export type LeaseApplications = LeaseApplication[];
 export interface User {
-  name: string;
-  role: string;
-  surname: string;
   userId: number;
+  name: string;
+  surname: string;
+  role: string;
+  username: string;
+  email: string;
+  password: string;
+}
+export interface LoginResponse {
+  userId: number;
+  role: string;
 }
 export interface Car {
   id: number;
@@ -40,7 +47,6 @@ export interface Employee {
   password: string;
 }
 
-
 export interface LeaseApplicationForm {
    userId: number|null|undefined;
    monthlyIncome: number|null;
@@ -53,4 +59,8 @@ export interface LeaseApplicationForm {
    loanAmount: number|null;
    startDate: string|null;
 
+export interface Car {
+  id: number;
+  make: string;
+  model: string;
 }

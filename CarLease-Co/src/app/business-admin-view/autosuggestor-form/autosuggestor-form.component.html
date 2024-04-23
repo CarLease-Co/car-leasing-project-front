@@ -1,0 +1,55 @@
+<div class="container">
+  <h3 class="autosuggestor-form-header">Autosuggestor values form</h3>
+  <form
+    [formGroup]="autosuggestorForm"
+    (ngSubmit)="onSubmit()"
+    class="autosuggestor-application-form"
+  >
+    <mat-form-field class="full-width-form-field" appearance="outline">
+      <mat-label>Interest Percentage</mat-label>
+      <input
+        matInput
+        type="number"
+        min="0"
+        placeholder="Enter Interest Percentage"
+        formControlName="interestPercentage"
+        required
+      />
+    </mat-form-field>
+
+    <div class="full-width-form-field">
+      <mat-form-field class="half-width-form-field" appearance="outline">
+        <mat-label>Min Car Price</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          placeholder="Enter Car Min Price Range"
+          formControlName="minCarPriceRange"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field class="half-width-form-field" appearance="outline">
+        <mat-label>Max Car Price</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          placeholder="Enter Car Min Price Range"
+          formControlName="maxCarPriceRange"
+          required
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="button-container">
+      <button
+        type="submit"
+        mat-raised-button
+        [disabled]="!autosuggestorForm.valid"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
