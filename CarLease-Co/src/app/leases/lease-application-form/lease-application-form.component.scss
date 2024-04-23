@@ -8,6 +8,7 @@
   min-height: 100vh;
   margin-bottom: 20px;
   margin-top: 50px;
+
 }
 
 .lease-form-header {
@@ -19,22 +20,18 @@
 }
 
 .loan-application-form {
-  max-width: 600px;
+  max-width: 900px;
   margin: 0 auto;
 
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-  .full-width-form-field {
-    width: calc(100%);
-    margin-bottom: 20px;
-  }
-
   .slider-container {
     margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 1em;
 
     mat-slider {
       width: calc(100% - 20px);
@@ -64,14 +61,42 @@
   }
 
   .button-container {
-    display: flex;
-    justify-content: flex-start;
+    text-align: center;
     button[type="submit"] {
       padding: 5px 50px;
       margin-top: 5px;
       background-color: mat.get-color-from-palette($primary);
       color: white;
     }
+  }
+
+  .section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    margin: 0 auto;
+    align-content: flex-end;
+    //text-align: center;
+  }
+
+  .col {
+    //flex: 1;
+    flex-basis: 45%;
+
+    box-sizing: border-box;
+
+  }
+
+  .right-col {
+  //  align items to the right
+    left: 0;
+  }
+  mat-form-field {
+    width: 100%;
+    padding: 0;
   }
 
   @media screen and (max-width: 600px) {

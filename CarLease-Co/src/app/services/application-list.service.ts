@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, map, tap } from 'rxjs';
-import { Car, LeaseApplication, LeaseApplications } from '../types';
+import {BehaviorSubject, catchError, map, Observable, tap, throwError} from 'rxjs';
+import {Car, LeaseApplication, LeaseApplicationForm, LeaseApplications} from '../types';
+import {Application} from "express";
 
 @Injectable({
   providedIn: 'root',
@@ -44,5 +45,30 @@ export class ApplicationListService {
         tap((cars) => this.cars$.next(cars))
       )
       .subscribe();
+  }
+  createApplication(application: LeaseApplicationForm): void {
+
+    this.httpClient
+      .post('https://car-leasing-project-back-sandbox.onrender.com/api/v1/applications',
+        application)
+      .subscribe({
+        next: (response) => console.log('Response:', response),
+        error: (error) => console.error('Error:', error),
+      })
+
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error);
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, body was: `, error.error);
+    }
+    // Return an observable with a user-facing error message.
+    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 }

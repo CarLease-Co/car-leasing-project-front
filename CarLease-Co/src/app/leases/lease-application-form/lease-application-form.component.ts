@@ -40,11 +40,11 @@ export class LeaseApplicationFormComponent {
   filteredModels$!: Observable<string[]>;
   leaseForm = new FormGroup({
     userId: new FormControl(1),
-    monthlyIncome: new FormControl('', [
+    monthlyIncome: new FormControl(0, [
       Validators.required,
       Validators.min(1),
     ]),
-    financialObligations: new FormControl('', [
+    financialObligations: new FormControl(0, [
       Validators.required,
       Validators.min(1),
     ]),
@@ -63,12 +63,12 @@ export class LeaseApplicationFormComponent {
       Validators.min(3),
       Validators.max(68),
     ]),
-    loanAmount: new FormControl('', [
+    loanAmount: new FormControl(0, [
       Validators.required,
       Validators.min(1),
     ]),
     textExplanation: new FormControl(''),
-    startDate: new FormControl(new Date().toISOString().split('T')[0]),
+    startDate: new FormControl(new Date().toISOString())
   });
   private readonly router = inject(Router);
   readonly service = inject(ApplicationListService);
@@ -104,6 +104,8 @@ export class LeaseApplicationFormComponent {
   }
 
   onSubmit() {
-    console.log('Form submitted:', this.leaseForm.value);
+    this.service.createApplication(this.leaseForm.getRawValue());
+    console.log('Form submitted:', this.leaseForm.getRawValue());
+
   }
 }
