@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, map, tap } from 'rxjs';
-import { LeaseApplication, LeaseApplications } from '../types';
+import {BehaviorSubject, catchError, map, Observable, tap, throwError} from 'rxjs';
+import {Car, LeaseApplication, LeaseApplicationForm, LeaseApplications} from '../types';
+import {Application} from "express";
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ import { LeaseApplication, LeaseApplications } from '../types';
 export class ApplicationListService {
   private readonly httpClient = inject(HttpClient);
   private applicationsSubject = new BehaviorSubject<LeaseApplication[]>([]);
+  cars$ = new BehaviorSubject<Car[]>([]);
   applications$ = this.applicationsSubject.asObservable();
   application$ = new BehaviorSubject<LeaseApplication | null>(null);
   getApplications(): void {
@@ -32,5 +34,28 @@ export class ApplicationListService {
         tap((application) => this.application$.next(application))
       )
       .subscribe();
+  }
+  getCars(): void {
+    this.httpClient
+      .get<Car>(
+        'https://car-leasing-project-back-sandbox.onrender.com/api/v1/cars'
+      )
+      .pipe(
+        tap(console.log),
+        tap((cars) => this.cars$.next(cars))
+      )
+      .subscribe();
+  }
+  createApplication(application: LeaseApplicationForm): void {
+
+    this.httpClient
+      .post('https://car-leasing-project-back-sandbox.onrender.com/api/v1/applications',
+        application)
+      .subscribe({
+        next: (response) => {
+        },
+        error: (error) => console.error('Error:', error),
+      })
+
   }
 }

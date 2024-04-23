@@ -7,7 +7,8 @@ export interface LeaseApplication {
   userSurname: string;
   monthlyIncome: number;
   financialObligations: number;
-  carId: number;
+  car: Car;
+  manufactureDate: number;
   loanAmount: number;
   loanDuration: number;
   textExplanation: string;
@@ -30,7 +31,13 @@ export interface LoginResponse {
   userId: number;
   role: string;
 }
-
+export interface Car {
+  id: number;
+  make: string;
+  model: string;
+  priceFrom: number;
+  priceTo: number;
+}
 export interface Employee {
   userId: number;
   name: string;
@@ -39,6 +46,19 @@ export interface Employee {
   email: string;
   password: string;
 }
+
+export interface LeaseApplicationForm {
+   userId: number|null|undefined;
+   monthlyIncome: number|null;
+   financialObligations: number|null;
+   carMake: string|null;
+   carModel: string|null;
+   manufactureDate: number|null;
+   textExplanation: string|null;
+   loanDuration: number|null;
+   loanAmount: number|null;
+   startDate: string|null;
+
 export interface Car {
   id: number;
   make: string;

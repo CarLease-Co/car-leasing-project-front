@@ -52,6 +52,13 @@ export class UserListComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.dataSource.filterPredicate = (data, filter) => {
+
+      return data.surname.toLowerCase()
+        .includes(filter) || data.userId.toString().includes(filter)
+        || data.role.toLowerCase().includes(filter)
+        || data.email.toLowerCase().includes(filter);
+    }
     this.dataSource.sortingDataAccessor = (item: Employee, property: string): string|any => {
       switch (property) {
         case 'fullName': return item.surname;

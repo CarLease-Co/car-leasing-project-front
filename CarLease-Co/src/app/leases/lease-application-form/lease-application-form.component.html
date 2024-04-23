@@ -5,99 +5,108 @@
     (ngSubmit)="onSubmit()"
     class="loan-application-form"
   >
-    <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Monthly Income *</mat-label>
-      <input
-        matInput
-        type="number"
-        placeholder="Enter Monthly Income"
-        formControlName="monthlyIncome"
-        required
-      />
-    </mat-form-field>
 
-    <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Monthly Financial Obligations *</mat-label>
-      <input
-        matInput
-        type="number"
-        placeholder="Enter Monthly Financial Obligations"
-        formControlName="monthlyObligations"
-        required
-      />
-    </mat-form-field>
-
-    <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Car Brand *</mat-label>
-      <mat-select
-        placeholder="Select Car Brand"
-        formControlName="carMake"
-        required
-      >
-        <mat-option value="brand1">Make 1</mat-option>
-        <mat-option value="brand2">Make 2</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Car Model *</mat-label>
-      <mat-select
-        placeholder="Select Car Model"
-        formControlName="carModel"
-        required
-      >
-        <mat-option value="model1">Model 1</mat-option>
-        <mat-option value="model2">Model 2</mat-option>
-        <mat-option value="model3">Model 3</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Leasing Amount *</mat-label>
-      <input
-        matInput
-        type="number"
-        placeholder="Enter Leasing Amount"
-        formControlName="leasingAmount"
-        required
-      />
-    </mat-form-field>
-
-    <div class="slider-container">
-      <label class="slider-label">Car Year *</label>
-      <mat-slider min="1925" max="2024" step="1"
-        ><input matSliderThumb formControlName="carYear"
-      /></mat-slider>
-      <div class="slider-info">
-        <span class="slider-value">{{
-          leaseForm.get("carYear")?.value ?? "Not set"
-        }}</span>
-        <span class="slider-max">2024</span>
-      </div>
-    </div>
-
-    <div class="slider-container">
-      <label class="slider-label">Duration of Loan (months) *</label>
-      <mat-slider min="3" max="68" step="1" thumbLabel tickInterval="5">
-        <input matSliderThumb formControlName="duration"
-      /></mat-slider>
-      <div class="slider-info">
-        <span class="slider-value"
-          >{{ leaseForm.get("duration")?.value ?? "Not set" }} months</span
+    <div class="loan-section section">
+      <mat-form-field class="full-width-form-field col" appearance="outline" >
+        <mat-label>Loan Amount</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Enter Leasing Amount"
+          formControlName="loanAmount"
+          required
+        />
+      </mat-form-field>
+      <div class="slider-container col right-col">
+        <label class="slider-label">Duration of Loan (months)</label>
+        <mat-slider
+          min="3"
+          max="68"
+          step="1"
+          discrete
+          thumbLabel
+          tickInterval="5"
         >
-        <span class="slider-max">68 months</span>
+          <input matSliderThumb formControlName="loanDuration"
+          /></mat-slider>
+        <div class="slider-info">
+        <span class="slider-value"
+        >{{ leaseForm.get("loanDuration")?.value ?? "Not set" }} months</span
+        >
+          <span class="slider-max">68 months</span>
+        </div>
       </div>
     </div>
+    <div class="personal-info-section section">
+      <mat-form-field class="full-width-form-field col" appearance="outline">
+        <mat-label>Monthly Income after Taxes</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Enter Monthly Income"
+          formControlName="monthlyIncome"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field class="full-width-form-field col right-col" appearance="outline">
+        <mat-label>Monthly Financial Obligations</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Enter Monthly Financial Obligations"
+          formControlName="financialObligations"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="car-section section">
+      <mat-form-field class="full-width-form-field col" appearance="outline">
+        <mat-label>Car Brand</mat-label>
+        <mat-select
+          placeholder="Select Car Brand"
+          formControlName="carMake"
+          required
+        >
+          @for (make of this.uniqueCarBrands$ | async; track make) {
+            <mat-option [value]="make">{{ make }}</mat-option
+            >}
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Explanation</mat-label>
-      <textarea
-        matInput
-        placeholder="Enter Explanation (up to 420 characters)"
-        formControlName="explanation"
-        maxlength="420"
-      ></textarea>
-    </mat-form-field>
+      <mat-form-field class="full-width-form-field col right-col" appearance="outline">
+        <mat-label>Car Model</mat-label>
+        <mat-select
+          placeholder="Select Car Model"
+          formControlName="carModel"
+          required
+        >@for (model of this.filteredModels$ | async; track model) {
+          <mat-option [value]="model">{{ model }}</mat-option
+          >}
+        </mat-select>
+      </mat-form-field>
+
+      <div class="slider-container col">
+        <label class="slider-label">Car Year</label>
+        <mat-slider min="1994" max="2024" step="1" discrete
+        ><input matSliderThumb formControlName="manufactureDate"
+        /></mat-slider>
+        <div class="slider-info">
+        <span class="slider-value">{{
+            leaseForm.get("manufactureDate")?.value ?? "Not set"
+          }}</span>
+          <span class="slider-max">2024</span>
+        </div>
+      </div>
+      <mat-form-field class="full-width-form-field col" appearance="outline">
+        <mat-label>textExplanation</mat-label>
+        <textarea
+          matInput
+          placeholder="Enter Explanation (up to 420 characters)"
+          formControlName="textExplanation"
+          maxlength="420"
+        ></textarea>
+      </mat-form-field>
+    </div>
 
     <div class="button-container">
       <button type="submit" mat-raised-button [disabled]="!leaseForm.valid">
