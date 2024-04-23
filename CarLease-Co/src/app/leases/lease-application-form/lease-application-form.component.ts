@@ -40,13 +40,13 @@ export class LeaseApplicationFormComponent {
   filteredModels$!: Observable<string[]>;
   leaseForm = new FormGroup({
     userId: new FormControl(1),
-    monthlyIncome: new FormControl(0, [
+    monthlyIncome: new FormControl(null, [
       Validators.required,
       Validators.min(1),
     ]),
-    financialObligations: new FormControl(0, [
+    financialObligations: new FormControl(null, [
       Validators.required,
-      Validators.min(1),
+      Validators.min(0),
     ]),
     carMake: new FormControl('', Validators.required),
     carModel: new FormControl(
@@ -63,7 +63,7 @@ export class LeaseApplicationFormComponent {
       Validators.min(3),
       Validators.max(68),
     ]),
-    loanAmount: new FormControl(0, [
+    loanAmount: new FormControl(null, [
       Validators.required,
       Validators.min(1),
     ]),
@@ -103,9 +103,23 @@ export class LeaseApplicationFormComponent {
 
   }
 
-  onSubmit() {
-    this.service.createApplication(this.leaseForm.getRawValue());
-    console.log('Form submitted:', this.leaseForm.getRawValue());
-
+  onSubmit():void {
+    if (this.leaseForm.valid) {
+      this.service.createApplication(this.leaseForm.getRawValue());
+      this.leaseForm.reset();
+      this.leaseForm.setErrors(null);
+    }
+  }
+  resetForm():void {
+    this.leaseForm.reset({
+      loanAmount: null,
+      loanDuration: 3,
+      monthlyIncome: null,
+      financialObligations: null,
+      carMake: null,
+      carModel: null,
+      manufactureDate: 1994,
+      textExplanation: ''
+    });
   }
 }
