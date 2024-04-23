@@ -1,6 +1,7 @@
 export enum EMPLOYEE_ROLE {
-    REVIEWER= 'Reviewer',
-    APPROVER= 'Approver',
-    BUSINESS_ADMIN= 'Business Admin',
-    SYSTEM_ADMIN= 'System Admin'
+  APPLICANT = 'APPLICANT',
+  REVIEWER = 'REVIEWER',
+  APPROVER = 'APPROVER',
+  BUSINESS_ADMIN = 'BUSINESS_ADMIN',
+  SYSTEM_ADMIN = 'SYSTEM_ADMIN',
 }

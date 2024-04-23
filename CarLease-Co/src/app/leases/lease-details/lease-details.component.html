@@ -17,21 +17,18 @@
       <h3>Loan amount</h3>
       <h3>Loan duration in months</h3>
       <h3>Applicant's monthly income</h3>
-      <h3>Application submission status</h3>
       <h3>Application approval status</h3>
       <h3>Additional information</h3>
     </mat-card-content>
     <mat-card-content style="padding: 0">
       <h3>{{ application.user.name }}</h3>
       <h3>{{ application.user.surname }}</h3>
-      <h3>{{ application.carId }}</h3>
       <h3>{{ application.startDate }}</h3>
       <h3>{{ application.endDate }}</h3>
       <h3>{{ application.financialObligations }}</h3>
       <h3>{{ application.loanAmount }}</h3>
-      <h3>{{ application.loanDurationInMonths }}</h3>
+      <h3>{{ application.loanDuration }}</h3>
       <h3>{{ application.monthlyIncome }}</h3>
-      <h3>{{ application.submitted }}</h3>
       <h3>{{ application.status }}</h3>
       <h3>{{ application.textExplanation }}</h3>
     </mat-card-content>

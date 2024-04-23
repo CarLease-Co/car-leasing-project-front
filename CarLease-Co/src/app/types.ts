@@ -9,7 +9,7 @@ export interface LeaseApplication {
   financialObligations: number;
   carId: number;
   loanAmount: number;
-  loanDurationInMonths: number;
+  loanDuration: number;
   textExplanation: string;
   submitted: boolean;
   endDate: Date;
@@ -38,4 +38,9 @@ export interface Employee {
   role: EMPLOYEE_ROLE;
   email: string;
   password: string;
+}
+export interface Car {
+  id: number;
+  make: string;
+  model: string;
 }

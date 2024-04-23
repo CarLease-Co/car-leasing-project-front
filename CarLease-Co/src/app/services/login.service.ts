@@ -2,13 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, tap } from 'rxjs';
 import { LoginResponse } from '../types';
+import { LocalStorageManagerService } from './local-storage-manager.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
   private readonly httpClient = inject(HttpClient);
-  loginResponse$ = new BehaviorSubject<LoginResponse | null>(null);
+  private readonly router = inject(Router);
+  private readonly localStorageService = inject(LocalStorageManagerService);
+
   login(username: string, password: string): void {
     this.httpClient
       .get<LoginResponse>(
@@ -16,9 +20,8 @@ export class LoginService {
         { params: { username, password } }
       )
       .pipe(
-        tap((response) =>
-          localStorage.setItem('loginResponse', JSON.stringify(response))
-        )
+        tap(this.localStorageService.setUser),
+        tap(() => this.router.navigate(['']))
       )
       .subscribe();
   }

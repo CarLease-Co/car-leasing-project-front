@@ -38,14 +38,12 @@ export class LoginFormComponent {
     username: new FormControl('', [Validators.required, Validators.min(3)]),
     password: new FormControl('', Validators.required),
   });
-  private readonly router = inject(Router);
   readonly service = inject(LoginService);
   login() {
     const usernameInputValue = this.loginForm.get('username')?.value;
     const passwordInputValue = this.loginForm.get('password')?.value;
     if (usernameInputValue && passwordInputValue) {
       this.service.login(usernameInputValue, passwordInputValue);
-      this.router.navigate(['']);
     }
   }
 }

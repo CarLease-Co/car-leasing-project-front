@@ -9,6 +9,8 @@ import { ApplicationListService } from '../../services/application-list.service'
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { MatIconModule } from '@angular/material/icon';
+import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
+import { EMPLOYEE_ROLE } from '../../enums';
 
 @Component({
   selector: 'app-lease-applications-list',
@@ -25,6 +27,10 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './lease-applications-list.component.scss',
 })
 export class LeaseApplicationsListComponent implements AfterViewInit {
+  private readonly router = inject(Router);
+  loginService = inject(LoginService);
+  localStorageService = inject(LocalStorageManagerService);
+
   leaseApplications: LeaseApplication[] = [];
   displayedColumns: string[] = [
     'id',
@@ -34,10 +40,8 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
     'status',
   ];
 
-  role!: string | null;
-  userId!: number | null;
-  private readonly router = inject(Router);
-  loginService = inject(LoginService);
+  role!: string | undefined;
+  userId!: number | undefined;
 
   dataSource: MatTableDataSource<LeaseApplication> =
     new MatTableDataSource<LeaseApplication>();
@@ -47,17 +51,22 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
 
   constructor(private applicationsService: ApplicationListService) {}
   ngOnInit(): void {
-    const loginResponse = JSON.parse(localStorage.getItem('loginResponse')!);
-    this.role = loginResponse.role;
-    this.userId = loginResponse.userId;
+    // console.log('getas', this.localStorageService.getStorage('loginResponse'));
+    // // const loginResponse = JSON.parse(localStorage.getItem('loginResponse')!);
+    const loginResponse = this.localStorageService.getStoredUser();
+    this.role = loginResponse?.role;
+    this.userId = loginResponse?.userId;
     this.applicationsService.getApplications();
     this.applicationsService.applications$.subscribe((applications) => {
-      if (this.role === 'APPLICANT') {
+      if (this.role === EMPLOYEE_ROLE.APPLICANT) {
         this.dataSource.data = applications.filter(
           (application) => application.user.userId === +this.userId!
         );
         this.leaseApplications = applications;
-      } else if (this.role === 'REVIEWER' || this.role === 'APPROVER') {
+      } else if (
+        this.role === EMPLOYEE_ROLE.REVIEWER ||
+        this.role === EMPLOYEE_ROLE.APPROVER
+      ) {
         this.dataSource.data = applications.filter(
           (application) => application.status !== 'DRAFT'
         );
