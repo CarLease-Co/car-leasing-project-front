@@ -2,12 +2,10 @@
 @import "../../../variables.scss";
 @include mat.core();
 
-.container {
-  position: relative;
+.autosuggestor-view {
   padding: 50px;
   min-height: 100vh;
-  margin-bottom: 20px;
-  margin-top: 50px;
+  margin-top: $margin-top;
 }
 
 .autosuggestor-form-header {
@@ -19,18 +17,21 @@
 }
 
 .autosuggestor-application-form {
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: $autosuggestor-form-max-width;
+  margin: $margin-x-auto;
 
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: $form-padding;
+  border-radius: $form-border-radius;
+  box-shadow: $form-box-shadow;
 
   .full-width-form-field {
     width: calc(100%);
     margin-bottom: 20px;
     .half-width-form-field {
-      width: calc(50%);
+      width: calc(50% - 5px);
+    }
+    .half-width-form-field:first-child {
+      margin-right: 10px;
     }
   }
 
@@ -39,9 +40,32 @@
     justify-content: flex-start;
     button[type="submit"] {
       padding: 5px 50px;
-      margin-top: 5px;
+      margin-top: 25px;
       background-color: $primary-background;
       color: white;
+    }
+  }
+  .year-slider-container {
+    margin: auto;
+    max-width: calc(100%);
+
+    mat-slider {
+      width: calc(100%);
+    }
+
+    .slider-values {
+      margin-top: 5px;
+      font-size: 16px;
+      color: #615d5d;
+    }
+    .slider-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .slider-label {
+      color: #615d5d;
     }
   }
 
