@@ -20,7 +20,7 @@ import { MatSort, MatSortHeader, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Employee } from '../../types';
 import { MatPaginator } from '@angular/material/paginator';
-import {EmployeeProperties} from "../../enums";
+import { EMPLOYEE_PROPERTIES } from '../../enums';
 
 @Component({
   selector: 'app-user-list',
@@ -48,13 +48,15 @@ import {EmployeeProperties} from "../../enums";
   styleUrl: './user-list.component.scss',
 })
 export class UserListComponent implements AfterViewInit {
-  dataSource: MatTableDataSource<Employee> = new MatTableDataSource(employeeList);
+  dataSource: MatTableDataSource<Employee> = new MatTableDataSource(
+    employeeList
+  );
   displayedColumns: string[] = [
-    EmployeeProperties.UserId,
-    EmployeeProperties.FullName,
-    EmployeeProperties.Role,
-    EmployeeProperties.Email,
-    EmployeeProperties.Password
+    EMPLOYEE_PROPERTIES.USER_ID,
+    EMPLOYEE_PROPERTIES.FULL_NAME,
+    EMPLOYEE_PROPERTIES.ROLE,
+    EMPLOYEE_PROPERTIES.EMAIL,
+    EMPLOYEE_PROPERTIES.PASSWORD,
   ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -65,10 +67,10 @@ export class UserListComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.filterPredicate = (data, filter) => {
       return (
-        data[EmployeeProperties.Surname].toLowerCase().includes(filter) ||
-        data[EmployeeProperties.UserId].toString().includes(filter) ||
-        data[EmployeeProperties.Role].toLowerCase().includes(filter) ||
-        data[EmployeeProperties.Email].toLowerCase().includes(filter)
+        data[EMPLOYEE_PROPERTIES.SURNAME].toLowerCase().includes(filter) ||
+        data[EMPLOYEE_PROPERTIES.USER_ID].toString().includes(filter) ||
+        data[EMPLOYEE_PROPERTIES.ROLE].toLowerCase().includes(filter) ||
+        data[EMPLOYEE_PROPERTIES.EMAIL].toLowerCase().includes(filter)
       );
     };
     this.dataSource.sortingDataAccessor = (
@@ -76,15 +78,15 @@ export class UserListComponent implements AfterViewInit {
       property: string
     ): string | number => {
       switch (property) {
-        case EmployeeProperties.FullName:
+        case EMPLOYEE_PROPERTIES.FULL_NAME:
           return item.surname;
-        case EmployeeProperties.UserId:
+        case EMPLOYEE_PROPERTIES.USER_ID:
           return item.userId;
-        case EmployeeProperties.Role:
+        case EMPLOYEE_PROPERTIES.ROLE:
           return item.role;
-        case EmployeeProperties.Email:
+        case EMPLOYEE_PROPERTIES.EMAIL:
           return item.email;
-        case EmployeeProperties.Password:
+        case EMPLOYEE_PROPERTIES.PASSWORD:
           return item.password;
         default:
           return '';

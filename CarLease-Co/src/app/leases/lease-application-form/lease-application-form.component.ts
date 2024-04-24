@@ -12,11 +12,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
-import { Router } from '@angular/router';
 import { ApplicationListService } from '../../services/application-list.service';
-import { filter, map, Observable, tap } from 'rxjs';
+import { map, Observable, of, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { LoanFormConfig } from '../../constants';
+import { FORM_FIELDS } from '../../enums';
 @Component({
   selector: 'app-lease-application-form',
   standalone: true,
@@ -34,9 +34,9 @@ import { LoanFormConfig } from '../../constants';
   styleUrls: ['./lease-application-form.component.scss'],
 })
 export class LeaseApplicationFormComponent {
-  uniqueCarBrands$!: Observable<string[]>;
-  filteredModels$!: Observable<string[]>;
-
+  readonly applicationService = inject(ApplicationListService);
+  uniqueCarBrands$: Observable<string[]> = of([]);
+  filteredModels$: Observable<string[]> = of([]);
 
   leaseForm = new FormGroup({
     userId: new FormControl(1), //get using local storage
@@ -63,28 +63,33 @@ export class LeaseApplicationFormComponent {
       Validators.min(LoanFormConfig.minLoanDuration),
       Validators.max(LoanFormConfig.maxLoanDuration),
     ]),
-    loanAmount: new FormControl(null, [Validators.required, Validators.min(LoanFormConfig.minLoanAmount)]),
+    loanAmount: new FormControl(null, [
+      Validators.required,
+      Validators.min(LoanFormConfig.minLoanAmount),
+    ]),
     textExplanation: new FormControl(''),
     startDate: new FormControl(new Date().toISOString()),
   });
 
-
-
-  private readonly applicationRouter = inject(Router);
-  readonly applicationService = inject(ApplicationListService);
   get makeControl(): AbstractControl<string | null, string | null> | null {
-    return this.leaseForm.get('carMake');
+    return this.leaseForm.get(FORM_FIELDS.CAR_MAKE);
   }
   get modelControl(): AbstractControl<string | null, string | null> | null {
-    return this.leaseForm.get('carModel');
+    return this.leaseForm.get(FORM_FIELDS.CAR_MODEL);
   }
 
-  get loanDuration(): number|string {
-    return this.leaseForm.get('loanDuration')?.value ?? 'Not set';
+  get loanDuration(): number | string {
+    return (
+      this.leaseForm.get(FORM_FIELDS.LOAN_DURATION)?.value ??
+      FORM_FIELDS.NOT_SET
+    );
   }
 
-  get manufactureDate(): number|string {
-    return this.leaseForm.get('manufactureDate')?.value ?? 'Not set';
+  get manufactureDate(): number | string {
+    return (
+      this.leaseForm.get(FORM_FIELDS.MANUFACTURE_DATE)?.value ??
+      FORM_FIELDS.NOT_SET
+    );
   }
 
   ngOnInit(): void {
@@ -130,5 +135,5 @@ export class LeaseApplicationFormComponent {
     });
   }
 
-    protected readonly LoanFormConfig = LoanFormConfig;
+  protected readonly LoanFormConfig = LoanFormConfig;
 }

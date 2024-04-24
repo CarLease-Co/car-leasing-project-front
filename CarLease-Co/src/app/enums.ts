@@ -24,11 +24,18 @@ export enum ROUTES {
   NEW_APPLICATION = 'new-application',
 }
 
-export enum EmployeeProperties {
-  Surname = 'surname',
-  FullName = 'fullName',
-  UserId = 'userId',
-  Role = 'role',
-  Email = 'email',
-  Password = 'password',
+export enum EMPLOYEE_PROPERTIES {
+  SURNAME = 'surname',
+  FULL_NAME = 'fullName',
+  USER_ID = 'userId',
+  ROLE = 'role',
+  EMAIL = 'email',
+  PASSWORD = 'password',
+}
+export enum FORM_FIELDS {
+  CAR_MAKE = 'carMake',
+  CAR_MODEL = 'carModel',
+  LOAN_DURATION = 'loanDuration',
+  MANUFACTURE_DATE = 'manufactureDate',
+  NOT_SET = 'Not set',
 }
