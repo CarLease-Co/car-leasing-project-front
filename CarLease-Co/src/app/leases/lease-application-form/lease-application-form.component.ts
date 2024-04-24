@@ -37,6 +37,8 @@ import { AsyncPipe } from '@angular/common';
 export class LeaseApplicationFormComponent {
   uniqueCarBrands$!: Observable<string[]>;
   filteredModels$!: Observable<string[]>;
+  
+  
   leaseForm = new FormGroup({
     userId: new FormControl(1),
     monthlyIncome: new FormControl(null, [
@@ -66,8 +68,11 @@ export class LeaseApplicationFormComponent {
     textExplanation: new FormControl(''),
     startDate: new FormControl(new Date().toISOString()),
   });
-  private readonly router = inject(Router);
-  readonly service = inject(ApplicationListService);
+  
+  
+  
+  private readonly applicationRouter = inject(Router);
+  readonly applicationService = inject(ApplicationListService);
   get makeControl(): AbstractControl<string | null, string | null> | null {
     return this.leaseForm.get('carMake');
   }
@@ -75,8 +80,16 @@ export class LeaseApplicationFormComponent {
     return this.leaseForm.get('carModel');
   }
 
+  get loanDuration(): number|string {
+    return this.leaseForm.get('loanDuration')?.value ?? 'Not set';
+  }
+
+  get manufactureDate(): number|string {
+    return this.leaseForm.get('manufactureDate')?.value ?? 'Not set';
+  }
+
   ngOnInit(): void {
-    this.service.getCars();
+    this.applicationService.getCars();
     this.makeControl?.valueChanges
       .pipe(
         tap((make) => {
@@ -84,13 +97,13 @@ export class LeaseApplicationFormComponent {
         })
       )
       .subscribe();
-    this.uniqueCarBrands$ = this.service.cars$.pipe(
+    this.uniqueCarBrands$ = this.applicationService.cars$.pipe(
       map((cars) => cars.map((car) => car.make)),
       map((brands) => Array.from(new Set(brands)))
     );
 
     this.leaseForm.controls.carMake.valueChanges.subscribe((make) => {
-      this.filteredModels$ = this.service.cars$.pipe(
+      this.filteredModels$ = this.applicationService.cars$.pipe(
         map((cars) =>
           cars.filter((car) => car.make === make).map((car) => car.model)
         )
@@ -100,7 +113,7 @@ export class LeaseApplicationFormComponent {
 
   onSubmit(): void {
     if (this.leaseForm.valid) {
-      this.service.createApplication(this.leaseForm.getRawValue());
+      this.applicationService.createApplication(this.leaseForm.getRawValue());
       this.leaseForm.reset();
       this.leaseForm.setErrors(null);
     }

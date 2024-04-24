@@ -62,7 +62,6 @@ export class ApplicationListService {
           this.router.navigate([ROUTES.APPLICATIONS]);
           response;
         },
-        error: (error) => console.error('Error:', error),
       });
   }
 }

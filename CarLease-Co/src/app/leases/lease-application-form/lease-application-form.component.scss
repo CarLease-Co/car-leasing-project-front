@@ -33,7 +33,7 @@
     padding: 0 1em;
 
     mat-slider {
-      width: calc(100% - 20px);
+      width: 100%;
       margin: 0 10px;
     }
 
@@ -87,11 +87,6 @@
   .col {
     flex-basis: 45%;
     box-sizing: border-box;
-  }
-
-  .right-col {
-    //  align items to the right
-    left: 0;
   }
   mat-form-field {
     width: 100%;
