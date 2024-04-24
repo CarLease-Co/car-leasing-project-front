@@ -4,7 +4,7 @@ import { LeaseDetailsComponent } from './leases/lease-details/lease-details.comp
 import { LeaseApplicationFormComponent } from './leases/lease-application-form/lease-application-form.component';
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import { loginAccessGuard } from './guards/login-access.guard';
-import { ViewComponent } from './sysadmin-view/view/view.component';
+import { SysAdminViewComponent } from './sys-admin-view/sys-admin-view/sys-admin-view.component';
 import { AppComponent } from './app.component';
 import { AutosuggestorFormComponent } from './business-admin-view/autosuggestor-form/autosuggestor-form.component';
 import { sysAdminLoginGuard } from './guards/sysadmin-login.guard';
@@ -17,10 +17,10 @@ export const routes: Routes = [
     component: AppComponent,
     canActivate: [loginAccessGuard],
   },
-  { path: 'login', component: LoginFormComponent },
+  { path: ROUTES.LOGIN, component: LoginFormComponent },
   {
     path: ROUTES.SYS_ADMIN_VIEW,
-    component: ViewComponent,
+    component: SysAdminViewComponent,
     canActivate: [sysAdminLoginGuard],
   },
 

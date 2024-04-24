@@ -13,8 +13,6 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 
 import { MatCardModule } from '@angular/material/card';
-import { Router } from '@angular/router';
-import { User } from '../../types';
 import { LoginService } from '../../services/login.service';
 
 @Component({
@@ -34,16 +32,16 @@ import { LoginService } from '../../services/login.service';
   styleUrl: './login-form.component.scss',
 })
 export class LoginFormComponent {
+  readonly loginService = inject(LoginService);
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.min(3)]),
     password: new FormControl('', Validators.required),
   });
-  readonly service = inject(LoginService);
-  login() {
+  login(): void {
     const usernameInputValue = this.loginForm.get('username')?.value;
     const passwordInputValue = this.loginForm.get('password')?.value;
     if (usernameInputValue && passwordInputValue) {
-      this.service.login(usernameInputValue, passwordInputValue);
+      this.loginService.login(usernameInputValue, passwordInputValue);
     }
   }
 }

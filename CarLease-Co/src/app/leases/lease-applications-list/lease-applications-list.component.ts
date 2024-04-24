@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
 import { APPLICATION_STATUS, EMPLOYEE_ROLE, ROUTES } from '../../enums';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-lease-applications-list',
@@ -53,30 +54,34 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
     this.role = loginResponse?.role;
     this.userId = loginResponse?.userId;
     this.applicationsService.getApplications();
-    this.applicationsService.applications$.subscribe((applications) => {
-      if (this.role === EMPLOYEE_ROLE.APPLICANT) {
-        this.dataSource.data = applications.filter(
-          (application) => application.user.userId === +this.userId!
-        );
-        this.leaseApplications = applications;
-      } else if (
-        this.role === EMPLOYEE_ROLE.REVIEWER ||
-        this.role === EMPLOYEE_ROLE.APPROVER
-      ) {
-        this.dataSource.data = applications.filter(
-          (application) => application.status !== APPLICATION_STATUS.DRAFT
-        );
-        this.leaseApplications = applications;
-      }
-    });
+    this.applicationsService.applications$
+      .pipe(tap((applications) => this.filterApplications(applications)))
+      .subscribe();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
+  filterApplications(applications: LeaseApplication[]): void {
+    if (this.role === EMPLOYEE_ROLE.APPLICANT) {
+      this.dataSource.data = applications.filter(
+        (application) => application.user.userId === +this.userId!
+      );
+      this.leaseApplications = applications;
+    } else if (
+      this.role === EMPLOYEE_ROLE.REVIEWER ||
+      this.role === EMPLOYEE_ROLE.APPROVER
+    ) {
+      this.dataSource.data = applications.filter(
+        (application) => application.status !== APPLICATION_STATUS.DRAFT
+      );
+      this.leaseApplications = applications;
+    }
+  }
+
+  applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }

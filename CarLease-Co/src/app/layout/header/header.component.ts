@@ -18,7 +18,7 @@ export class HeaderComponent {
   private readonly router = inject(Router);
   private readonly localStorageService = inject(LocalStorageManagerService);
   readonly EMPLOYEE_ROLE = EMPLOYEE_ROLE;
-  role: string | undefined;
+  role?: string;
   user = this.localStorageService.storedUser();
 
   goToLeaseList(): void {
@@ -34,7 +34,7 @@ export class HeaderComponent {
   goToBusAdminView(): void {
     this.router.navigate([ROUTES.AUTOSUGGESTOR_FORM]);
   }
-  logout() {
+  logout(): void {
     localStorage.clear();
     this.router.navigate([ROUTES.LOGIN]);
   }

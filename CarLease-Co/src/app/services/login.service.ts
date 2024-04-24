@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { LoginResponse } from '../types';
 import { LocalStorageManagerService } from './local-storage-manager.service';
 import { Router } from '@angular/router';
+import { ROUTES } from '../enums';
+import { BASE_URL, LOGIN_PATH } from '../constants';
 
 @Injectable({
   providedIn: 'root',
@@ -15,13 +17,12 @@ export class LoginService {
 
   login(username: string, password: string): void {
     this.httpClient
-      .get<LoginResponse>(
-        'https://car-leasing-project-back-sandbox.onrender.com/api/v1/users/login',
-        { params: { username, password } }
-      )
+      .get<LoginResponse>(`${BASE_URL}${LOGIN_PATH}`, {
+        params: { username, password },
+      })
       .pipe(
         tap(this.localStorageService.setUser),
-        tap(() => this.router.navigate(['']))
+        tap(() => this.router.navigate([ROUTES.HOME]))
       )
       .subscribe();
   }
