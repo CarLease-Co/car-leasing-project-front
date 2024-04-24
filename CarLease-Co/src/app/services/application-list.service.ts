@@ -21,6 +21,7 @@ import {
 import { Application } from 'express';
 import { Router } from '@angular/router';
 import { BASE_URL } from '../constants';
+import { ROUTES } from '../enums';
 
 @Injectable({
   providedIn: 'root',
@@ -58,7 +59,7 @@ export class ApplicationListService {
       .post(`${BASE_URL}/api/v1/applications`, application)
       .subscribe({
         next: (response) => {
-          this.router.navigate(['applications']);
+          this.router.navigate([ROUTES.APPLICATIONS]);
           response;
         },
         error: (error) => console.error('Error:', error),

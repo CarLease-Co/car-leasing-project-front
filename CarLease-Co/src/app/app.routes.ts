@@ -9,33 +9,38 @@ import { AppComponent } from './app.component';
 import { AutosuggestorFormComponent } from './business-admin-view/autosuggestor-form/autosuggestor-form.component';
 import { sysAdminLoginGuard } from './guards/sysadmin-login.guard';
 import { busadminLoginGuard } from './guards/busadmin-login.guard';
+import { ROUTES } from './enums';
 
 export const routes: Routes = [
-  { path: '', component: AppComponent, canActivate: [loginAccessGuard] },
+  {
+    path: ROUTES.HOME,
+    component: AppComponent,
+    canActivate: [loginAccessGuard],
+  },
   { path: 'login', component: LoginFormComponent },
   {
-    path: 'sysadmin-view',
+    path: ROUTES.SYSADMIN_VIEW,
     component: ViewComponent,
     canActivate: [sysAdminLoginGuard],
   },
 
   {
-    path: 'autosuggestor-form',
+    path: ROUTES.AUTOSUGGESTOR_FORM,
     component: AutosuggestorFormComponent,
     canActivate: [busadminLoginGuard],
   },
   {
-    path: 'applications',
+    path: ROUTES.APPLICATIONS,
     component: LeaseApplicationsListComponent,
     canActivate: [loginAccessGuard],
   },
   {
-    path: 'applications/application-details/:id',
+    path: ROUTES.APPLICATION_DETAILS_BY_ID,
     component: LeaseDetailsComponent,
     canActivate: [loginAccessGuard],
   },
   {
-    path: 'new-application',
+    path: ROUTES.NEW_APPLICATION,
     component: LeaseApplicationFormComponent,
     canActivate: [loginAccessGuard],
   },

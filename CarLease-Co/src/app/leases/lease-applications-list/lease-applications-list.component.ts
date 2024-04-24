@@ -9,7 +9,7 @@ import { ApplicationListService } from '../../services/application-list.service'
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
-import { APPLICATION_STATUS, EMPLOYEE_ROLE } from '../../enums';
+import { APPLICATION_STATUS, EMPLOYEE_ROLE, ROUTES } from '../../enums';
 
 @Component({
   selector: 'app-lease-applications-list',
@@ -84,9 +84,6 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
     const selectedApplication = this.leaseApplications.find(
       (application) => application.id === id
     );
-    this.router.navigate([
-      'applications/application-details',
-      selectedApplication?.id,
-    ]);
+    this.router.navigate([ROUTES.APPLICATION_DETAILS, selectedApplication?.id]);
   }
 }

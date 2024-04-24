@@ -20,5 +20,6 @@ export enum ROUTES {
   AUTOSUGGESTOR_FORM = 'autosuggestor-form',
   APPLICATIONS = 'applications',
   APPLICATION_DETAILS_BY_ID = 'applications/application-details/:id',
+  APPLICATION_DETAILS = 'applications/application-details',
   NEW_APPLICATION = 'new-application',
 }
