@@ -1,5 +1,5 @@
 @use "@angular/material" as mat;
-@import "../../../styles.scss";
+@import "../../../variables.scss";
 @include mat.core();
 
 .container {
@@ -19,25 +19,21 @@
 }
 
 .loan-application-form {
-  max-width: 600px;
+  max-width: 900px;
   margin: 0 auto;
 
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-  .full-width-form-field {
-    width: calc(100%);
-    margin-bottom: 20px;
-  }
-
   .slider-container {
     margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 1em;
 
     mat-slider {
-      width: calc(100% - 20px);
+      width: 100%;
       margin: 0 10px;
     }
 
@@ -64,14 +60,37 @@
   }
 
   .button-container {
-    display: flex;
-    justify-content: flex-start;
+    text-align: center;
     button[type="submit"] {
       padding: 5px 50px;
       margin-top: 5px;
-      background-color: mat.get-color-from-palette($primary);
+      background-color: $primary-background;
       color: white;
     }
+    button:hover {
+      cursor: pointer;
+      background-color: $primary-hover;
+    }
+  }
+
+  .section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    margin: 0 auto;
+    align-content: flex-end;
+  }
+
+  .col {
+    flex-basis: 45%;
+    box-sizing: border-box;
+  }
+  mat-form-field {
+    width: 100%;
+    padding: 0;
   }
 
   @media screen and (max-width: 600px) {

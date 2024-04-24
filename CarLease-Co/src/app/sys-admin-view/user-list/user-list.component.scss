@@ -1,18 +1,15 @@
-
-
 @use "@angular/material" as mat;
 
 @include mat.core();
-@import "../../../styles.scss";
+@import "../../../variables.scss";
 
 .user-list {
-  width: 70%;
+  width: $component-max-width;
   margin: 0 auto;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: $margin-top;
 }
 .max-width {
-  max-width: 1000px;
+  max-width: $component-max-width;
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -22,7 +19,7 @@
   width: 100%;
 }
 tr:hover {
-  background-color: mat.get-color-from-palette($primary-hover);
+  background-color: $primary-row;
   transition: 0.5s;
 }
 table {
