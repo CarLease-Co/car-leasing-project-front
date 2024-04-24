@@ -7,10 +7,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ApplicationListService } from '../../services/application-list.service';
 import { Router } from '@angular/router';
-import { LoginService } from '../../services/login.service';
 import { MatIconModule } from '@angular/material/icon';
 import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
-import { EMPLOYEE_ROLE } from '../../enums';
+import { APPLICATION_STATUS, EMPLOYEE_ROLE } from '../../enums';
 
 @Component({
   selector: 'app-lease-applications-list',
@@ -28,8 +27,8 @@ import { EMPLOYEE_ROLE } from '../../enums';
 })
 export class LeaseApplicationsListComponent implements AfterViewInit {
   private readonly router = inject(Router);
-  loginService = inject(LoginService);
-  localStorageService = inject(LocalStorageManagerService);
+  private readonly localStorageService = inject(LocalStorageManagerService);
+  private readonly applicationsService = inject(ApplicationListService);
 
   leaseApplications: LeaseApplication[] = [];
   displayedColumns: string[] = [
@@ -40,8 +39,8 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
     'status',
   ];
 
-  role!: string | undefined;
-  userId!: number | undefined;
+  role?: string;
+  userId?: number;
 
   dataSource: MatTableDataSource<LeaseApplication> =
     new MatTableDataSource<LeaseApplication>();
@@ -49,10 +48,7 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private applicationsService: ApplicationListService) {}
   ngOnInit(): void {
-    // console.log('getas', this.localStorageService.getStorage('loginResponse'));
-    // // const loginResponse = JSON.parse(localStorage.getItem('loginResponse')!);
     const loginResponse = this.localStorageService.getStoredUser();
     this.role = loginResponse?.role;
     this.userId = loginResponse?.userId;
@@ -68,7 +64,7 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
         this.role === EMPLOYEE_ROLE.APPROVER
       ) {
         this.dataSource.data = applications.filter(
-          (application) => application.status !== 'DRAFT'
+          (application) => application.status !== APPLICATION_STATUS.DRAFT
         );
         this.leaseApplications = applications;
       }

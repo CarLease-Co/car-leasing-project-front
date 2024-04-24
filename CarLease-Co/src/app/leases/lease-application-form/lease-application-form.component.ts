@@ -15,8 +15,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { ApplicationListService } from '../../services/application-list.service';
-import {filter, map, Observable, tap} from 'rxjs';
-import {AsyncPipe} from "@angular/common";
+import { filter, map, Observable, tap } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-lease-application-form',
@@ -35,7 +35,6 @@ import {AsyncPipe} from "@angular/common";
   styleUrls: ['./lease-application-form.component.scss'],
 })
 export class LeaseApplicationFormComponent {
-
   uniqueCarBrands$!: Observable<string[]>;
   filteredModels$!: Observable<string[]>;
   leaseForm = new FormGroup({
@@ -63,12 +62,9 @@ export class LeaseApplicationFormComponent {
       Validators.min(3),
       Validators.max(68),
     ]),
-    loanAmount: new FormControl(null, [
-      Validators.required,
-      Validators.min(1),
-    ]),
+    loanAmount: new FormControl(null, [Validators.required, Validators.min(1)]),
     textExplanation: new FormControl(''),
-    startDate: new FormControl(new Date().toISOString())
+    startDate: new FormControl(new Date().toISOString()),
   });
   private readonly router = inject(Router);
   readonly service = inject(ApplicationListService);
@@ -89,28 +85,27 @@ export class LeaseApplicationFormComponent {
       )
       .subscribe();
     this.uniqueCarBrands$ = this.service.cars$.pipe(
-      map(cars => cars.map(car => car.make)),
-      map(brands => Array.from(new Set(brands)))
+      map((cars) => cars.map((car) => car.make)),
+      map((brands) => Array.from(new Set(brands)))
     );
 
-    this.leaseForm.controls.carMake.valueChanges.subscribe(make => {
+    this.leaseForm.controls.carMake.valueChanges.subscribe((make) => {
       this.filteredModels$ = this.service.cars$.pipe(
-        map(cars => cars.filter(car => car.make === make)
-          .map(car => car.model)
-
-      ));
+        map((cars) =>
+          cars.filter((car) => car.make === make).map((car) => car.model)
+        )
+      );
     });
-
   }
 
-  onSubmit():void {
+  onSubmit(): void {
     if (this.leaseForm.valid) {
       this.service.createApplication(this.leaseForm.getRawValue());
       this.leaseForm.reset();
       this.leaseForm.setErrors(null);
     }
   }
-  resetForm():void {
+  resetForm(): void {
     this.leaseForm.reset({
       loanAmount: null,
       loanDuration: 3,
@@ -119,7 +114,7 @@ export class LeaseApplicationFormComponent {
       carMake: null,
       carModel: null,
       manufactureDate: 1994,
-      textExplanation: ''
+      textExplanation: '',
     });
   }
 }

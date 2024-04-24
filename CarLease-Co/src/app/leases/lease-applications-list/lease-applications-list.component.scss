@@ -2,18 +2,15 @@
 
 @include mat.core();
 @import "../../../styles.scss";
+@import "../../../variables.scss";
 .max-width {
-  max-width: 1000px;
+  max-width: $component-max-width;
   display: flex;
   flex-direction: column;
   margin: auto;
 }
 .margin-top {
-  margin-top: 64px;
-}
-.mat-mdc-form-field {
-  font-size: 14px;
-  width: 100%;
+  margin-top: $margin-top;
 }
 tr:hover {
   background-color: mat.get-color-from-palette($primary-row);

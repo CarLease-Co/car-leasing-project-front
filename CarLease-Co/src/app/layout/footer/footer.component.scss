@@ -1,6 +1,6 @@
 @use "@angular/material" as mat;
 @include mat.core();
-@import "../../../styles.scss";
+@import "../../../variables.scss";
 .custom-footer {
   background-color: mat.get-color-from-palette($primary);
   position: fixed;

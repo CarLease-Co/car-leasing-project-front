@@ -48,17 +48,17 @@ export interface Employee {
 }
 
 export interface LeaseApplicationForm {
-   userId: number|null|undefined;
-   monthlyIncome: number|null;
-   financialObligations: number|null;
-   carMake: string|null;
-   carModel: string|null;
-   manufactureDate: number|null;
-   textExplanation: string|null;
-   loanDuration: number|null;
-   loanAmount: number|null;
-   startDate: string|null;
-
+  userId: number | null | undefined;
+  monthlyIncome: number | null;
+  financialObligations: number | null;
+  carMake: string | null;
+  carModel: string | null;
+  manufactureDate: number | null;
+  textExplanation: string | null;
+  loanDuration: number | null;
+  loanAmount: number | null;
+  startDate: string | null;
+}
 export interface Car {
   id: number;
   make: string;

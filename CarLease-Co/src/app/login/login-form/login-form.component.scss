@@ -1,39 +1,39 @@
 @use "@angular/material" as mat;
 
 @include mat.core();
-@import "../../../styles.scss";
-.container {
-  margin: 100px auto;
+@import "../../../variables.scss";
+.login-welcome {
+  margin: 10rem auto;
   width: 75%;
   display: flex;
   flex-direction: row;
   color: white;
-  height: 450px;
-  border-radius: 40px;
+  height: 30rem;
+  border-radius: 4rem;
 }
 mat-form-field {
-  margin-bottom: 25px;
+  margin-bottom: 2.5rem;
 }
 .welcome-wrapper,
 .login-wrapper {
-  padding: 30px;
+  padding: 3rem;
   width: 50%;
   text-align: center;
   align-content: center;
 }
 .welcome-wrapper {
-  background-color: mat.get-color-from-palette($primary);
-  border-radius: 40px;
+  background-color: $primary-background;
+  border-radius: 4rem;
 }
 .button-container {
   button[type="submit"] {
-    padding: 5px 50px;
-    margin-top: 5px;
-    background-color: mat.get-color-from-palette($primary);
+    padding: 0.5rem 5rem;
+    margin-top: 0.5rem;
+    background-color: $primary-background;
     color: white;
   }
   button:hover {
-    background-color: mat.get-color-from-palette($primary-hover);
+    background-color: $primary-hover;
   }
 }
 .input-field-wrapper {

@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { CanActivateFn } from '@angular/router';
 
-import { sysadminLoginGuard } from './sysadmin-login.guard';
+import { sysAdminLoginGuard } from './sysadmin-login.guard';
 
 describe('sysadminLoginGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => sysadminLoginGuard(...guardParameters));
+  const executeGuard: CanActivateFn = (...guardParameters) =>
+    TestBed.runInInjectionContext(() => sysAdminLoginGuard(...guardParameters));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

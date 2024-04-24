@@ -1,10 +1,10 @@
 @use "@angular/material" as mat;
 
 @include mat.core();
-@import "../../../styles.scss";
+@import "../../../variables.scss";
 .example-card {
-  max-width: 1000px;
-  margin: 100px auto 25px;
+  max-width: $component-max-width;
+  margin: $margin-top auto 25px;
 }
 .content-wrapper {
   margin-top: 10px;

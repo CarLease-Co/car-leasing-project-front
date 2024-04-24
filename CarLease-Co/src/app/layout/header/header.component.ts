@@ -1,11 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { Router } from '@angular/router';
 import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
-import { EMPLOYEE_ROLE } from '../../enums';
+import { EMPLOYEE_ROLE, ROUTES } from '../../enums';
 
 @Component({
   selector: 'app-header',
@@ -17,24 +17,25 @@ import { EMPLOYEE_ROLE } from '../../enums';
 export class HeaderComponent {
   private readonly router = inject(Router);
   private readonly localStorageService = inject(LocalStorageManagerService);
-  role: string | undefined;
   readonly EMPLOYEE_ROLE = EMPLOYEE_ROLE;
-  ngOnInit() {}
+  role: string | undefined;
+  user = this.localStorageService.storedUser();
+
   goToLeaseList(): void {
-    this.router.navigate(['applications']);
+    this.router.navigate([ROUTES.APPLICATIONS]);
   }
 
   goToLeaseForm(): void {
-    this.router.navigate(['new-application']);
+    this.router.navigate([ROUTES.NEW_APPLICATION]);
   }
   goToSysAdminView(): void {
-    this.router.navigate(['sysadmin-view']);
+    this.router.navigate([ROUTES.SYSADMIN_VIEW]);
   }
   goToBusAdminView(): void {
-    this.router.navigate(['autosuggestor-form']);
+    this.router.navigate([ROUTES.AUTOSUGGESTOR_FORM]);
   }
   logout() {
     localStorage.clear();
-    this.router.navigate(['login']);
+    this.router.navigate([ROUTES.LOGIN]);
   }
 }

@@ -5,3 +5,20 @@ export enum EMPLOYEE_ROLE {
   BUSINESS_ADMIN = 'BUSINESS_ADMIN',
   SYSTEM_ADMIN = 'SYSTEM_ADMIN',
 }
+export enum APPLICATION_STATUS {
+  DRAFT = 'DRAFT',
+  PENDING = 'PENDING',
+  REVIEW_APPROVED = 'REVIEW_APPROVED',
+  REVIEW_DECLINED = 'REVIEW_DECLINED',
+  APPROVED = 'APPROVED',
+  DECLINED = 'DECLINED',
+}
+export enum ROUTES {
+  HOME = '',
+  LOGIN = 'login',
+  SYSADMIN_VIEW = 'sysadmin-view',
+  AUTOSUGGESTOR_FORM = 'autosuggestor-form',
+  APPLICATIONS = 'applications',
+  APPLICATION_DETAILS_BY_ID = 'applications/application-details/:id',
+  NEW_APPLICATION = 'new-application',
+}

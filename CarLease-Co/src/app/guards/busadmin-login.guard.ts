@@ -7,11 +7,7 @@ import { EMPLOYEE_ROLE } from '../enums';
 export const busadminLoginGuard: CanActivateFn = () => {
   const localStorageService = inject(LocalStorageManagerService);
 
-  if (
+  return (
     localStorageService.getStoredUser()?.role === EMPLOYEE_ROLE.BUSINESS_ADMIN
-  ) {
-    return true;
-  } else {
-    return false;
-  }
+  );
 };

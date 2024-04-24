@@ -2,7 +2,7 @@
   <mat-toolbar color="primary" class="opacity-50 width">
     <h1>CarLess</h1>
     <span class="example-spacer"></span>
-    @if (role){
+    @if (user()?.role){
     <button
       mat-icon-button
       [matMenuTriggerFor]="menu"
@@ -11,7 +11,7 @@
       <mat-icon>menu</mat-icon></button
     >}
     <mat-menu #menu="matMenu">
-      @switch (role) { @case (EMPLOYEE_ROLE.SYSTEM_ADMIN) {
+      @switch (user()?.role) { @case (EMPLOYEE_ROLE.SYSTEM_ADMIN) {
       <button mat-menu-item (click)="goToSysAdminView()">
         <mat-icon>manage_search</mat-icon>
         <span>User List</span>
@@ -24,14 +24,11 @@
       <button mat-menu-item (click)="goToLeaseForm()">
         <mat-icon>add</mat-icon>
         <span>New Lease</span></button
-      >} @case (EMPLOYEE_ROLE.APPLICANT || EMPLOYEE_ROLE.APPROVER ||
-      EMPLOYEE_ROLE.REVIEWER) {
+      >} }
       <button mat-menu-item (click)="goToLeaseList()">
         <mat-icon>home</mat-icon>
         <span>My Leases</span>
       </button>
-
-      } }
       <button mat-menu-item (click)="logout()">
         <mat-icon>logout</mat-icon>
         <span>Log out</span>

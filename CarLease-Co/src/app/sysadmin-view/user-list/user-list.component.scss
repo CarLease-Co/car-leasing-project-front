@@ -1,9 +1,7 @@
-
-
 @use "@angular/material" as mat;
 
 @include mat.core();
-@import "../../../styles.scss";
+@import "../../../variables.scss";
 
 .user-list {
   width: 70%;
@@ -22,7 +20,7 @@
   width: 100%;
 }
 tr:hover {
-  background-color: mat.get-color-from-palette($primary-hover);
+  background-color: $primary-hover;
   transition: 0.5s;
 }
 table {
