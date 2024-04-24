@@ -4,13 +4,12 @@
 @import "../../../variables.scss";
 
 .user-list {
-  width: 70%;
+  width: $component-max-width;
   margin: 0 auto;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: $margin-top;
 }
 .max-width {
-  max-width: 1000px;
+  max-width: $component-max-width;
   display: flex;
   flex-direction: column;
   margin: auto;

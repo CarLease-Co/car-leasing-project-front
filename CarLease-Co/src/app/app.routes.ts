@@ -8,7 +8,7 @@ import { ViewComponent } from './sysadmin-view/view/view.component';
 import { AppComponent } from './app.component';
 import { AutosuggestorFormComponent } from './business-admin-view/autosuggestor-form/autosuggestor-form.component';
 import { sysAdminLoginGuard } from './guards/sysadmin-login.guard';
-import { busadminLoginGuard } from './guards/busadmin-login.guard';
+import { busAdminLoginGuard } from './guards/busadmin-login.guard';
 import { ROUTES } from './enums';
 
 export const routes: Routes = [
@@ -19,7 +19,7 @@ export const routes: Routes = [
   },
   { path: 'login', component: LoginFormComponent },
   {
-    path: ROUTES.SYSADMIN_VIEW,
+    path: ROUTES.SYS_ADMIN_VIEW,
     component: ViewComponent,
     canActivate: [sysAdminLoginGuard],
   },
@@ -27,7 +27,7 @@ export const routes: Routes = [
   {
     path: ROUTES.AUTOSUGGESTOR_FORM,
     component: AutosuggestorFormComponent,
-    canActivate: [busadminLoginGuard],
+    canActivate: [busAdminLoginGuard],
   },
   {
     path: ROUTES.APPLICATIONS,

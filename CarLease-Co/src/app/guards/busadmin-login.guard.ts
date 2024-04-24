@@ -4,7 +4,7 @@ import { read } from 'fs';
 import { LocalStorageManagerService } from '../services/local-storage-manager.service';
 import { EMPLOYEE_ROLE } from '../enums';
 
-export const busadminLoginGuard: CanActivateFn = () => {
+export const busAdminLoginGuard: CanActivateFn = () => {
   const localStorageService = inject(LocalStorageManagerService);
 
   return (

@@ -29,7 +29,7 @@ export class HeaderComponent {
     this.router.navigate([ROUTES.NEW_APPLICATION]);
   }
   goToSysAdminView(): void {
-    this.router.navigate([ROUTES.SYSADMIN_VIEW]);
+    this.router.navigate([ROUTES.SYS_ADMIN_VIEW]);
   }
   goToBusAdminView(): void {
     this.router.navigate([ROUTES.AUTOSUGGESTOR_FORM]);

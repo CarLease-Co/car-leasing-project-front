@@ -16,7 +16,7 @@ export enum APPLICATION_STATUS {
 export enum ROUTES {
   HOME = '',
   LOGIN = 'login',
-  SYSADMIN_VIEW = 'sysadmin-view',
+  SYS_ADMIN_VIEW = 'sysadmin-view',
   AUTOSUGGESTOR_FORM = 'autosuggestor-form',
   APPLICATIONS = 'applications',
   APPLICATION_DETAILS_BY_ID = 'applications/application-details/:id',
