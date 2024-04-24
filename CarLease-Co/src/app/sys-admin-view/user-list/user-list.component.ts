@@ -20,6 +20,7 @@ import { MatSort, MatSortHeader, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Employee } from '../../types';
 import { MatPaginator } from '@angular/material/paginator';
+import {EmployeeProperties} from "../../enums";
 
 @Component({
   selector: 'app-user-list',
@@ -47,13 +48,13 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrl: './user-list.component.scss',
 })
 export class UserListComponent implements AfterViewInit {
-  dataSource = new MatTableDataSource(employeeList);
+  dataSource: MatTableDataSource<Employee> = new MatTableDataSource(employeeList);
   displayedColumns: string[] = [
-    'userId',
-    'fullName',
-    'role',
-    'email',
-    'password',
+    EmployeeProperties.UserId,
+    EmployeeProperties.FullName,
+    EmployeeProperties.Role,
+    EmployeeProperties.Email,
+    EmployeeProperties.Password
   ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -64,10 +65,10 @@ export class UserListComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.filterPredicate = (data, filter) => {
       return (
-        data.surname.toLowerCase().includes(filter) ||
-        data.userId.toString().includes(filter) ||
-        data.role.toLowerCase().includes(filter) ||
-        data.email.toLowerCase().includes(filter)
+        data[EmployeeProperties.Surname].toLowerCase().includes(filter) ||
+        data[EmployeeProperties.UserId].toString().includes(filter) ||
+        data[EmployeeProperties.Role].toLowerCase().includes(filter) ||
+        data[EmployeeProperties.Email].toLowerCase().includes(filter)
       );
     };
     this.dataSource.sortingDataAccessor = (
@@ -75,15 +76,15 @@ export class UserListComponent implements AfterViewInit {
       property: string
     ): string | number => {
       switch (property) {
-        case 'fullName':
+        case EmployeeProperties.FullName:
           return item.surname;
-        case 'userId':
+        case EmployeeProperties.UserId:
           return item.userId;
-        case 'role':
+        case EmployeeProperties.Role:
           return item.role;
-        case 'email':
+        case EmployeeProperties.Email:
           return item.email;
-        case 'password':
+        case EmployeeProperties.Password:
           return item.password;
         default:
           return '';

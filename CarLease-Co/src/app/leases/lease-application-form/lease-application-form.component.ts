@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { Car } from '../../types';
 import {
   FormGroup,
   FormControl,
@@ -17,7 +16,7 @@ import { Router } from '@angular/router';
 import { ApplicationListService } from '../../services/application-list.service';
 import { filter, map, Observable, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-
+import { LoanFormConfig } from '../../constants';
 @Component({
   selector: 'app-lease-application-form',
   standalone: true,
@@ -37,40 +36,40 @@ import { AsyncPipe } from '@angular/common';
 export class LeaseApplicationFormComponent {
   uniqueCarBrands$!: Observable<string[]>;
   filteredModels$!: Observable<string[]>;
-  
-  
+
+
   leaseForm = new FormGroup({
-    userId: new FormControl(1),
+    userId: new FormControl(1), //get using local storage
     monthlyIncome: new FormControl(null, [
       Validators.required,
-      Validators.min(1),
+      Validators.min(LoanFormConfig.minMonthlyIncome),
     ]),
     financialObligations: new FormControl(null, [
       Validators.required,
-      Validators.min(0),
+      Validators.min(LoanFormConfig.minFinancialObligations),
     ]),
     carMake: new FormControl('', Validators.required),
     carModel: new FormControl(
       { value: '', disabled: true },
       Validators.required
     ),
-    manufactureDate: new FormControl(1994, [
+    manufactureDate: new FormControl(LoanFormConfig.minCarYear, [
       Validators.required,
-      Validators.min(1994),
-      Validators.max(2024),
+      Validators.min(LoanFormConfig.minCarYear),
+      Validators.max(LoanFormConfig.maxCarYear),
     ]),
-    loanDuration: new FormControl(3, [
+    loanDuration: new FormControl(LoanFormConfig.minLoanDuration, [
       Validators.required,
-      Validators.min(3),
-      Validators.max(68),
+      Validators.min(LoanFormConfig.minLoanDuration),
+      Validators.max(LoanFormConfig.maxLoanDuration),
     ]),
-    loanAmount: new FormControl(null, [Validators.required, Validators.min(1)]),
+    loanAmount: new FormControl(null, [Validators.required, Validators.min(LoanFormConfig.minLoanAmount)]),
     textExplanation: new FormControl(''),
     startDate: new FormControl(new Date().toISOString()),
   });
-  
-  
-  
+
+
+
   private readonly applicationRouter = inject(Router);
   readonly applicationService = inject(ApplicationListService);
   get makeControl(): AbstractControl<string | null, string | null> | null {
@@ -130,4 +129,6 @@ export class LeaseApplicationFormComponent {
       textExplanation: '',
     });
   }
+
+    protected readonly LoanFormConfig = LoanFormConfig;
 }

@@ -23,3 +23,12 @@ export enum ROUTES {
   APPLICATION_DETAILS = 'applications/application-details',
   NEW_APPLICATION = 'new-application',
 }
+
+export enum EmployeeProperties {
+  Surname = 'surname',
+  FullName = 'fullName',
+  UserId = 'userId',
+  Role = 'role',
+  Email = 'email',
+  Password = 'password',
+}

@@ -20,9 +20,9 @@
       <div class="slider-container col right-col">
         <label class="slider-label">Duration of Loan (months)</label>
         <mat-slider
-          min="3"
-          max="68"
-          step="1"
+          min="{{LoanFormConfig.minLoanDuration}}"
+          max="{{LoanFormConfig.maxLoanDuration}}"
+          step="{{LoanFormConfig.sliderStep}}"
           discrete
           thumbLabel
           tickInterval="5"
@@ -33,7 +33,7 @@
         <span class="slider-value"
         >{{loanDuration}} months</span
         >
-          <span class="slider-max">68 months</span>
+          <span class="slider-max">{{LoanFormConfig.maxLoanDuration}} months</span>
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@
                 formControlName="carMake"
                 required
         >
-          @for (make of this.uniqueCarBrands$ | async; track make) {
+          @for (make of uniqueCarBrands$ | async; track make) {
           <mat-option [value]="make">{{ make }}</mat-option
             >}
         </mat-select>
@@ -87,23 +87,24 @@
 
       <div class="slider-container col">
         <label class="slider-label">Car Year</label>
-        <mat-slider min="1994" max="2024" step="1"
+        <mat-slider min="{{LoanFormConfig.minCarYear}}" max="{{LoanFormConfig.maxCarYear}}"
+                    step="{{LoanFormConfig.sliderStep}}"
         ><input matSliderThumb formControlName="manufactureDate"
         /></mat-slider>
         <div class="slider-info">
         <span class="slider-value">{{
             manufactureDate
           }}</span>
-          <span class="slider-max">2024</span>
+          <span class="slider-max">{{ LoanFormConfig.maxCarYear }}</span>
         </div>
       </div>
       <mat-form-field class="full-width-form-field col" appearance="outline">
         <mat-label>textExplanation</mat-label>
         <textarea
           matInput
-          placeholder="Enter Explanation (up to 420 characters)"
+          placeholder="Enter Explanation (up to {{LoanFormConfig.maxExplanationLength}} characters)"
           formControlName="textExplanation"
-          maxlength="420"
+          maxlength="{{LoanFormConfig.maxExplanationLength}}"
         ></textarea>
       </mat-form-field>
     </div>
