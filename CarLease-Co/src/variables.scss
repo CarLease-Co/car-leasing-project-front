@@ -1,11 +1,12 @@
 @use "@angular/material" as mat;
 @include mat.core();
 $margin-top: 64px;
-
-$primary: mat.define-palette(mat.$indigo-palette, 200);
-
-$primary-row: mat.define-palette(mat.$indigo-palette, 50);
-$primary-hov: mat.define-palette(mat.$indigo-palette, 100);
-$primary-background: mat.get-color-from-palette($primary);
-$primary-hover: mat.get-color-from-palette($primary-hov);
 $component-max-width: 1000px;
+
+$primary-200: mat.define-palette(mat.$indigo-palette, 200);
+$primary-50: mat.define-palette(mat.$indigo-palette, 50);
+$primary-100: mat.define-palette(mat.$indigo-palette, 100);
+
+$primary-background: mat.get-color-from-palette($primary-200);
+$primary-row: mat.get-color-from-palette($primary-50);
+$primary-hover: mat.get-color-from-palette($primary-100);

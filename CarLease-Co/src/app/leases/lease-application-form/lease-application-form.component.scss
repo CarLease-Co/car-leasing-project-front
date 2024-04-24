@@ -64,12 +64,12 @@
     button[type="submit"] {
       padding: 5px 50px;
       margin-top: 5px;
-      background-color: mat.get-color-from-palette($primary);
+      background-color: $primary-background;
       color: white;
     }
     button:hover {
       cursor: pointer;
-      background-color: mat.get-color-from-palette($primary-row);
+      background-color: $primary-hover;
     }
   }
 

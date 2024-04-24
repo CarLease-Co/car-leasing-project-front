@@ -2,7 +2,7 @@
 @include mat.core();
 @import "../../../variables.scss";
 .custom-footer {
-  background-color: mat.get-color-from-palette($primary);
+  background-color: $primary-background;
   position: fixed;
   left: 0;
   bottom: 0;

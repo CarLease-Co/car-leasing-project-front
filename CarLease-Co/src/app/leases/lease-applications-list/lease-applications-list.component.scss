@@ -13,7 +13,7 @@
   margin-top: $margin-top;
 }
 tr:hover {
-  background-color: mat.get-color-from-palette($primary-row);
+  background-color: $primary-row;
   transition: 0.5s;
   cursor: pointer;
 }
