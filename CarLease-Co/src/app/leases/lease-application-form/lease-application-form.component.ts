@@ -37,7 +37,10 @@ import {LocalStorageManagerService} from "../../services/local-storage-manager.s
 export class LeaseApplicationFormComponent {
   readonly applicationService = inject(ApplicationListService);
   private readonly localStorageService = inject(LocalStorageManagerService);
+  protected readonly LoanFormConfig = LoanFormConfig;
+
   private userId = this.localStorageService.getStoredUser()?.userId;
+
   uniqueCarBrands$: Observable<string[]> = of([]);
   filteredModels$: Observable<string[]> = of([]);
 
@@ -121,22 +124,7 @@ export class LeaseApplicationFormComponent {
   onSubmit(): void {
     if (this.leaseForm.valid) {
       this.applicationService.createApplication(this.leaseForm.getRawValue());
-      this.leaseForm.reset();
-      this.leaseForm.setErrors(null);
     }
   }
-  resetForm(): void {
-    this.leaseForm.reset({
-      loanAmount: null,
-      loanDuration: 3,
-      monthlyIncome: null,
-      financialObligations: null,
-      carMake: null,
-      carModel: null,
-      manufactureDate: 1994,
-      textExplanation: '',
-    });
-  }
 
-  protected readonly LoanFormConfig = LoanFormConfig;
 }

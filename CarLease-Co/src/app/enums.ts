@@ -24,7 +24,7 @@ export enum ROUTES {
   NEW_APPLICATION = 'new-application',
 }
 
-export enum EMPLOYEE_PROPERTIES {
+export enum USER_PROPERTIES {
   SURNAME = 'surname',
   FULL_NAME = 'fullName',
   USER_ID = 'userId',

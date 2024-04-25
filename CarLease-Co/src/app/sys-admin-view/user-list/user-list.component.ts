@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { employeeList } from '../../mock-data/Employees';
+import {AfterViewInit, Component, inject, ViewChild} from '@angular/core';
 import {
   MatCell,
   MatCellDef,
@@ -18,9 +17,10 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatSort, MatSortHeader, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Employee } from '../../types';
+import {User} from '../../types';
 import { MatPaginator } from '@angular/material/paginator';
-import { EMPLOYEE_PROPERTIES } from '../../enums';
+import {UserService} from "../../services/user.service";
+import {USER_PROPERTIES} from "../../enums";
 
 @Component({
   selector: 'app-user-list',
@@ -48,45 +48,53 @@ import { EMPLOYEE_PROPERTIES } from '../../enums';
   styleUrl: './user-list.component.scss',
 })
 export class UserListComponent implements AfterViewInit {
-  dataSource: MatTableDataSource<Employee> = new MatTableDataSource(
-    employeeList
-  );
+
+  private readonly userService: UserService = inject(UserService);
+
+  dataSource: MatTableDataSource<User, MatPaginator> = new MatTableDataSource<User>();
   displayedColumns: string[] = [
-    EMPLOYEE_PROPERTIES.USER_ID,
-    EMPLOYEE_PROPERTIES.FULL_NAME,
-    EMPLOYEE_PROPERTIES.ROLE,
-    EMPLOYEE_PROPERTIES.EMAIL,
-    EMPLOYEE_PROPERTIES.PASSWORD,
+    USER_PROPERTIES.USER_ID,
+    USER_PROPERTIES.FULL_NAME,
+    USER_PROPERTIES.ROLE,
+    USER_PROPERTIES.EMAIL,
+    USER_PROPERTIES.PASSWORD,
   ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  constructor(private _liveAnnouncer: LiveAnnouncer) {}
+  constructor(private _liveAnnouncer: LiveAnnouncer) {
+    this.userService.users$.subscribe(users => this.dataSource.data = users);
+  }
+
+  ngOnInit(): void {
+    this.userService.getUsers();
+  }
+
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.dataSource.filterPredicate = (data, filter) => {
       return (
-        data[EMPLOYEE_PROPERTIES.SURNAME].toLowerCase().includes(filter) ||
-        data[EMPLOYEE_PROPERTIES.USER_ID].toString().includes(filter) ||
-        data[EMPLOYEE_PROPERTIES.ROLE].toLowerCase().includes(filter) ||
-        data[EMPLOYEE_PROPERTIES.EMAIL].toLowerCase().includes(filter)
+        data[USER_PROPERTIES.SURNAME].toLowerCase().includes(filter) ||
+        data[USER_PROPERTIES.USER_ID].toString().includes(filter) ||
+        data[USER_PROPERTIES.ROLE].toLowerCase().includes(filter) ||
+        data[USER_PROPERTIES.EMAIL].toLowerCase().includes(filter)
       );
     };
     this.dataSource.sortingDataAccessor = (
-      item: Employee,
+      item: User,
       property: string
     ): string | number => {
       switch (property) {
-        case EMPLOYEE_PROPERTIES.FULL_NAME:
+        case USER_PROPERTIES.FULL_NAME:
           return item.surname;
-        case EMPLOYEE_PROPERTIES.USER_ID:
+        case USER_PROPERTIES.USER_ID:
           return item.userId;
-        case EMPLOYEE_PROPERTIES.ROLE:
+        case USER_PROPERTIES.ROLE:
           return item.role;
-        case EMPLOYEE_PROPERTIES.EMAIL:
+        case USER_PROPERTIES.EMAIL:
           return item.email;
-        case EMPLOYEE_PROPERTIES.PASSWORD:
+        case USER_PROPERTIES.PASSWORD:
           return item.password;
         default:
           return '';
