@@ -55,7 +55,6 @@ export class AutosuggestorFormComponent {
     ]),
   });
   onSubmit() {
-    console.log(this.autosuggestorForm.value);
     this.autosuggestorForm.reset();
   }
 }

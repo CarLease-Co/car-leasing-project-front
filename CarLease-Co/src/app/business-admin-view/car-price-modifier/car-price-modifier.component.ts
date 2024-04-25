@@ -77,7 +77,6 @@ export class CarPriceModifierComponent {
     });
   }
   onSubmit() {
-    console.log(this.carPriceForm.value);
     this.carPriceForm.reset();
   }
 }
