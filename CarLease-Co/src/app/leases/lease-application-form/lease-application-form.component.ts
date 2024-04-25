@@ -17,6 +17,7 @@ import { map, Observable, of, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { LoanFormConfig } from '../../constants';
 import { FORM_FIELDS } from '../../enums';
+import {LocalStorageManagerService} from "../../services/local-storage-manager.service";
 @Component({
   selector: 'app-lease-application-form',
   standalone: true,
@@ -35,11 +36,13 @@ import { FORM_FIELDS } from '../../enums';
 })
 export class LeaseApplicationFormComponent {
   readonly applicationService = inject(ApplicationListService);
+  private readonly localStorageService = inject(LocalStorageManagerService);
+  private userId = this.localStorageService.getStoredUser()?.userId;
   uniqueCarBrands$: Observable<string[]> = of([]);
   filteredModels$: Observable<string[]> = of([]);
 
   leaseForm = new FormGroup({
-    userId: new FormControl(1), //get using local storage
+    userId: new FormControl(this.userId),
     monthlyIncome: new FormControl(null, [
       Validators.required,
       Validators.min(LoanFormConfig.minMonthlyIncome),
