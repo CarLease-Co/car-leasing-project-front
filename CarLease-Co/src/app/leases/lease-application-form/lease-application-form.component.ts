@@ -17,6 +17,7 @@ import { map, Observable, of, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { LoanFormConfig } from '../../constants';
 import { FORM_FIELDS } from '../../enums';
+import {LocalStorageManagerService} from "../../services/local-storage-manager.service";
 @Component({
   selector: 'app-lease-application-form',
   standalone: true,
@@ -35,11 +36,16 @@ import { FORM_FIELDS } from '../../enums';
 })
 export class LeaseApplicationFormComponent {
   readonly applicationService = inject(ApplicationListService);
+  private readonly localStorageService = inject(LocalStorageManagerService);
+  protected readonly LoanFormConfig = LoanFormConfig;
+
+  private userId = this.localStorageService.getStoredUser()?.userId;
+
   uniqueCarBrands$: Observable<string[]> = of([]);
   filteredModels$: Observable<string[]> = of([]);
 
   leaseForm = new FormGroup({
-    userId: new FormControl(1), //get using local storage
+    userId: new FormControl(this.userId),
     monthlyIncome: new FormControl(null, [
       Validators.required,
       Validators.min(LoanFormConfig.minMonthlyIncome),
@@ -118,22 +124,7 @@ export class LeaseApplicationFormComponent {
   onSubmit(): void {
     if (this.leaseForm.valid) {
       this.applicationService.createApplication(this.leaseForm.getRawValue());
-      this.leaseForm.reset();
-      this.leaseForm.setErrors(null);
     }
   }
-  resetForm(): void {
-    this.leaseForm.reset({
-      loanAmount: null,
-      loanDuration: 3,
-      monthlyIncome: null,
-      financialObligations: null,
-      carMake: null,
-      carModel: null,
-      manufactureDate: 1994,
-      textExplanation: '',
-    });
-  }
 
-  protected readonly LoanFormConfig = LoanFormConfig;
 }
