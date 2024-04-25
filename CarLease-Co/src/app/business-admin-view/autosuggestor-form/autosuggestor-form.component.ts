@@ -33,18 +33,15 @@ export class AutosuggestorFormComponent {
       Validators.required,
       Validators.min(1),
     ]),
-    interestPercentage: new FormControl('', [
+    minInterestPercentage: new FormControl('', [
       Validators.required,
       Validators.min(1),
       Validators.max(100),
     ]),
-    minCarPriceRange: new FormControl('', [
+    maxInterestPercentage: new FormControl('', [
       Validators.required,
       Validators.min(1),
-    ]),
-    maxCarPriceRange: new FormControl('', [
-      Validators.required,
-      Validators.min(1),
+      Validators.max(100),
     ]),
     minCarYear: new FormControl(1994, [
       Validators.required,

@@ -18,6 +18,7 @@ export enum ROUTES {
   LOGIN = 'login',
   SYS_ADMIN_VIEW = 'sysadmin-view',
   AUTOSUGGESTOR_FORM = 'autosuggestor-form',
+  CAR_PRICE_MODIFIER = 'car-price-modifier',
   APPLICATIONS = 'applications',
   APPLICATION_DETAILS_BY_ID = 'applications/application-details/:id',
   APPLICATION_DETAILS = 'applications/application-details',

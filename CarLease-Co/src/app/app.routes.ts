@@ -10,6 +10,7 @@ import { AutosuggestorFormComponent } from './business-admin-view/autosuggestor-
 import { sysAdminLoginGuard } from './guards/sysadmin-login.guard';
 import { busAdminLoginGuard } from './guards/busadmin-login.guard';
 import { ROUTES } from './enums';
+import { CarPriceModifierComponent } from './business-admin-view/car-price-modifier/car-price-modifier.component';
 
 export const routes: Routes = [
   {
@@ -27,6 +28,11 @@ export const routes: Routes = [
   {
     path: ROUTES.AUTOSUGGESTOR_FORM,
     component: AutosuggestorFormComponent,
+    canActivate: [busAdminLoginGuard],
+  },
+  {
+    path: ROUTES.CAR_PRICE_MODIFIER,
+    component: CarPriceModifierComponent,
     canActivate: [busAdminLoginGuard],
   },
   {

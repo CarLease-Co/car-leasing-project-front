@@ -1,0 +1,65 @@
+<div class="car-price-modifier-view">
+  <h3 class="car-price-modifier-header">Car Price Modifier</h3>
+  <form
+    [formGroup]="carPriceForm"
+    (ngSubmit)="onSubmit()"
+    class="car-price-modifier-form"
+  >
+    <mat-form-field class="full-width-form-field col" appearance="outline">
+      <mat-label>Car Brand</mat-label>
+      <mat-select
+        placeholder="Select Car Brand"
+        formControlName="carMake"
+        required
+      >
+        @for (make of uniqueCarBrands$ | async; track make) {
+        <mat-option [value]="make">{{ make }}</mat-option
+        >}
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width-form-field" appearance="outline">
+      <mat-label>Car Model</mat-label>
+      <mat-select
+        placeholder="Select Car Model"
+        formControlName="carModel"
+        required
+        >@for (model of filteredModels$ | async; track model) {
+        <mat-option [value]="model">{{ model }}</mat-option
+        >}
+      </mat-select>
+    </mat-form-field>
+
+    <div class="full-width-form-field">
+      <mat-form-field class="half-width-form-field" appearance="outline">
+        <mat-label>Mininimum Car Price</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          step="0.01"
+          placeholder="Enter Car Min Price"
+          formControlName="minCarPrice"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field class="half-width-form-field" appearance="outline">
+        <mat-label>Maximum Car Price</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          step="0.01"
+          placeholder="Enter Car Max Price"
+          formControlName="maxCarPrice"
+          required
+        />
+      </mat-form-field>
+    </div>
+    <div class="button-container">
+      <button type="submit" mat-raised-button [disabled]="!carPriceForm.valid">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

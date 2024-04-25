@@ -9,10 +9,9 @@ export const LoanFormConfig = {
   maxCarYear: new Date().getFullYear(),
   minCarYear: new Date().getFullYear() - 30,
   sliderStep: 1,
-  maxExplanationLength:420,
+  maxExplanationLength: 420,
   minMonthlyIncome: 0,
   minLoanAmount: 100,
   minFinancialObligations: 0,
+  minCarPrice: 1,
 };
-
-

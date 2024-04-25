@@ -16,39 +16,29 @@
         required
       />
     </mat-form-field>
-    <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Interest Percentage</mat-label>
-      <input
-        matInput
-        type="number"
-        min="0"
-        step="0.01"
-        placeholder="Enter Interest Percentage"
-        formControlName="interestPercentage"
-        required
-      />
-    </mat-form-field>
 
     <div class="full-width-form-field">
       <mat-form-field class="half-width-form-field" appearance="outline">
-        <mat-label>Min Car Price</mat-label>
+        <mat-label>Minimum Interest Percentage</mat-label>
         <input
           matInput
           type="number"
           min="0"
-          placeholder="Enter Car Min Price Range"
-          formControlName="minCarPriceRange"
+          step="0.01"
+          placeholder="Enter Minimum Interest Percentage"
+          formControlName="minInterestPercentage"
           required
         />
       </mat-form-field>
       <mat-form-field class="half-width-form-field" appearance="outline">
-        <mat-label>Max Car Price</mat-label>
+        <mat-label>Maximum Interest Percentage</mat-label>
         <input
           matInput
           type="number"
           min="0"
-          placeholder="Enter Car Min Price Range"
-          formControlName="maxCarPriceRange"
+          step="0.01"
+          placeholder="Enter Maximum Interest Percentage"
+          formControlName="maxInterestPercentage"
           required
         />
       </mat-form-field>
