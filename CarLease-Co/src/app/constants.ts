@@ -15,3 +15,10 @@ export const LoanFormConfig = {
   minFinancialObligations: 0,
   minCarPrice: 1,
 };
+export const AutosuggestorFormConfig = {
+  maxCarYear: new Date().getFullYear(),
+  minCarYear: new Date().getFullYear() - 30,
+  minInterestPercentage: 1,
+  maxInterestPercentage: 100,
+  minMonthlyExpenses: 1,
+};

@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
+import { AutosuggestorFormConfig } from '../../constants';
 
 @Component({
   selector: 'app-autosuggestor-form',
@@ -31,27 +32,27 @@ export class AutosuggestorFormComponent {
   autosuggestorForm = new FormGroup({
     monthlyExpenses: new FormControl('', [
       Validators.required,
-      Validators.min(1),
+      Validators.min(AutosuggestorFormConfig.minMonthlyExpenses),
     ]),
     minInterestPercentage: new FormControl('', [
       Validators.required,
-      Validators.min(1),
-      Validators.max(100),
+      Validators.min(AutosuggestorFormConfig.minInterestPercentage),
+      Validators.max(AutosuggestorFormConfig.maxInterestPercentage),
     ]),
     maxInterestPercentage: new FormControl('', [
       Validators.required,
-      Validators.min(1),
-      Validators.max(100),
+      Validators.min(AutosuggestorFormConfig.minInterestPercentage),
+      Validators.max(AutosuggestorFormConfig.maxInterestPercentage),
     ]),
-    minCarYear: new FormControl(1994, [
+    minCarYear: new FormControl(AutosuggestorFormConfig.minCarYear, [
       Validators.required,
-      Validators.min(1994),
-      Validators.max(2024),
+      Validators.min(AutosuggestorFormConfig.minCarYear),
+      Validators.max(AutosuggestorFormConfig.maxCarYear),
     ]),
-    maxCarYear: new FormControl(2024, [
+    maxCarYear: new FormControl(AutosuggestorFormConfig.maxCarYear, [
       Validators.required,
-      Validators.min(1994),
-      Validators.max(2024),
+      Validators.min(AutosuggestorFormConfig.minCarYear),
+      Validators.max(AutosuggestorFormConfig.maxCarYear),
     ]),
   });
   onSubmit() {

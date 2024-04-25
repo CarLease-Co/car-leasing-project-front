@@ -16,6 +16,7 @@ import { ApplicationListService } from '../../services/application-list.service'
 import { Observable, map, of, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { FORM_FIELDS } from '../../enums';
+import { LoanFormConfig } from '../../constants';
 
 @Component({
   selector: 'app-car-price-modifier',
@@ -43,8 +44,14 @@ export class CarPriceModifierComponent {
       { value: '', disabled: true },
       Validators.required
     ),
-    minCarPrice: new FormControl('', [Validators.required, Validators.min(1)]),
-    maxCarPrice: new FormControl('', [Validators.required, Validators.min(1)]),
+    minCarPrice: new FormControl('', [
+      Validators.required,
+      Validators.min(LoanFormConfig.minCarPrice),
+    ]),
+    maxCarPrice: new FormControl('', [
+      Validators.required,
+      Validators.min(LoanFormConfig.minCarPrice),
+    ]),
   });
 
   get makeControl(): AbstractControl<string | null, string | null> | null {
