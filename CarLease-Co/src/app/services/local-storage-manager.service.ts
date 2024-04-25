@@ -25,4 +25,8 @@ export class LocalStorageManagerService {
     this._storedUser.set(parsedUser);
     return parsedUser;
   }
+  logout(): void {
+    localStorage.clear();
+    this._storedUser.set(undefined);
+  }
 }
