@@ -1,0 +1,27 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+@import "../../../variables.scss";
+.example-spacer {
+  flex: 1 1 auto;
+}
+.opacity-50 {
+  background-color: $primary-background;
+}
+.width {
+  width: 1000px;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+.sticky {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+h1 {
+  cursor: pointer;
+}

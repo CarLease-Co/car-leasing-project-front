@@ -1,0 +1,99 @@
+@use "@angular/material" as mat;
+@import "../../../variables.scss";
+@include mat.core();
+
+.container {
+  position: relative;
+  padding: 50px;
+  min-height: 100vh;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+.lease-form-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #615d5d;
+  text-align: center;
+}
+
+.loan-application-form {
+  max-width: 900px;
+  margin: 0 auto;
+
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .slider-container {
+    margin-bottom: 20px;
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0 1em;
+
+    mat-slider {
+      width: 100%;
+      margin: 0 10px;
+    }
+
+    .slider-value {
+      margin-top: 5px;
+      font-size: 16px;
+      color: #615d5d;
+    }
+    .slider-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .slider-max {
+      font-size: 16px;
+      color: #615d5d;
+      margin-top: 5px;
+    }
+
+    .slider-label {
+      color: #615d5d;
+    }
+  }
+
+  .button-container {
+    text-align: center;
+    button[type="submit"] {
+      padding: 5px 50px;
+      margin-top: 5px;
+      background-color: $primary-background;
+      color: white;
+    }
+    button:hover {
+      cursor: pointer;
+      background-color: $primary-hover;
+    }
+  }
+
+  .section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    margin: 0 auto;
+    align-content: flex-end;
+  }
+
+  .col {
+    flex-basis: 45%;
+    box-sizing: border-box;
+  }
+  mat-form-field {
+    width: 100%;
+    padding: 0;
+  }
+
+  @media screen and (max-width: 600px) {
+    max-width: 90%;
+  }
+}

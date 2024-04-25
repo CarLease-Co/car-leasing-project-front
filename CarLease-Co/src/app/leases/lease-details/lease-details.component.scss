@@ -1,0 +1,27 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+@import "../../../variables.scss";
+.example-card {
+  max-width: $component-max-width;
+  margin: $margin-top auto 25px;
+}
+.content-wrapper {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+}
+mat-card-content {
+  width: 50%;
+  text-align: center;
+}
+.mat-mdc-card-content:first-child {
+  padding: 0;
+}
+h3 {
+  margin: 0;
+  height: 40px;
+}
+h3:nth-child(even) {
+  background-color: $primary-row;
+}

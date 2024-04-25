@@ -1,0 +1,32 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+@import "../../../styles.scss";
+@import "../../../variables.scss";
+.max-width {
+  max-width: $component-max-width;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+.margin-top {
+  margin-top: $margin-top;
+}
+tr:hover {
+  background-color: $primary-row;
+  transition: 0.5s;
+  cursor: pointer;
+}
+table {
+  max-width: 100%;
+}
+th,
+tr {
+  text-align: start;
+}
+@media only screen and (max-width: 700px) {
+  .table-width {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}

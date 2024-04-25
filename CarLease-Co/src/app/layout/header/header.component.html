@@ -1,0 +1,38 @@
+<div color="primary" class="opacity-50 wrapper sticky">
+  <mat-toolbar color="primary" class="opacity-50 width">
+    <h1>CarLess</h1>
+    <span class="example-spacer"></span>
+    @if (user()?.role){
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon>menu</mat-icon></button
+    >}
+    <mat-menu #menu="matMenu">
+      @switch (user()?.role) { @case (EMPLOYEE_ROLE.SYSTEM_ADMIN) {
+      <button mat-menu-item (click)="goToSysAdminView()">
+        <mat-icon>manage_search</mat-icon>
+        <span>User List</span>
+      </button>
+      }@case (EMPLOYEE_ROLE.BUSINESS_ADMIN) {
+      <button mat-menu-item (click)="goToBusAdminView()">
+        <mat-icon>admin_panel_settings</mat-icon>
+        <span>Autosuggestor form</span></button
+      >} @case (EMPLOYEE_ROLE.APPLICANT) {
+      <button mat-menu-item (click)="goToLeaseForm()">
+        <mat-icon>add</mat-icon>
+        <span>New Lease</span></button
+      >} }
+      <button mat-menu-item (click)="goToLeaseList()">
+        <mat-icon>home</mat-icon>
+        <span>My Leases</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Log out</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</div>
