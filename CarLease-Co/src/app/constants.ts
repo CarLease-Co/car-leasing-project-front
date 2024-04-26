@@ -3,7 +3,7 @@ export const BASE_URL = 'https://car-leasing-project-back-sandbox.onrender.com';
 export const APPLICATIONS_PATH = '/api/v1/applications';
 export const CAR_PATH = '/api/v1/cars';
 export const LOGIN_PATH = '/api/v1/users/login';
-export const USER_PATH = "api/v1/users";
+export const USER_PATH = 'api/v1/users';
 export const LoanFormConfig = {
   minLoanDuration: 3,
   maxLoanDuration: 120,
@@ -22,4 +22,7 @@ export const AutosuggestorFormConfig = {
   minInterestPercentage: 1,
   maxInterestPercentage: 100,
   minMonthlyExpenses: 1,
+};
+export const ErrorMessages = {
+  wrongCredentials: 'Wrong username or password. Try again.',
 };
