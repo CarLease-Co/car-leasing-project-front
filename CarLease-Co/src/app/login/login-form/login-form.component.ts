@@ -14,10 +14,11 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { MatCardModule } from '@angular/material/card';
 import { LoginService } from '../../services/login.service';
-import { ErrorMessages } from '../../constants';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { AUTHORIZATION, USER_PROPERTIES } from '../../enums';
+import { AUTHORIZATION, ERROR_MESSAGES, USER_PROPERTIES } from '../../enums';
+import { EMPTY, Observable, catchError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-form',
@@ -44,7 +45,7 @@ export class LoginFormComponent {
     username: new FormControl('', [Validators.required, Validators.min(3)]),
     password: new FormControl('', Validators.required),
   });
-  errorMessages = ErrorMessages;
+  ERROR_MESSAGES = ERROR_MESSAGES;
   unauthorized: boolean = false;
 
   login(): void {
@@ -55,15 +56,17 @@ export class LoginFormComponent {
       USER_PROPERTIES.PASSWORD,
     )?.value;
     if (usernameInputValue && passwordInputValue) {
-      this.loginService.login(usernameInputValue, passwordInputValue).subscribe(
-        (response) => response,
-        (err) => {
-          if (err.status == 401) {
-            this.unauthorized = true;
-            this.loginForm.reset();
-          }
-        },
-      );
+      this.loginService
+        .login(usernameInputValue, passwordInputValue)
+        .pipe(catchError(this.checkErrorStatus))
+        .subscribe();
     }
   }
+  private checkErrorStatus = (error: HttpErrorResponse): Observable<never> => {
+    if (error.status == 401) {
+      this.unauthorized = true;
+      this.loginForm.reset();
+    }
+    return EMPTY;
+  };
 }

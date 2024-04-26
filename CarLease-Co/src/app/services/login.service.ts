@@ -5,7 +5,7 @@ import { LoginResponse } from '../types';
 import { LocalStorageManagerService } from './local-storage-manager.service';
 import { Router } from '@angular/router';
 import { ROUTES } from '../enums';
-import { BASE_URL, ErrorMessages, LOGIN_PATH } from '../constants';
+import { BASE_URL, LOGIN_PATH } from '../constants';
 
 @Injectable({
   providedIn: 'root',

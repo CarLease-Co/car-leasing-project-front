@@ -30,14 +30,9 @@
           required
         />
       </mat-form-field>
-      <div
-        [ngClass]="
-          unauthorized ? AUTHORIZATION.UNAUTHORIZED : AUTHORIZATION.AUTHORIZED
-        "
-      >
-        <mat-icon>error</mat-icon>
-        {{ errorMessages.wrongCredentials }}
-      </div>
+      @if (unauthorized) {
+        <mat-error>{{ ERROR_MESSAGES.WRONG_CREDENTIALS }}</mat-error>
+      }
     </div>
     <div class="button-container">
       <button type="submit" mat-raised-button [disabled]="!loginForm.valid">

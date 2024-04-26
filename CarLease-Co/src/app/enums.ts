@@ -45,3 +45,8 @@ export enum AUTHORIZATION {
   UNAUTHORIZED = 'unauthorized',
   AUTHORIZED = 'authorized',
 }
+
+export enum ERROR_MESSAGES {
+  WRONG_CREDENTIALS = 'Wrong username or password. Try again.',
+  GENERIC_ERROR = 'Something went wrong. Try again later.',
+}

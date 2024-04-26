@@ -23,6 +23,3 @@ export const AutosuggestorFormConfig = {
   maxInterestPercentage: 100,
   minMonthlyExpenses: 1,
 };
-export const ErrorMessages = {
-  wrongCredentials: 'Wrong username or password. Try again.',
-};
