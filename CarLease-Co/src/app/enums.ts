@@ -39,3 +39,9 @@ export enum FORM_FIELDS {
   MANUFACTURE_DATE = 'manufactureDate',
   NOT_SET = 'Not set',
 }
+
+export enum AUTOSUGGESTOR_VALUES {
+  BAD="BAD",
+  OKAY="OKAY",
+  GOOD="GOOD"
+}

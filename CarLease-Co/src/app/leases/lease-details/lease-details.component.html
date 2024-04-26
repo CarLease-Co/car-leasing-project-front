@@ -22,26 +22,47 @@
       <h3>Application approval status</h3>
       <h3>Additional information</h3>
     </mat-card-content>
-    <mat-card-content style="padding: 0">
-      <h3>{{ application.user.name }}</h3>
-      <h3>{{ application.user.surname }}</h3>
-      <h3>{{ application.car.make }}</h3>
-      <h3>{{ application.car.model }}</h3>
-      <h3>{{ application.manufactureDate }}</h3>
-      <h3>{{ application.startDate }}</h3>
-      <h3>{{ application.endDate }}</h3>
-      <h3>{{ application.financialObligations }}</h3>
-      <h3>{{ application.loanAmount }}</h3>
-      <h3>{{ application.loanDuration }}</h3>
-      <h3>{{ application.monthlyIncome }}</h3>
-      <h3>{{ application.status }}</h3>
-      <h3>{{ application.textExplanation }}</h3>
-    </mat-card-content>
+<!--    <mat-card-content style="padding: 0">-->
+<!--      <h3>{{ application.user.name }}</h3>-->
+<!--      <h3>{{ application.user.surname }}</h3>-->
+<!--      <h3>{{ application.car.make }}</h3>-->
+<!--      <h3>{{ application.car.model }}</h3>-->
+<!--      <h3>{{ application.manufactureDate }}</h3>-->
+<!--      <h3>{{ application.startDate }}</h3>-->
+<!--      <h3>{{ application.endDate }}</h3>-->
+<!--      <h3>{{ application.financialObligations }}</h3>-->
+<!--      <h3>{{ application.loanAmount }}</h3>-->
+<!--      <h3>{{ application.loanDuration }}</h3>-->
+<!--      <h3>{{ application.monthlyIncome }}</h3>-->
+<!--      <h3>{{ application.status }}</h3>-->
+<!--      <h3>{{ application.textExplanation }}</h3>-->
+
+<!--    </mat-card-content>-->
+
   </div>
   <mat-card-actions>
-    <button mat-button>EDIT</button>
-    <button mat-button>DELETE</button>
+
+
   </mat-card-actions>
+  @switch(user()?.role) {
+    @case (EMPLOYEE_ROLE.REVIEWER) {
+      <mat-card-actions>
+        <app-autosuggestor/>
+      </mat-card-actions>
+    }
+    @case (EMPLOYEE_ROLE.APPROVER) {
+      <mat-card-actions>
+        <app-autosuggestor/>
+      </mat-card-actions>
+    }
+    @case (EMPLOYEE_ROLE.APPLICANT) {
+      <mat-card-actions>
+        <button mat-button>EDIT</button>
+        <button mat-button>DELETE</button>
+      </mat-card-actions>
+    }
+  }
 </mat-card>
+
 
 }

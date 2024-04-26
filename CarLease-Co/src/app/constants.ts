@@ -4,6 +4,7 @@ export const APPLICATIONS_PATH = '/api/v1/applications';
 export const CAR_PATH = '/api/v1/cars';
 export const LOGIN_PATH = '/api/v1/users/login';
 export const USER_PATH = "api/v1/users";
+export const AUTOSUGGESTOR_PATH = "api/v1/autosuggestors"
 export const LoanFormConfig = {
   minLoanDuration: 3,
   maxLoanDuration: 120,
