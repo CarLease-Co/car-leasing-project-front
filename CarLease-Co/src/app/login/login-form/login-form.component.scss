@@ -35,15 +35,6 @@
     background-color: $primary-hover;
   }
 }
-.unauthorized {
-  color: $warn;
-  text-align: start;
-  font-size: 11px;
-  visibility: visible;
-}
-.autorized {
-  visibility: hidden;
-}
 .input-field-wrapper {
   display: flex;
   flex-direction: column;

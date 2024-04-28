@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import {
   Car,
   LeaseApplication,
@@ -39,14 +39,14 @@ export class ApplicationListService {
       .pipe(tap((cars) => this.cars$.next(cars)))
       .subscribe();
   }
-  createApplication(application: LeaseApplicationForm): void {
-    this.httpClient
+  createApplication(application: LeaseApplicationForm): Observable<unknown> {
+    return this.httpClient
       .post(`${BASE_URL}${APPLICATIONS_PATH}`, application)
-      .subscribe({
-        next: (response) => {
-          this.router.navigate([ROUTES.APPLICATIONS]);
+      .pipe(
+        tap((response) => {
           response;
-        },
-      });
+          this.router.navigate([ROUTES.APPLICATIONS]);
+        }),
+      );
   }
 }
