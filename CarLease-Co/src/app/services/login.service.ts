@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { tap } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { LoginResponse } from '../types';
 import { LocalStorageManagerService } from './local-storage-manager.service';
 import { Router } from '@angular/router';
@@ -15,15 +15,14 @@ export class LoginService {
   private readonly router = inject(Router);
   private readonly localStorageService = inject(LocalStorageManagerService);
 
-  login(username: string, password: string): void {
-    this.httpClient
+  login(username: string, password: string): Observable<LoginResponse> {
+    return this.httpClient
       .get<LoginResponse>(`${BASE_URL}${LOGIN_PATH}`, {
         params: { username, password },
       })
       .pipe(
         tap(this.localStorageService.setUser),
-        tap(() => this.router.navigate([ROUTES.HOME]))
-      )
-      .subscribe();
+        tap(() => this.router.navigate([ROUTES.HOME])),
+      );
   }
 }

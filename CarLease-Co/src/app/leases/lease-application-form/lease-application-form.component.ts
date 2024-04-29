@@ -13,11 +13,12 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { ApplicationListService } from '../../services/application-list.service';
-import { map, Observable, of, tap } from 'rxjs';
+import { catchError, EMPTY, map, Observable, of, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { LoanFormConfig } from '../../constants';
-import { FORM_FIELDS } from '../../enums';
-import {LocalStorageManagerService} from "../../services/local-storage-manager.service";
+import { ERROR_MESSAGES, FORM_FIELDS } from '../../enums';
+import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-lease-application-form',
   standalone: true,
@@ -44,6 +45,9 @@ export class LeaseApplicationFormComponent {
   uniqueCarBrands$: Observable<string[]> = of([]);
   filteredModels$: Observable<string[]> = of([]);
 
+  ERROR_MESSAGES = ERROR_MESSAGES;
+  unauthorized: boolean = false;
+
   leaseForm = new FormGroup({
     userId: new FormControl(this.userId),
     monthlyIncome: new FormControl(null, [
@@ -57,7 +61,7 @@ export class LeaseApplicationFormComponent {
     carMake: new FormControl('', Validators.required),
     carModel: new FormControl(
       { value: '', disabled: true },
-      Validators.required
+      Validators.required,
     ),
     manufactureDate: new FormControl(LoanFormConfig.minCarYear, [
       Validators.required,
@@ -104,27 +108,36 @@ export class LeaseApplicationFormComponent {
       .pipe(
         tap((make) => {
           make ? this.modelControl?.enable() : this.modelControl?.disable();
-        })
+        }),
       )
       .subscribe();
     this.uniqueCarBrands$ = this.applicationService.cars$.pipe(
       map((cars) => cars.map((car) => car.make)),
-      map((brands) => Array.from(new Set(brands)))
+      map((brands) => Array.from(new Set(brands))),
     );
 
     this.leaseForm.controls.carMake.valueChanges.subscribe((make) => {
       this.filteredModels$ = this.applicationService.cars$.pipe(
         map((cars) =>
-          cars.filter((car) => car.make === make).map((car) => car.model)
-        )
+          cars.filter((car) => car.make === make).map((car) => car.model),
+        ),
       );
     });
   }
 
   onSubmit(): void {
     if (this.leaseForm.valid) {
-      this.applicationService.createApplication(this.leaseForm.getRawValue());
+      this.applicationService
+        .createApplication(this.leaseForm.getRawValue())
+        .pipe(catchError(this.handleError))
+        .subscribe();
     }
   }
-
+  private handleError = (error: HttpErrorResponse): Observable<never> => {
+    if (error) {
+      this.unauthorized = true;
+      this.leaseForm.reset();
+    }
+    return EMPTY;
+  };
 }

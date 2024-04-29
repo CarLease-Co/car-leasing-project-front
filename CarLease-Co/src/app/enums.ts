@@ -26,6 +26,7 @@ export enum ROUTES {
 }
 
 export enum USER_PROPERTIES {
+  USERNAME = 'username',
   SURNAME = 'surname',
   FULL_NAME = 'fullName',
   USER_ID = 'userId',
@@ -39,4 +40,13 @@ export enum FORM_FIELDS {
   LOAN_DURATION = 'loanDuration',
   MANUFACTURE_DATE = 'manufactureDate',
   NOT_SET = 'Not set',
+}
+export enum AUTHORIZATION {
+  UNAUTHORIZED = 'unauthorized',
+  AUTHORIZED = 'authorized',
+}
+
+export enum ERROR_MESSAGES {
+  WRONG_CREDENTIALS = 'Wrong username or password. Try again.',
+  GENERIC_ERROR = 'Something went wrong. Try again later.',
 }

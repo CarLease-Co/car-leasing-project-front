@@ -10,7 +10,9 @@ $form-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 $primary-200: mat.define-palette(mat.$indigo-palette, 200);
 $primary-50: mat.define-palette(mat.$indigo-palette, 50);
 $primary-100: mat.define-palette(mat.$indigo-palette, 100);
+$warn-600: mat.define-palette(mat.$red-palette, 600);
 
 $primary-background: mat.get-color-from-palette($primary-200);
 $primary-row: mat.get-color-from-palette($primary-50);
 $primary-hover: mat.get-color-from-palette($primary-100);
+$warn: mat.get-color-from-palette($warn-600);
