@@ -1,16 +1,16 @@
 import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
-import { LeaseApplication } from '../../types';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { ApplicationListService } from '../../services/application-list.service';
 import { Router } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
-import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
-import { APPLICATION_STATUS, EMPLOYEE_ROLE, ROUTES } from '../../enums';
 import { tap } from 'rxjs';
+import { APPLICATION_STATUS, EMPLOYEE_ROLE, ROUTES } from '../../enums';
+import { ApplicationListService } from '../../services/application-list.service';
+import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
+import { LeaseApplication } from '../../types';
 
 @Component({
   selector: 'app-lease-applications-list',
@@ -55,7 +55,9 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
     this.userId = loginResponse?.userId;
     this.applicationsService.getApplications();
     this.applicationsService.applications$
-      .pipe(tap((applications) => this.filterApplications(applications)))
+      .pipe(
+        tap((applications) => this.filterApplications(applications)),
+      )
       .subscribe();
   }
 
@@ -66,8 +68,9 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
 
   filterApplications(applications: LeaseApplication[]): void {
     if (this.role === EMPLOYEE_ROLE.APPLICANT) {
+
       this.dataSource.data = applications.filter(
-        (application) => application.user.userId === +this.userId!
+        (application) => application.userId === +this.userId!
       );
       this.leaseApplications = applications;
     } else if (

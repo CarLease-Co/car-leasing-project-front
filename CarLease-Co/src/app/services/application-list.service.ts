@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, tap } from 'rxjs';
+import { APPLICATIONS_PATH, BASE_URL, CAR_PATH } from '../constants';
+import { ROUTES } from '../enums';
 import {
   Car,
   LeaseApplication,
   LeaseApplicationForm,
   LeaseApplications,
 } from '../types';
-import { Router } from '@angular/router';
-import { APPLICATIONS_PATH, BASE_URL, CAR_PATH } from '../constants';
-import { ROUTES } from '../enums';
 
 @Injectable({
   providedIn: 'root',

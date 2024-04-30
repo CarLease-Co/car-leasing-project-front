@@ -4,9 +4,9 @@ import { MatCardModule } from '@angular/material/card';
 import { LeaseApplication } from '../../types';
 import { ApplicationListService } from '../../services/application-list.service';
 import { ActivatedRoute } from '@angular/router';
-import {AutosuggestorComponent} from "../../autosuggestor/autosuggestor.component";
-import {EMPLOYEE_ROLE} from "../../enums";
-import {LocalStorageManagerService} from "../../services/local-storage-manager.service";
+import { AutosuggestorComponent } from "../../autosuggestor/autosuggestor.component";
+import { EMPLOYEE_ROLE } from "../../enums";
+import { LocalStorageManagerService } from "../../services/local-storage-manager.service";
 
 @Component({
   selector: 'app-lease-details',
@@ -29,8 +29,6 @@ export class LeaseDetailsComponent {
     if (applicationId) {
       this.service.getApplicationById(applicationId);
     }
-
-    console.log(this.user()?.role);
   }
 
 }

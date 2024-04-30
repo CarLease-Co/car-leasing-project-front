@@ -16,8 +16,9 @@ import { ApplicationListService } from '../../services/application-list.service'
 import { map, Observable, of, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { LoanFormConfig } from '../../constants';
-import { FORM_FIELDS } from '../../enums';
-import {LocalStorageManagerService} from "../../services/local-storage-manager.service";
+import { APPLICATION_STATUS, FORM_FIELDS } from '../../enums';
+import { LocalStorageManagerService } from "../../services/local-storage-manager.service";
+import { LeaseApplication, LeaseApplicationForm } from '../../types';
 @Component({
   selector: 'app-lease-application-form',
   standalone: true,
@@ -123,7 +124,11 @@ export class LeaseApplicationFormComponent {
 
   onSubmit(): void {
     if (this.leaseForm.valid) {
-      this.applicationService.createApplication(this.leaseForm.getRawValue());
+
+      const application: LeaseApplicationForm = { ...this.leaseForm.getRawValue(), ...{ status: APPLICATION_STATUS.PENDING } };
+      application.status = APPLICATION_STATUS.PENDING;
+      this.applicationService.createApplication(application);
+      // this.applicationService.createApplication(this.leaseForm.getRawValue());
     }
   }
 
