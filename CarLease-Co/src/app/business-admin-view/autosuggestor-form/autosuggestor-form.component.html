@@ -10,9 +10,9 @@
       <input
         matInput
         type="number"
-        min="0"
+        min="1"
         placeholder="Enter Monthly Expenses Rate"
-        formControlName="monthlyExpenses"
+        formControlName="rate"
         required
       />
     </mat-form-field>
@@ -26,7 +26,7 @@
           min="0"
           step="0.01"
           placeholder="Enter Minimum Interest Percentage"
-          formControlName="minInterestPercentage"
+          formControlName="interestFrom"
           required
         />
       </mat-form-field>
@@ -38,22 +38,37 @@
           min="0"
           step="0.01"
           placeholder="Enter Maximum Interest Percentage"
-          formControlName="maxInterestPercentage"
+          formControlName="interestTo"
           required
         />
       </mat-form-field>
     </div>
     <div class="year-slider-container">
-      <label class="slider-label">Car year range</label>
+      <label class="slider-label" for="year">Car year range</label>
       <mat-slider min="1994" max="2024" step="1" discrete>
-        <input value="1994" matSliderStartThumb formControlName="minCarYear" />
-        <input value="2024" matSliderEndThumb formControlName="maxCarYear" />
+        <input
+          value="1994"
+          matSliderStartThumb
+          formControlName="yearFrom"
+          name="year"
+        />
+        <input
+          value="2024"
+          matSliderEndThumb
+          formControlName="yearTo"
+          name="year"
+        />
       </mat-slider>
       <div class="slider-info">
         <span class="slider-values"> 1994</span>
         <span class="slider-values">2024</span>
       </div>
     </div>
+    @if (unauthorized) {
+      <mat-error class="unauthorized">{{
+        ERROR_MESSAGES.GENERIC_ERROR
+      }}</mat-error>
+    }
     <div class="button-container">
       <button
         type="submit"

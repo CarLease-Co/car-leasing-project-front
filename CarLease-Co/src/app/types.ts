@@ -64,3 +64,16 @@ export interface Car {
   make: string;
   model: string;
 }
+export interface AutosuggestorForm {
+  rate?: number;
+  interestFrom?: number;
+  interestTo?: number;
+  yearFrom?: number;
+  yearTo?: number;
+}
+export interface CarPriceForm {
+  make?: string | null;
+  model?: string | null;
+  priceFrom?: number | null;
+  priceTo?: number | null;
+}
