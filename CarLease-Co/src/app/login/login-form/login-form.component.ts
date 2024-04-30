@@ -16,7 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { LoginService } from '../../services/login.service';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { AUTHORIZATION, ERROR_MESSAGES, USER_PROPERTIES } from '../../enums';
+import { ERROR_MESSAGES, USER_PROPERTIES } from '../../enums';
 import { EMPTY, Observable, catchError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -40,7 +40,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LoginFormComponent {
   readonly loginService = inject(LoginService);
-  readonly AUTHORIZATION = AUTHORIZATION;
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.min(3)]),
     password: new FormControl('', Validators.required),
