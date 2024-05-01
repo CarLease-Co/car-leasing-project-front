@@ -1,0 +1,87 @@
+@import "../../../variables.scss";
+.user-form-display {
+  margin-top: calc($margin-top + 10px);
+  margin-bottom: 10px;
+  padding: 5px 20px;
+  border: none;
+  color: white;
+  background-color: $primary-background;
+  border-radius: var(--mdc-protected-button-container-shape);
+  height: 40px;
+}
+.user-form-display:hover {
+  cursor: pointer;
+  background-color: $primary-hover;
+  transition: 0.5s;
+}
+.button-wrapper {
+  display: flex;
+  justify-content: end;
+  max-width: $component-max-width;
+  margin: $margin-x-auto;
+}
+.new-user {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+.user-form-wrapper {
+  position: fixed;
+  height: 50%;
+  width: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 8px;
+  z-index: 1001;
+  padding: $form-padding;
+  text-align: center;
+  color: #615d5d;
+}
+.user-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+mat-form-field {
+  height: fit-content;
+  grid-column: span 1;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  button {
+    border: none;
+    height: fit-content;
+    width: fit-content;
+    background-color: transparent;
+    padding: 0;
+    mat-icon {
+      border-radius: 15px;
+    }
+    mat-icon:hover {
+      color: white;
+      background-color: $primary-hover;
+      transition: 0.5s;
+    }
+  }
+}
+.button-container {
+  grid-column: span 2;
+  button[type="submit"] {
+    padding: 5px 50px;
+    margin-top: 5px;
+    background-color: $primary-background;
+    color: white;
+  }
+  button:hover {
+    cursor: pointer;
+    background-color: $primary-hover;
+    transition: 0.5s;
+  }
+}

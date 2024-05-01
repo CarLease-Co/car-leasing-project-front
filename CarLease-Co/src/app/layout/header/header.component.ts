@@ -1,11 +1,11 @@
-import { Component, computed, inject } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
-import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
 import { EMPLOYEE_ROLE, ROUTES } from '../../enums';
+import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
 
 @Component({
   selector: 'app-header',

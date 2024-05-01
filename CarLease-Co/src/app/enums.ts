@@ -46,3 +46,7 @@ export enum ERROR_MESSAGES {
   WRONG_CREDENTIALS = 'Wrong username or password. Try again.',
   GENERIC_ERROR = 'Something went wrong. Try again later.',
 }
+export enum DISPLAY_OPTIONS {
+  NONE = 'none',
+  BLOCK = 'block',
+}

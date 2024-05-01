@@ -1,0 +1,93 @@
+<div class="button-wrapper">
+  <button type="button" class="user-form-display" (click)="userForm()">
+    + Add New User
+  </button>
+</div>
+<mat-card
+  class="new-user"
+  [style.display]="
+    displayNewUserForm ? DISPLAY_OPTIONS.BLOCK : DISPLAY_OPTIONS.NONE
+  "
+>
+  <div
+    class="user-form-wrapper"
+    [style.display]="
+      displayNewUserForm ? DISPLAY_OPTIONS.BLOCK : DISPLAY_OPTIONS.NONE
+    "
+  >
+    <div class="header">
+      <h1>New User</h1>
+      <button type="button" (click)="userForm()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <form [formGroup]="newUserForm" (ngSubmit)="createUser()" class="user-form">
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="string"
+          placeholder="Enter Email"
+          formControlName="email"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Role</mat-label>
+        <mat-select placeholder="Select Role" formControlName="role" required>
+          @for (role of EMPLOYEE_ROLE | keyvalue; track EMPLOYEE_ROLE) {
+            <mat-option [value]="role.key">{{ role.key }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          type="string"
+          placeholder="Enter Name"
+          formControlName="name"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Surname</mat-label>
+        <input
+          matInput
+          type="string"
+          placeholder="Enter Surname"
+          formControlName="surname"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          type="string"
+          placeholder="Enter Username"
+          formControlName="username"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="Enter Password"
+          formControlName="password"
+          required
+        />
+      </mat-form-field>
+      <div class="button-container">
+        @if (unauthorized) {
+          <mat-error>{{ ERROR_MESSAGES.GENERIC_ERROR }}</mat-error>
+        }
+        <button type="submit" mat-raised-button [disabled]="!newUserForm.valid">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</mat-card>
