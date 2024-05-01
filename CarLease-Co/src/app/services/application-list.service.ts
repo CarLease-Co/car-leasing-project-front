@@ -23,13 +23,14 @@ export class ApplicationListService {
   application$ = new BehaviorSubject<LeaseApplication | null>(null);
   getApplications(userId: number, role: string): void {
     const headers = new HttpHeaders({
-      'userId': userId,
-      'role': role
-    })
-    console.log(headers);
+      userId: userId,
+      role: role,
+    });
 
     this.httpClient
-      .get<LeaseApplications>(`${BASE_URL}${APPLICATIONS_PATH}`, { headers: headers })
+      .get<LeaseApplications>(`${BASE_URL}${APPLICATIONS_PATH}`, {
+        headers: headers,
+      })
       .pipe(tap((applications) => this.applicationsSubject.next(applications)))
       .subscribe();
   }

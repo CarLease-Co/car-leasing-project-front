@@ -18,7 +18,7 @@ export class UserService {
 
   getUsers(): void {
     this.httpClient
-      .get<User[]>(`${BASE_URL}/${USER_PATH}`)
+      .get<User[]>(`${BASE_URL}${USER_PATH}`)
       .pipe(tap((users) => this.userSubject.next(users)))
       .subscribe();
   }

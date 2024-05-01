@@ -1,4 +1,8 @@
-import { APPLICATION_STATUS, AUTOSUGGESTOR_VALUES, EMPLOYEE_ROLE } from './enums';
+import {
+  APPLICATION_STATUS,
+  AUTOSUGGESTOR_VALUES,
+  EMPLOYEE_ROLE,
+} from './enums';
 
 export interface LeaseApplication {
   id: number;
@@ -7,7 +11,8 @@ export interface LeaseApplication {
   userSurname: string;
   monthlyIncome: number;
   financialObligations: number;
-  car: Car;
+  carMake: string;
+  carModel: string;
   manufactureDate: number;
   loanAmount: number;
   loanDuration: number;

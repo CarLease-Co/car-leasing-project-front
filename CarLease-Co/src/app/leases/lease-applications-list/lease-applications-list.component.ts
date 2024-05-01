@@ -55,9 +55,7 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
     this.userId = loginResponse?.userId;
     this.applicationsService.getApplications(this.userId!, this.role!);
     this.applicationsService.applications$
-      .pipe(
-        tap((applications) => this.filterApplications(applications)),
-      )
+      .pipe(tap((applications) => this.filterApplications(applications)))
       .subscribe();
   }
 
@@ -68,9 +66,8 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
 
   filterApplications(applications: LeaseApplication[]): void {
     if (this.role === EMPLOYEE_ROLE.APPLICANT) {
-
       this.dataSource.data = applications.filter(
-        (application) => application.userId === +this.userId!
+        (application) => application.userId === +this.userId!,
       );
       this.leaseApplications = applications;
     } else if (
@@ -78,7 +75,7 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
       this.role === EMPLOYEE_ROLE.APPROVER
     ) {
       this.dataSource.data = applications.filter(
-        (application) => application.status !== APPLICATION_STATUS.DRAFT
+        (application) => application.status !== APPLICATION_STATUS.DRAFT,
       );
       this.leaseApplications = applications;
     }
@@ -90,7 +87,7 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
   }
   onApplication(id: number): void {
     const selectedApplication = this.leaseApplications.find(
-      (application) => application.id === id
+      (application) => application.id === id,
     );
     this.router.navigate([ROUTES.APPLICATION_DETAILS, selectedApplication?.id]);
   }
