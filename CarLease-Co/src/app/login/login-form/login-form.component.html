@@ -30,6 +30,9 @@
           required
         />
       </mat-form-field>
+      @if (unauthorized) {
+        <mat-error>{{ ERROR_MESSAGES.WRONG_CREDENTIALS }}</mat-error>
+      }
     </div>
     <div class="button-container">
       <button type="submit" mat-raised-button [disabled]="!loginForm.valid">

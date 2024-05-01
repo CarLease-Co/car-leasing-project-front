@@ -26,6 +26,7 @@ export enum ROUTES {
 }
 
 export enum USER_PROPERTIES {
+  USERNAME = 'username',
   SURNAME = 'surname',
   FULL_NAME = 'fullName',
   USER_ID = 'userId',
@@ -34,16 +35,23 @@ export enum USER_PROPERTIES {
   PASSWORD = 'password',
 }
 export enum FORM_FIELDS {
-  CAR_MAKE = 'carMake',
-  CAR_MODEL = 'carModel',
+  CAR_MAKE = 'make',
+  CAR_MODEL = 'model',
   LOAN_DURATION = 'loanDuration',
   MANUFACTURE_DATE = 'manufactureDate',
   NOT_SET = 'Not set',
 }
 
-
 export enum AUTOSUGGESTOR_VALUES {
   BAD = "BAD",
   GOOD = "GOOD",
   MAYBE = "MAYBE"
+}
+export enum ERROR_MESSAGES {
+  WRONG_CREDENTIALS = 'Wrong username or password. Try again.',
+  GENERIC_ERROR = 'Something went wrong. Try again later.',
+}
+export enum DISPLAY_OPTIONS {
+  NONE = 'none',
+  BLOCK = 'block',
 }

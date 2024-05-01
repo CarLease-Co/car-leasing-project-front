@@ -9,12 +9,12 @@
       <mat-label>Car Brand</mat-label>
       <mat-select
         placeholder="Select Car Brand"
-        formControlName="carMake"
+        formControlName="make"
         required
       >
         @for (make of uniqueCarBrands$ | async; track make) {
-        <mat-option [value]="make">{{ make }}</mat-option
-        >}
+          <mat-option [value]="make">{{ make }}</mat-option>
+        }
       </mat-select>
     </mat-form-field>
 
@@ -22,11 +22,12 @@
       <mat-label>Car Model</mat-label>
       <mat-select
         placeholder="Select Car Model"
-        formControlName="carModel"
+        formControlName="model"
         required
-        >@for (model of filteredModels$ | async; track model) {
-        <mat-option [value]="model">{{ model }}</mat-option
-        >}
+      >
+        @for (model of filteredModels$ | async; track model) {
+          <mat-option [value]="model">{{ model }}</mat-option>
+        }
       </mat-select>
     </mat-form-field>
 
@@ -39,7 +40,7 @@
           min="0"
           step="1"
           placeholder="Enter Car Min Price"
-          formControlName="minCarPrice"
+          formControlName="priceFrom"
           required
         />
       </mat-form-field>
@@ -51,11 +52,16 @@
           min="0"
           step="1"
           placeholder="Enter Car Max Price"
-          formControlName="maxCarPrice"
+          formControlName="priceTo"
           required
         />
       </mat-form-field>
     </div>
+    @if (unauthorized) {
+      <mat-error class="unauthorized">{{
+        ERROR_MESSAGES.GENERIC_ERROR
+      }}</mat-error>
+    }
     <div class="button-container">
       <button type="submit" mat-raised-button [disabled]="!carPriceForm.valid">
         Submit

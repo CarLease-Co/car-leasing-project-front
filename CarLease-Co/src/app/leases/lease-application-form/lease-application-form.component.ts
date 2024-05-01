@@ -1,24 +1,25 @@
+import { AsyncPipe } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import {
-  FormGroup,
-  FormControl,
-  Validators,
-  ReactiveFormsModule,
   AbstractControl,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatButtonModule } from '@angular/material/button';
-import { ApplicationListService } from '../../services/application-list.service';
-import { map, Observable, of, tap } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { EMPTY, Observable, catchError, map, of, tap } from 'rxjs';
 import { LoanFormConfig } from '../../constants';
-import { APPLICATION_STATUS, FORM_FIELDS } from '../../enums';
-import { LocalStorageManagerService } from "../../services/local-storage-manager.service";
-import { LeaseApplication, LeaseApplicationForm } from '../../types';
+import { APPLICATION_STATUS, ERROR_MESSAGES, FORM_FIELDS } from '../../enums';
+import { ApplicationListService } from '../../services/application-list.service';
+import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
+import { LeaseApplicationForm } from '../../types';
 @Component({
   selector: 'app-lease-application-form',
   standalone: true,
@@ -45,6 +46,9 @@ export class LeaseApplicationFormComponent {
   uniqueCarBrands$: Observable<string[]> = of([]);
   filteredModels$: Observable<string[]> = of([]);
 
+  ERROR_MESSAGES = ERROR_MESSAGES;
+  unauthorized: boolean = false;
+
   leaseForm = new FormGroup({
     userId: new FormControl(this.userId),
     monthlyIncome: new FormControl(null, [
@@ -58,7 +62,7 @@ export class LeaseApplicationFormComponent {
     carMake: new FormControl('', Validators.required),
     carModel: new FormControl(
       { value: '', disabled: true },
-      Validators.required
+      Validators.required,
     ),
     manufactureDate: new FormControl(LoanFormConfig.minCarYear, [
       Validators.required,
@@ -105,31 +109,38 @@ export class LeaseApplicationFormComponent {
       .pipe(
         tap((make) => {
           make ? this.modelControl?.enable() : this.modelControl?.disable();
-        })
+        }),
       )
       .subscribe();
     this.uniqueCarBrands$ = this.applicationService.cars$.pipe(
       map((cars) => cars.map((car) => car.make)),
-      map((brands) => Array.from(new Set(brands)))
+      map((brands) => Array.from(new Set(brands))),
     );
 
     this.leaseForm.controls.carMake.valueChanges.subscribe((make) => {
       this.filteredModels$ = this.applicationService.cars$.pipe(
         map((cars) =>
-          cars.filter((car) => car.make === make).map((car) => car.model)
-        )
+          cars.filter((car) => car.make === make).map((car) => car.model),
+        ),
       );
     });
   }
 
   onSubmit(): void {
     if (this.leaseForm.valid) {
-
       const application: LeaseApplicationForm = { ...this.leaseForm.getRawValue(), ...{ status: APPLICATION_STATUS.PENDING } };
       application.status = APPLICATION_STATUS.PENDING;
-      this.applicationService.createApplication(application);
-      // this.applicationService.createApplication(this.leaseForm.getRawValue());
+      this.applicationService
+        .createApplication(application)
+        .pipe(catchError(this.handleError))
+        .subscribe();
     }
   }
-
+  private handleError = (error: HttpErrorResponse): Observable<never> => {
+    if (error) {
+      this.unauthorized = true;
+      this.leaseForm.reset();
+    }
+    return EMPTY;
+  };
 }

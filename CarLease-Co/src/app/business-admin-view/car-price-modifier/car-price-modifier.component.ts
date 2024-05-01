@@ -13,10 +13,12 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import { ApplicationListService } from '../../services/application-list.service';
-import { Observable, map, of, tap } from 'rxjs';
+import { EMPTY, Observable, catchError, map, of, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { FORM_FIELDS } from '../../enums';
+import { ERROR_MESSAGES, FORM_FIELDS } from '../../enums';
 import { LoanFormConfig } from '../../constants';
+import { BusAdminService } from '../../services/bus-admin.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-car-price-modifier',
@@ -35,24 +37,25 @@ import { LoanFormConfig } from '../../constants';
   styleUrl: './car-price-modifier.component.scss',
 })
 export class CarPriceModifierComponent {
+  private readonly busAdminService = inject(BusAdminService);
   readonly applicationService = inject(ApplicationListService);
   uniqueCarBrands$: Observable<string[]> = of([]);
   filteredModels$: Observable<string[]> = of([]);
   carPriceForm = new FormGroup({
-    carMake: new FormControl('', Validators.required),
-    carModel: new FormControl(
-      { value: '', disabled: true },
-      Validators.required
-    ),
-    minCarPrice: new FormControl('', [
+    make: new FormControl('', Validators.required),
+    model: new FormControl({ value: '', disabled: true }, Validators.required),
+    priceFrom: new FormControl(null, [
       Validators.required,
       Validators.min(LoanFormConfig.minCarPrice),
     ]),
-    maxCarPrice: new FormControl('', [
+    priceTo: new FormControl(null, [
       Validators.required,
       Validators.min(LoanFormConfig.minCarPrice),
     ]),
   });
+
+  ERROR_MESSAGES = ERROR_MESSAGES;
+  unauthorized: boolean = false;
 
   get makeControl(): AbstractControl<string | null, string | null> | null {
     return this.carPriceForm.get(FORM_FIELDS.CAR_MAKE);
@@ -67,23 +70,35 @@ export class CarPriceModifierComponent {
       .pipe(
         tap((make) => {
           make ? this.modelControl?.enable() : this.modelControl?.disable();
-        })
+        }),
       )
       .subscribe();
     this.uniqueCarBrands$ = this.applicationService.cars$.pipe(
       map((cars) => cars.map((car) => car.make)),
-      map((brands) => Array.from(new Set(brands)))
+      map((brands) => Array.from(new Set(brands))),
     );
 
-    this.carPriceForm.controls.carMake.valueChanges.subscribe((make) => {
+    this.carPriceForm.controls.make.valueChanges.subscribe((make) => {
       this.filteredModels$ = this.applicationService.cars$.pipe(
         map((cars) =>
-          cars.filter((car) => car.make === make).map((car) => car.model)
-        )
+          cars.filter((car) => car.make === make).map((car) => car.model),
+        ),
       );
     });
   }
-  onSubmit() {
-    this.carPriceForm.reset();
+  onSubmit(): void {
+    if (this.carPriceForm.valid) {
+      this.busAdminService
+        .adjustCarPrices(this.carPriceForm.getRawValue())
+        .pipe(catchError(this.handleError))
+        .subscribe();
+    }
   }
+  private handleError = (error: HttpErrorResponse): Observable<never> => {
+    if (error) {
+      this.unauthorized = true;
+      this.carPriceForm.reset();
+    }
+    return EMPTY;
+  };
 }

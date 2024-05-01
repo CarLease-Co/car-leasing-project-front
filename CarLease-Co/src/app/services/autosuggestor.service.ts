@@ -1,8 +1,7 @@
-import { inject, Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs";
-import { AUTOSUGGESTOR_VALUES } from "../enums";
-import { APPLICATIONS_PATH, AUTOSUGGESTOR_PATH, BASE_URL } from "../constants";
+import { APPLICATIONS_PATH, BASE_URL } from "../constants";
 import { Autosuggestion } from '../types';
 
 @Injectable({

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { APPLICATIONS_PATH, BASE_URL, CAR_PATH } from '../constants';
 import { ROUTES } from '../enums';
 import {
@@ -45,14 +45,14 @@ export class ApplicationListService {
       .pipe(tap((cars) => this.cars$.next(cars)))
       .subscribe();
   }
-  createApplication(application: LeaseApplicationForm): void {
-    this.httpClient
+  createApplication(application: LeaseApplicationForm): Observable<unknown> {
+    return this.httpClient
       .post(`${BASE_URL}${APPLICATIONS_PATH}`, application)
-      .subscribe({
-        next: (response) => {
-          this.router.navigate([ROUTES.APPLICATIONS]);
+      .pipe(
+        tap((response) => {
           response;
-        },
-      });
+          this.router.navigate([ROUTES.APPLICATIONS]);
+        }),
+      );
   }
 }

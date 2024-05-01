@@ -1,4 +1,3 @@
-import { Application } from 'express';
 import { APPLICATION_STATUS, AUTOSUGGESTOR_VALUES, EMPLOYEE_ROLE } from './enums';
 
 export interface LeaseApplication {
@@ -66,8 +65,6 @@ export interface Car {
   make: string;
   model: string;
 }
-
-
 export interface Autosuggestion {
   id: number;
   price: number;
@@ -75,4 +72,25 @@ export interface Autosuggestion {
   evalStatus: AUTOSUGGESTOR_VALUES;
   application: LeaseApplication;
   evaluation: number;
+}
+export interface AutosuggestorForm {
+  rate?: number;
+  interestFrom?: number;
+  interestTo?: number;
+  yearFrom?: number;
+  yearTo?: number;
+}
+export interface CarPriceForm {
+  make?: string | null;
+  model?: string | null;
+  priceFrom?: number | null;
+  priceTo?: number | null;
+}
+export interface NewUserForm {
+  name?: string;
+  surname?: string;
+  role?: string;
+  username?: string;
+  email?: string;
+  password?: string;
 }
