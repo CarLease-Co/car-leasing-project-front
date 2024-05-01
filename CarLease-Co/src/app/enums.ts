@@ -40,8 +40,9 @@ export enum FORM_FIELDS {
   NOT_SET = 'Not set',
 }
 
+
 export enum AUTOSUGGESTOR_VALUES {
-  BAD="BAD",
-  OKAY="OKAY",
-  GOOD="GOOD"
+  BAD = "BAD",
+  GOOD = "GOOD",
+  MAYBE = "MAYBE"
 }

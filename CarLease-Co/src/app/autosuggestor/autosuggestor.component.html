@@ -1,15 +1,14 @@
 <div class="suggestor">
   <p class="suggestor-header">Suggestion:</p>
   <div class="icons">
-    <span class="material-symbols-sharp good">
-sentiment_satisfied
-</span>
-    <span class="material-symbols-sharp neutral transparent active">
-sentiment_neutral
-</span>
-    <span class="material-symbols-sharp bad transparent">
-sentiment_dissatisfied
-</span>
+    <span class="material-symbols-sharp good" [ngClass]="{'active': currentStatus === AUTOSUGGESTOR_VALUES.GOOD}">
+      sentiment_satisfied
+    </span>
+    <span class="material-symbols-sharp neutral" [ngClass]="{'active': currentStatus === AUTOSUGGESTOR_VALUES.MAYBE}">
+      sentiment_neutral
+    </span>
+    <span class="material-symbols-sharp bad" [ngClass]="{'active': currentStatus === AUTOSUGGESTOR_VALUES.BAD}">
+      sentiment_dissatisfied
+    </span>
   </div>
 </div>
-

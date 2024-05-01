@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, tap } from 'rxjs';
@@ -21,9 +21,15 @@ export class ApplicationListService {
   cars$ = new BehaviorSubject<Car[]>([]);
   applications$ = this.applicationsSubject.asObservable();
   application$ = new BehaviorSubject<LeaseApplication | null>(null);
-  getApplications(): void {
+  getApplications(userId: number, role: string): void {
+    const headers = new HttpHeaders({
+      'userId': userId,
+      'role': role
+    })
+    console.log(headers);
+
     this.httpClient
-      .get<LeaseApplications>(`${BASE_URL}${APPLICATIONS_PATH}`)
+      .get<LeaseApplications>(`${BASE_URL}${APPLICATIONS_PATH}`, { headers: headers })
       .pipe(tap((applications) => this.applicationsSubject.next(applications)))
       .subscribe();
   }

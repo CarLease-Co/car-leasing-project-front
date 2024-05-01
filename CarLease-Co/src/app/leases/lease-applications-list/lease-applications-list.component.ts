@@ -53,7 +53,7 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
     const loginResponse = this.localStorageService.getStoredUser();
     this.role = loginResponse?.role;
     this.userId = loginResponse?.userId;
-    this.applicationsService.getApplications();
+    this.applicationsService.getApplications(this.userId!, this.role!);
     this.applicationsService.applications$
       .pipe(
         tap((applications) => this.filterApplications(applications)),
