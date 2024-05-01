@@ -1,13 +1,18 @@
-import { EMPLOYEE_ROLE } from './enums';
+import {
+  APPLICATION_STATUS,
+  AUTOSUGGESTOR_VALUES,
+  EMPLOYEE_ROLE,
+} from './enums';
 
 export interface LeaseApplication {
   id: number;
-  user: User;
+  userId: number;
   userName: string;
   userSurname: string;
   monthlyIncome: number;
   financialObligations: number;
-  car: Car;
+  carMake: string;
+  carModel: string;
   manufactureDate: number;
   loanAmount: number;
   loanDuration: number;
@@ -58,11 +63,20 @@ export interface LeaseApplicationForm {
   loanDuration: number | null;
   loanAmount: number | null;
   startDate: string | null;
+  status: APPLICATION_STATUS | null | undefined;
 }
 export interface Car {
   id: number;
   make: string;
   model: string;
+}
+export interface Autosuggestion {
+  id: number;
+  price: number;
+  currentYear: number;
+  evalStatus: AUTOSUGGESTOR_VALUES;
+  application: LeaseApplication;
+  evaluation: number;
 }
 export interface AutosuggestorForm {
   rate?: number;

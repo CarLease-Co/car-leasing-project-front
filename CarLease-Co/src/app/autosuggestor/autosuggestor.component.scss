@@ -1,0 +1,40 @@
+.material-symbols-sharp {
+  font-size: 4em;
+  opacity: 0.2;
+  font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 40
+}
+
+.good {
+  color: green;
+}
+.neutral {
+  color: orange;
+}
+.bad {
+  color: red;
+}
+
+.active {
+  opacity: 1;
+}
+
+.suggestor-header {
+  font-size: 2em;
+  margin-right: 15px;
+}
+
+.suggestor {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+}

@@ -42,6 +42,11 @@ export enum FORM_FIELDS {
   NOT_SET = 'Not set',
 }
 
+export enum AUTOSUGGESTOR_VALUES {
+  BAD = "BAD",
+  GOOD = "GOOD",
+  MAYBE = "MAYBE"
+}
 export enum ERROR_MESSAGES {
   WRONG_CREDENTIALS = 'Wrong username or password. Try again.',
   GENERIC_ERROR = 'Something went wrong. Try again later.',

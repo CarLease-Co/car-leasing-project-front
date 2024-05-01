@@ -1,24 +1,25 @@
+import { AsyncPipe } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import {
-  FormGroup,
-  FormControl,
-  Validators,
-  ReactiveFormsModule,
   AbstractControl,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatButtonModule } from '@angular/material/button';
-import { ApplicationListService } from '../../services/application-list.service';
-import { catchError, EMPTY, map, Observable, of, tap } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { EMPTY, Observable, catchError, map, of, tap } from 'rxjs';
 import { LoanFormConfig } from '../../constants';
-import { ERROR_MESSAGES, FORM_FIELDS } from '../../enums';
+import { APPLICATION_STATUS, ERROR_MESSAGES, FORM_FIELDS } from '../../enums';
+import { ApplicationListService } from '../../services/application-list.service';
 import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { LeaseApplicationForm } from '../../types';
 @Component({
   selector: 'app-lease-application-form',
   standalone: true,
@@ -127,8 +128,10 @@ export class LeaseApplicationFormComponent {
 
   onSubmit(): void {
     if (this.leaseForm.valid) {
+      const application: LeaseApplicationForm = { ...this.leaseForm.getRawValue(), ...{ status: APPLICATION_STATUS.PENDING } };
+      application.status = APPLICATION_STATUS.PENDING;
       this.applicationService
-        .createApplication(this.leaseForm.getRawValue())
+        .createApplication(application)
         .pipe(catchError(this.handleError))
         .subscribe();
     }
