@@ -1,4 +1,4 @@
-<div class="container">
+<div class="autosuggestor-view">
   <h3 class="autosuggestor-form-header">Autosuggestor values form</h3>
   <form
     [formGroup]="autosuggestorForm"
@@ -6,42 +6,54 @@
     class="autosuggestor-application-form"
   >
     <mat-form-field class="full-width-form-field" appearance="outline">
-      <mat-label>Interest Percentage</mat-label>
+      <mat-label>Monthly Expenses Rate</mat-label>
       <input
         matInput
         type="number"
         min="0"
-        placeholder="Enter Interest Percentage"
-        formControlName="interestPercentage"
+        placeholder="Enter Monthly Expenses Rate"
+        formControlName="monthlyExpenses"
         required
       />
     </mat-form-field>
 
     <div class="full-width-form-field">
       <mat-form-field class="half-width-form-field" appearance="outline">
-        <mat-label>Min Car Price</mat-label>
+        <mat-label>Minimum Interest Percentage</mat-label>
         <input
           matInput
           type="number"
           min="0"
-          placeholder="Enter Car Min Price Range"
-          formControlName="minCarPriceRange"
+          step="0.01"
+          placeholder="Enter Minimum Interest Percentage"
+          formControlName="minInterestPercentage"
           required
         />
       </mat-form-field>
       <mat-form-field class="half-width-form-field" appearance="outline">
-        <mat-label>Max Car Price</mat-label>
+        <mat-label>Maximum Interest Percentage</mat-label>
         <input
           matInput
           type="number"
           min="0"
-          placeholder="Enter Car Min Price Range"
-          formControlName="maxCarPriceRange"
+          step="0.01"
+          placeholder="Enter Maximum Interest Percentage"
+          formControlName="maxInterestPercentage"
           required
         />
       </mat-form-field>
     </div>
-
+    <div class="year-slider-container">
+      <label class="slider-label">Car year range</label>
+      <mat-slider min="1994" max="2024" step="1" discrete>
+        <input value="1994" matSliderStartThumb formControlName="minCarYear" />
+        <input value="2024" matSliderEndThumb formControlName="maxCarYear" />
+      </mat-slider>
+      <div class="slider-info">
+        <span class="slider-values"> 1994</span>
+        <span class="slider-values">2024</span>
+      </div>
+    </div>
     <div class="button-container">
       <button
         type="submit"

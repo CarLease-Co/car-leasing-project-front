@@ -2,7 +2,11 @@
 @include mat.core();
 $margin-top: 64px;
 $component-max-width: 1000px;
-
+$autosuggestor-form-max-width: 600px;
+$margin-x-auto: 0 auto;
+$form-padding: 20px;
+$form-border-radius: 8px;
+$form-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 $primary-200: mat.define-palette(mat.$indigo-palette, 200);
 $primary-50: mat.define-palette(mat.$indigo-palette, 50);
 $primary-100: mat.define-palette(mat.$indigo-palette, 100);

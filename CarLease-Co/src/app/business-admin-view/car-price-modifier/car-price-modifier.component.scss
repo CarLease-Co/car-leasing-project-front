@@ -2,13 +2,13 @@
 @import "../../../variables.scss";
 @include mat.core();
 
-.autosuggestor-view {
+.car-price-modifier-view {
   padding: 50px;
   min-height: 100vh;
   margin-top: $margin-top;
 }
 
-.autosuggestor-form-header {
+.car-price-modifier-header {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
@@ -16,7 +16,7 @@
   text-align: center;
 }
 
-.autosuggestor-application-form {
+.car-price-modifier-form {
   max-width: $autosuggestor-form-max-width;
   margin: $margin-x-auto;
 
@@ -43,29 +43,6 @@
       margin-top: 25px;
       background-color: $primary-background;
       color: white;
-    }
-  }
-  .year-slider-container {
-    margin: auto;
-    max-width: calc(100%);
-
-    mat-slider {
-      width: calc(100%);
-    }
-
-    .slider-values {
-      margin-top: 5px;
-      font-size: 16px;
-      color: #615d5d;
-    }
-    .slider-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .slider-label {
-      color: #615d5d;
     }
   }
 
