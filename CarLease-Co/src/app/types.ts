@@ -77,3 +77,11 @@ export interface CarPriceForm {
   priceFrom?: number | null;
   priceTo?: number | null;
 }
+export interface NewUserForm {
+  name?: string;
+  surname?: string;
+  role?: string;
+  username?: string;
+  email?: string;
+  password?: string;
+}

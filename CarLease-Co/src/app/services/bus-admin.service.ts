@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AutosuggestorForm, Car, CarPriceForm } from '../types';
 import { Observable, tap } from 'rxjs';
 import { AUTOSUGGESTOR_PATH, BASE_URL, CAR_PATCH_PATH } from '../constants';
 import { ROUTES } from '../enums';
+import { AutosuggestorForm, Car, CarPriceForm } from '../types';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +26,6 @@ export class BusAdminService {
           response;
           this.router.navigate([ROUTES.HOME]);
         }),
-        tap(console.log),
       );
   }
   adjustCarPrices(car: CarPriceForm): Observable<unknown> {
@@ -35,7 +34,6 @@ export class BusAdminService {
         response;
         this.router.navigate([ROUTES.HOME]);
       }),
-      tap(console.log),
     );
   }
 }
