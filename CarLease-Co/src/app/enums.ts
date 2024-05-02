@@ -39,8 +39,8 @@ export enum USER_PROPERTIES {
   PASSWORD = 'password',
 }
 export enum FORM_FIELDS {
-  CAR_MAKE = 'make',
-  CAR_MODEL = 'model',
+  CAR_MAKE = 'carMake',
+  CAR_MODEL = 'carModel',
   LOAN_DURATION = 'loanDuration',
   MANUFACTURE_DATE = 'manufactureDate',
   NOT_SET = 'Not set',

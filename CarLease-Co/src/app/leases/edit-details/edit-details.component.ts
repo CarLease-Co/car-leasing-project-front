@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -38,16 +38,17 @@ import { LeaseApplication, LeaseApplicationForm } from '../../types';
   templateUrl: './edit-details.component.html',
   styleUrl: './edit-details.component.scss',
 })
-export class EditDetailsComponent {
+export class EditDetailsComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly localStorageService = inject(LocalStorageManagerService);
   protected readonly LoanFormConfig = LoanFormConfig;
-
+  private readonly applicationId = this.activatedRoute.snapshot.params[ID];
   private userId = this.localStorageService.getStoredUser()?.userId;
   readonly applicationService = inject(ApplicationListService);
 
   uniqueCarBrands$: Observable<string[]> = of([]);
   filteredModels$: Observable<string[]> = of([]);
+  filteredModels: string[] = [];
 
   ERROR_MESSAGES = ERROR_MESSAGES;
   unauthorized: boolean = false;
@@ -56,11 +57,11 @@ export class EditDetailsComponent {
 
   leaseEditForm = new FormGroup({
     userId: new FormControl(this.userId),
-    monthlyIncome: new FormControl(null, [
+    monthlyIncome: new FormControl(NaN, [
       Validators.required,
       Validators.min(LoanFormConfig.minMonthlyIncome),
     ]),
-    financialObligations: new FormControl(null, [
+    financialObligations: new FormControl(NaN, [
       Validators.required,
       Validators.min(LoanFormConfig.minFinancialObligations),
     ]),
@@ -79,7 +80,7 @@ export class EditDetailsComponent {
       Validators.min(LoanFormConfig.minLoanDuration),
       Validators.max(LoanFormConfig.maxLoanDuration),
     ]),
-    loanAmount: new FormControl(null, [
+    loanAmount: new FormControl(NaN, [
       Validators.required,
       Validators.min(LoanFormConfig.minLoanAmount),
     ]),
@@ -109,6 +110,14 @@ export class EditDetailsComponent {
   }
 
   ngOnInit(): void {
+    if (this.applicationId) {
+      this.applicationService
+        .getApplicationById(this.applicationId)
+        .subscribe((application) => {
+          this.fetchedApplication = application;
+          this.populateFormWithApplicationData();
+        });
+    }
     this.applicationService.getCars();
     this.makeControl?.valueChanges
       .pipe(
@@ -129,13 +138,6 @@ export class EditDetailsComponent {
         ),
       );
     });
-    const applicationId = this.activatedRoute.snapshot.params[ID];
-    if (applicationId) {
-      this.applicationService
-        .getApplicationById(applicationId)
-        .pipe(tap((application) => (this.fetchedApplication = application)))
-        .subscribe();
-    }
   }
 
   onSubmit(): void {
@@ -146,9 +148,34 @@ export class EditDetailsComponent {
       };
       application.status = APPLICATION_STATUS.PENDING;
       this.applicationService
-        .createApplication(application)
+        .patchApplication(this.applicationId, application)
         .pipe(catchError(this.handleError))
         .subscribe();
+    }
+  }
+  private populateFormWithApplicationData() {
+    if (this.fetchedApplication) {
+      const {
+        loanAmount,
+        textExplanation,
+        monthlyIncome,
+        financialObligations,
+        carMake,
+        carModel,
+        manufactureDate,
+        loanDuration,
+      } = this.fetchedApplication;
+
+      this.leaseEditForm.patchValue({
+        loanAmount,
+        textExplanation,
+        monthlyIncome,
+        financialObligations,
+        carMake,
+        carModel,
+        manufactureDate,
+        loanDuration,
+      });
     }
   }
   private handleError = (error: HttpErrorResponse): Observable<never> => {

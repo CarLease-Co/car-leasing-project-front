@@ -2,7 +2,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { APPLICATIONS_PATH, BASE_URL, CAR_PATH } from '../constants';
+import {
+  APPLICATIONS_PATH,
+  BASE_URL,
+  CAR_PATH,
+  UPDATE_PATH,
+} from '../constants';
 import { ROUTES } from '../enums';
 import {
   Car,
@@ -39,7 +44,11 @@ export class ApplicationListService {
   getApplicationById(id: number): Observable<LeaseApplication> {
     return this.httpClient
       .get<LeaseApplication>(`${BASE_URL}${APPLICATIONS_PATH}/${id}`)
-      .pipe(tap((application) => this.application$.next(application)));
+      .pipe(
+        tap((application) => {
+          this.application$.next(application);
+        }),
+      );
   }
   getCars(): void {
     this.httpClient
@@ -62,6 +71,25 @@ export class ApplicationListService {
       .delete(`${BASE_URL}${APPLICATIONS_PATH}/${id}`, {
         headers: this.userHeaders,
       })
+      .pipe(
+        tap((response) => {
+          response;
+          this.router.navigate([ROUTES.APPLICATIONS]);
+        }),
+      );
+  }
+  patchApplication(
+    applicationId: number,
+    application: LeaseApplicationForm,
+  ): Observable<unknown> {
+    return this.httpClient
+      .patch(
+        `${BASE_URL}${APPLICATIONS_PATH}${UPDATE_PATH}${applicationId}`,
+        application,
+        {
+          headers: this.userHeaders,
+        },
+      )
       .pipe(
         tap((response) => {
           response;
