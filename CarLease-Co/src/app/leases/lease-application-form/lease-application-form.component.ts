@@ -128,8 +128,24 @@ export class LeaseApplicationFormComponent {
 
   onSubmit(): void {
     if (this.leaseForm.valid) {
-      const application: LeaseApplicationForm = { ...this.leaseForm.getRawValue(), ...{ status: APPLICATION_STATUS.PENDING } };
+      const application: LeaseApplicationForm = {
+        ...this.leaseForm.getRawValue(),
+        ...{ status: APPLICATION_STATUS.PENDING },
+      };
       application.status = APPLICATION_STATUS.PENDING;
+      this.applicationService
+        .createApplication(application)
+        .pipe(catchError(this.handleError))
+        .subscribe();
+    }
+  }
+  onSave(): void {
+    if (this.leaseForm.valid) {
+      const application: LeaseApplicationForm = {
+        ...this.leaseForm.getRawValue(),
+        ...{ status: APPLICATION_STATUS.DRAFT },
+      };
+      application.status = APPLICATION_STATUS.DRAFT;
       this.applicationService
         .createApplication(application)
         .pipe(catchError(this.handleError))

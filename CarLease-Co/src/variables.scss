@@ -10,6 +10,7 @@ $form-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
 $primary-text-700: mat.define-palette(mat.$grey-palette, 700);
 $grey-background-100: mat.define-palette(mat.$grey-palette, 100);
+$grey-background-700: mat.define-palette(mat.$grey-palette, 500);
 $primary-200: mat.define-palette(mat.$indigo-palette, 200);
 $primary-50: mat.define-palette(mat.$indigo-palette, 50);
 $primary-100: mat.define-palette(mat.$indigo-palette, 100);
@@ -23,3 +24,4 @@ $warn: mat.get-color-from-palette($warn-600);
 $warn-background: mat.get-color-from-palette($warn-200);
 $primary-text: mat.get-color-from-palette($primary-text-700);
 $grey-background: mat.get-color-from-palette($grey-background-100);
+$grey-background-button: mat.get-color-from-palette($grey-background-700);
