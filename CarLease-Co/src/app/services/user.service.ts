@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { BASE_URL, USER_PATH } from '../constants';
 import { NewUserForm, User } from '../types';
@@ -10,16 +9,19 @@ import { NewUserForm, User } from '../types';
 })
 export class UserService {
   private readonly httpClient = inject(HttpClient);
-  private readonly router = inject(Router);
-  private userSubject: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(
+  private usersSubject: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(
     [],
   );
-  public users$ = this.userSubject.asObservable();
+  public users$ = this.usersSubject.asObservable();
+  private userSubject: BehaviorSubject<User | undefined> = new BehaviorSubject<
+    User | undefined
+  >(undefined);
+  public user$ = this.usersSubject.asObservable();
 
   getUsers(): void {
     this.httpClient
       .get<User[]>(`${BASE_URL}${USER_PATH}`)
-      .pipe(tap((users) => this.userSubject.next(users)))
+      .pipe(tap((users) => this.usersSubject.next(users)))
       .subscribe();
   }
   createUser(newUser: NewUserForm): Observable<unknown> {
@@ -31,5 +33,12 @@ export class UserService {
           this.getUsers();
         }),
       );
+  }
+  getUser(userId: number | undefined): Observable<User> {
+    return this.httpClient.get<User>(`${BASE_URL}${USER_PATH}/${userId}`).pipe(
+      tap((user) => {
+        this.userSubject.next(user);
+      }),
+    );
   }
 }

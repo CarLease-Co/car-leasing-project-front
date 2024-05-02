@@ -23,6 +23,10 @@ export enum ROUTES {
   APPLICATION_DETAILS_BY_ID = 'applications/application-details/:id',
   APPLICATION_DETAILS = 'applications/application-details',
   NEW_APPLICATION = 'new-application',
+  NEW_APPLICATION_BY_ID = 'new-application/:id',
+  EDIT_APPLICATION = 'applications/application-details/edit',
+  // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
+  EDIT_APPLICATION_BY_ID = 'applications/application-details/edit/:id',
 }
 
 export enum USER_PROPERTIES {
@@ -35,17 +39,17 @@ export enum USER_PROPERTIES {
   PASSWORD = 'password',
 }
 export enum FORM_FIELDS {
-  CAR_MAKE = 'make',
-  CAR_MODEL = 'model',
+  CAR_MAKE = 'carMake',
+  CAR_MODEL = 'carModel',
   LOAN_DURATION = 'loanDuration',
   MANUFACTURE_DATE = 'manufactureDate',
   NOT_SET = 'Not set',
 }
 
 export enum AUTOSUGGESTOR_VALUES {
-  BAD = "BAD",
-  GOOD = "GOOD",
-  MAYBE = "MAYBE"
+  BAD = 'BAD',
+  GOOD = 'GOOD',
+  MAYBE = 'MAYBE',
 }
 export enum ERROR_MESSAGES {
   WRONG_CREDENTIALS = 'Wrong username or password. Try again.',

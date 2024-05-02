@@ -1,7 +1,7 @@
 <div class="container">
-  <h3 class="lease-form-header">Lease application form</h3>
+  <h3 class="lease-form-header">Edit lease application form</h3>
   <form
-    [formGroup]="leaseForm"
+    [formGroup]="leaseEditForm"
     (ngSubmit)="onSubmit()"
     class="loan-application-form"
   >
@@ -11,6 +11,7 @@
         <input
           matInput
           type="number"
+          min="1"
           placeholder="Enter Leasing Amount"
           formControlName="loanAmount"
           required
@@ -106,7 +107,7 @@
         </div>
       </div>
       <mat-form-field class="full-width-form-field col" appearance="outline">
-        <mat-label>textExplanation</mat-label>
+        <mat-label>Detailed description</mat-label>
         <textarea
           matInput
           placeholder="Enter Explanation (up to {{
@@ -124,9 +125,7 @@
     }
 
     <div class="button-container">
-      <button type="submit" mat-raised-button [disabled]="!leaseForm.valid">
-        Submit
-      </button>
+      <button type="submit" mat-raised-button>Submit</button>
     </div>
   </form>
 </div>
