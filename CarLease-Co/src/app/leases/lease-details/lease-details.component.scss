@@ -25,3 +25,68 @@ h3 {
 h3:nth-child(even) {
   background-color: $primary-row;
 }
+.status-card {
+  background-color: $primary-row;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: $form-padding;
+  text-align: end;
+  color: $primary-text;
+  mat-card-content {
+    text-align: end;
+  }
+}
+.user-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: large;
+  font-weight: 800;
+  background-color: $primary-row;
+}
+.detail {
+  display: flex;
+  flex-direction: column;
+  background-color: $grey-background;
+  border-radius: $form-border-radius;
+  text-align: start;
+  padding: $form-padding;
+}
+.details {
+  margin-top: $margin-top;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 100%;
+  justify-content: space-between;
+  color: $primary-text;
+}
+.detail-info {
+  display: flex;
+  flex-direction: row;
+  gap: 10%;
+  color: black;
+  border-bottom: 1px solid $primary-text;
+  height: 40px;
+}
+.autosuggestor {
+  margin-top: $margin-top;
+}
+.applicant-actions {
+  button {
+    width: 80px;
+  }
+  .edit:hover {
+    color: $grey-background;
+    background-color: transparent;
+  }
+  .delete {
+    color: $warn;
+  }
+  .delete:hover {
+    color: $grey-background;
+    background-color: $warn-background;
+  }
+}

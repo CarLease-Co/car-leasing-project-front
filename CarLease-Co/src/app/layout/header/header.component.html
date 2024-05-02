@@ -39,7 +39,13 @@
             <span>Car Price Modifier</span>
           </button>
         }
-        @case (EMPLOYEE_ROLE.REVIEWER || EMPLOYEE_ROLE.APPROVER) {
+        @case (EMPLOYEE_ROLE.REVIEWER) {
+          <button mat-menu-item (click)="goToLeaseList()">
+            <mat-icon>home</mat-icon>
+            <span>My Leases</span>
+          </button>
+        }
+        @case (EMPLOYEE_ROLE.APPROVER) {
           <button mat-menu-item (click)="goToLeaseList()">
             <mat-icon>home</mat-icon>
             <span>My Leases</span>

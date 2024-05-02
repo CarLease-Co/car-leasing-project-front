@@ -1,16 +1,17 @@
 import { Routes } from '@angular/router';
-import { LeaseApplicationsListComponent } from './leases/lease-applications-list/lease-applications-list.component';
-import { LeaseDetailsComponent } from './leases/lease-details/lease-details.component';
-import { LeaseApplicationFormComponent } from './leases/lease-application-form/lease-application-form.component';
-import { LoginFormComponent } from './login/login-form/login-form.component';
-import { loginAccessGuard } from './guards/login-access.guard';
-import { SysAdminViewComponent } from './sys-admin-view/sys-admin-view/sys-admin-view.component';
 import { AppComponent } from './app.component';
 import { AutosuggestorFormComponent } from './business-admin-view/autosuggestor-form/autosuggestor-form.component';
-import { sysAdminLoginGuard } from './guards/sysadmin-login.guard';
-import { busAdminLoginGuard } from './guards/busadmin-login.guard';
-import { ROUTES } from './enums';
 import { CarPriceModifierComponent } from './business-admin-view/car-price-modifier/car-price-modifier.component';
+import { ROUTES } from './enums';
+import { busAdminLoginGuard } from './guards/busadmin-login.guard';
+import { loginAccessGuard } from './guards/login-access.guard';
+import { sysAdminLoginGuard } from './guards/sysadmin-login.guard';
+import { EditDetailsComponent } from './leases/edit-details/edit-details.component';
+import { LeaseApplicationFormComponent } from './leases/lease-application-form/lease-application-form.component';
+import { LeaseApplicationsListComponent } from './leases/lease-applications-list/lease-applications-list.component';
+import { LeaseDetailsComponent } from './leases/lease-details/lease-details.component';
+import { LoginFormComponent } from './login/login-form/login-form.component';
+import { SysAdminViewComponent } from './sys-admin-view/sys-admin-view/sys-admin-view.component';
 
 export const routes: Routes = [
   {
@@ -43,6 +44,11 @@ export const routes: Routes = [
   {
     path: ROUTES.APPLICATION_DETAILS_BY_ID,
     component: LeaseDetailsComponent,
+    canActivate: [loginAccessGuard],
+  },
+  {
+    path: ROUTES.EDIT_APPLICATION_BY_ID,
+    component: EditDetailsComponent,
     canActivate: [loginAccessGuard],
   },
   {
