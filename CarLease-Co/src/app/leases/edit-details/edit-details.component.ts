@@ -153,6 +153,20 @@ export class EditDetailsComponent implements OnInit {
         .subscribe();
     }
   }
+
+  onSave(): void {
+    if (this.leaseEditForm.valid) {
+      const application: LeaseApplicationForm = {
+        ...this.leaseEditForm.getRawValue(),
+        ...{ status: APPLICATION_STATUS.DRAFT },
+      };
+      application.status = APPLICATION_STATUS.DRAFT;
+      this.applicationService
+        .createApplication(application)
+        .pipe(catchError(this.handleError))
+        .subscribe();
+    }
+  }
   private populateFormWithApplicationData() {
     if (this.fetchedApplication) {
       const {
