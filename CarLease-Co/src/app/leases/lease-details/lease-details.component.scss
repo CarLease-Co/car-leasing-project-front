@@ -2,26 +2,54 @@
 
 @include mat.core();
 @import "../../../variables.scss";
+
 .example-card {
   max-width: $component-max-width;
   margin: $margin-top auto 25px;
 }
+
 .content-wrapper {
   margin-top: 10px;
   display: flex;
   flex-direction: row;
 }
+
 mat-card-content {
   width: 50%;
   text-align: center;
 }
+
 .mat-mdc-card-content:first-child {
   padding: 0;
 }
+
 h3 {
   margin: 0;
   height: 40px;
 }
+
 h3:nth-child(even) {
   background-color: $primary-row;
+}
+
+
+.review-container {
+  padding-top: 0;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.autosuggestor {
+  margin-left: auto;
+}
+
+.review-view {
+  width: 100%;
+  margin: 0 auto;
+  border-top: 1px solid gray;
+  padding-top: 20px;
 }

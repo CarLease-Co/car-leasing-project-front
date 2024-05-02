@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+
+}
+
+.review-ui-header {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.review-ui {
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+.radio-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.submit-btn {
+    display: block;
+    margin: 10px auto;
+}
+
+mat-radio-button:first-child {
+    margin-right: 20px;
+}
