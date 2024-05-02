@@ -11,6 +11,10 @@
         <mat-slider min="{{ LoanFormConfig.minLoanDuration }}" max="{{ LoanFormConfig.maxLoanDuration }}"
           step="{{ LoanFormConfig.sliderStep }}" discrete thumbLabel tickInterval="5">
           <input matSliderThumb formControlName="loanDuration" /></mat-slider>
+        <label class="slider-label" for="car">Duration of Loan (months)</label>
+        <mat-slider name="car" min="{{ LoanFormConfig.minLoanDuration }}" max="{{ LoanFormConfig.maxLoanDuration }}"
+          step="{{ LoanFormConfig.sliderStep }}" discrete thumbLabel tickInterval="5">
+          <input matSliderThumb formControlName="loanDuration" /></mat-slider>
         <div class="slider-info">
           <span class="slider-value">{{ loanDuration }} months</span>
           <span class="slider-max">{{ LoanFormConfig.maxLoanDuration }} months</span>
@@ -48,13 +52,20 @@
       </mat-form-field>
 
       <div class="slider-container col">
-        <label class="slider-label">Car Year</label>
-        <mat-slider min="{{ LoanFormConfig.minCarYear }}" max="{{ LoanFormConfig.maxCarYear }}"
-          step="{{ LoanFormConfig.sliderStep }}"><input matSliderThumb formControlName="manufactureDate" /></mat-slider>
-        <div class="slider-info">
-          <span class="slider-value">{{ manufactureDate }}</span>
-          <span class="slider-max">{{ LoanFormConfig.maxCarYear }}</span>
-        </div>
+        <<<<<<< HEAD <label class="slider-label">Car Year</label>
+          <mat-slider min="{{ LoanFormConfig.minCarYear }}" max="{{ LoanFormConfig.maxCarYear }}"
+            step="{{ LoanFormConfig.sliderStep }}"><input matSliderThumb
+              formControlName="manufactureDate" /></mat-slider>
+          =======
+          <label class="slider-label" for="year">Car Year</label>
+          <mat-slider min="{{ LoanFormConfig.minCarYear }}" max="{{ LoanFormConfig.maxCarYear }}"
+            step="{{ LoanFormConfig.sliderStep }}"><input matSliderThumb formControlName="manufactureDate"
+              name="year" /></mat-slider>
+          >>>>>>> fix/application-details-view
+          <div class="slider-info">
+            <span class="slider-value">{{ manufactureDate }}</span>
+            <span class="slider-max">{{ LoanFormConfig.maxCarYear }}</span>
+          </div>
       </div>
       <mat-form-field class="full-width-form-field col" appearance="outline">
         <mat-label>textExplanation</mat-label>

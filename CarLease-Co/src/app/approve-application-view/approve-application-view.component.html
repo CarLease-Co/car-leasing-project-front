@@ -1,1 +1,23 @@
-<p>approve-application-view works!</p>
+<div class="container">
+    <p class="approve-ui-header">
+        Approve application
+    </p>
+    <div class="approve-ui">
+
+        <div class="button-section">
+            <form (submit)="submitForm()">
+                <mat-radio-group aria-label="Select an option" class="radio-buttons">
+                    <mat-radio-button value="approve">Approve reviewer's choice</mat-radio-button>
+                    <mat-radio-button value="reject">Reject reviewer's choice</mat-radio-button>
+                </mat-radio-group>
+
+
+                <button type="submit" mat-raised-button class="submit-btn">Submit</button>
+            </form>
+
+        </div>
+
+    </div>
+    <div class="autosuggestor-container">
+    </div>
+</div>
