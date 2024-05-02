@@ -46,6 +46,8 @@ export class LeaseApplicationFormComponent {
   uniqueCarBrands$: Observable<string[]> = of([]);
   filteredModels$: Observable<string[]> = of([]);
 
+  filteredModels: string[] = [];
+
   ERROR_MESSAGES = ERROR_MESSAGES;
   unauthorized: boolean = false;
 
@@ -83,6 +85,7 @@ export class LeaseApplicationFormComponent {
   });
 
   get makeControl(): AbstractControl<string | null, string | null> | null {
+
     return this.leaseForm.get(FORM_FIELDS.CAR_MAKE);
   }
   get modelControl(): AbstractControl<string | null, string | null> | null {
@@ -109,19 +112,19 @@ export class LeaseApplicationFormComponent {
       .pipe(
         tap((make) => {
           make ? this.modelControl?.enable() : this.modelControl?.disable();
-        }),
+        })
       )
       .subscribe();
     this.uniqueCarBrands$ = this.applicationService.cars$.pipe(
       map((cars) => cars.map((car) => car.make)),
-      map((brands) => Array.from(new Set(brands))),
+      map((brands) => Array.from(new Set(brands)))
     );
 
     this.leaseForm.controls.carMake.valueChanges.subscribe((make) => {
       this.filteredModels$ = this.applicationService.cars$.pipe(
         map((cars) =>
-          cars.filter((car) => car.make === make).map((car) => car.model),
-        ),
+          cars.filter((car) => car.make === make).map((car) => car.model)
+        )
       );
     });
   }
