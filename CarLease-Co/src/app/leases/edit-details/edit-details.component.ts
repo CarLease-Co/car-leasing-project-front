@@ -43,7 +43,8 @@ export class EditDetailsComponent implements OnInit {
   private readonly localStorageService = inject(LocalStorageManagerService);
   protected readonly LoanFormConfig = LoanFormConfig;
   private readonly applicationId = this.activatedRoute.snapshot.params[ID];
-  private userId = this.localStorageService.getStoredUser()?.userId;
+  private readonly currentUser = this.localStorageService.storedUser();
+  readonly userId = this.currentUser()?.userId;
   readonly applicationService = inject(ApplicationListService);
 
   uniqueCarBrands$: Observable<string[]> = of([]);
@@ -85,7 +86,7 @@ export class EditDetailsComponent implements OnInit {
       Validators.min(LoanFormConfig.minLoanAmount),
     ]),
     textExplanation: new FormControl(''),
-    startDate: new FormControl(new Date().toISOString()),
+    startDate: new FormControl(new Date().toISOString().split('T')[0]),
   });
 
   get makeControl(): AbstractControl<string | null, string | null> | null {
@@ -162,7 +163,7 @@ export class EditDetailsComponent implements OnInit {
       };
       application.status = APPLICATION_STATUS.DRAFT;
       this.applicationService
-        .createApplication(application)
+        .patchApplication(this.applicationId, application)
         .pipe(catchError(this.handleError))
         .subscribe();
     }

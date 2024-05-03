@@ -1,12 +1,11 @@
 import { inject } from '@angular/core';
 import { CanActivateFn } from '@angular/router';
-import { LocalStorageManagerService } from '../services/local-storage-manager.service';
 import { EMPLOYEE_ROLE } from '../enums';
+import { LocalStorageManagerService } from '../services/local-storage-manager.service';
 
 export const busAdminLoginGuard: CanActivateFn = () => {
   const localStorageService = inject(LocalStorageManagerService);
+  const currentUser = localStorageService.storedUser();
 
-  return (
-    localStorageService.getStoredUser()?.role === EMPLOYEE_ROLE.BUSINESS_ADMIN
-  );
+  return currentUser()?.role === EMPLOYEE_ROLE.BUSINESS_ADMIN;
 };

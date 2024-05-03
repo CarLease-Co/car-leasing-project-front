@@ -64,16 +64,11 @@
     display: flex;
     justify-content: center;
     gap: 50px;
-    button[type="submit"] {
-      padding: 5px 50px;
-      margin-top: 5px;
-      background-color: $primary-background;
-      color: white;
-    }
+    button[type="submit"],
     button[type="button"] {
       padding: 5px 50px;
       margin-top: 5px;
-      background-color: $grey-background-button;
+      background-color: $primary-background;
       color: white;
     }
     button:hover {

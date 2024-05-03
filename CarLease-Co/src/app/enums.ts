@@ -45,6 +45,10 @@ export enum FORM_FIELDS {
   MANUFACTURE_DATE = 'manufactureDate',
   NOT_SET = 'Not set',
 }
+export enum CAR_FORM_FIELDS {
+  CAR_MAKE = 'make',
+  CAR_MODEL = 'model',
+}
 
 export enum AUTOSUGGESTOR_VALUES {
   BAD = 'BAD',

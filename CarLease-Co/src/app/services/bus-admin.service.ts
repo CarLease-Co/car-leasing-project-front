@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { AUTOSUGGESTOR_PATH, BASE_URL, CAR_PATCH_PATH } from '../constants';
 import { ROUTES } from '../enums';
 import { AutosuggestorForm, Car, CarPriceForm } from '../types';
+import { LocalStorageManagerService } from './local-storage-manager.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,14 +13,22 @@ import { AutosuggestorForm, Car, CarPriceForm } from '../types';
 export class BusAdminService {
   private readonly httpClient = inject(HttpClient);
   private readonly router = inject(Router);
+  private readonly localStorageService = inject(LocalStorageManagerService);
 
   adjustAutosuggestor(
     autosuggestorRanges: AutosuggestorForm,
   ): Observable<unknown> {
+    const userHeaders = new HttpHeaders({
+      userId: this.localStorageService.storedUser()()!.userId,
+      role: this.localStorageService.storedUser()()!.role,
+    });
     return this.httpClient
       .put<AutosuggestorForm>(
         `${BASE_URL}${AUTOSUGGESTOR_PATH}`,
         autosuggestorRanges,
+        {
+          headers: userHeaders,
+        },
       )
       .pipe(
         tap((response) => {
@@ -29,11 +38,19 @@ export class BusAdminService {
       );
   }
   adjustCarPrices(car: CarPriceForm): Observable<unknown> {
-    return this.httpClient.patch<Car>(`${BASE_URL}${CAR_PATCH_PATH}`, car).pipe(
-      tap((response) => {
-        response;
-        this.router.navigate([ROUTES.HOME]);
-      }),
-    );
+    const userHeaders = new HttpHeaders({
+      userId: this.localStorageService.storedUser()()!.userId,
+      role: this.localStorageService.storedUser()()!.role,
+    });
+    return this.httpClient
+      .patch<Car>(`${BASE_URL}${CAR_PATCH_PATH}`, car, {
+        headers: userHeaders,
+      })
+      .pipe(
+        tap((response) => {
+          response;
+          this.router.navigate([ROUTES.HOME]);
+        }),
+      );
   }
 }
