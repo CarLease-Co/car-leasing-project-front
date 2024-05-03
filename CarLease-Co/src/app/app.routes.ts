@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { AutosuggestorFormComponent } from './business-admin-view/autosuggestor-form/autosuggestor-form.component';
 import { CarPriceModifierComponent } from './business-admin-view/car-price-modifier/car-price-modifier.component';
 import { ROUTES } from './enums';
@@ -12,11 +11,12 @@ import { LeaseApplicationsListComponent } from './leases/lease-applications-list
 import { LeaseDetailsComponent } from './leases/lease-details/lease-details.component';
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import { SysAdminViewComponent } from './sys-admin-view/sys-admin-view/sys-admin-view.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 export const routes: Routes = [
   {
     path: ROUTES.HOME,
-    component: AppComponent,
+    component: HomePageComponent,
     canActivate: [loginAccessGuard],
   },
   { path: ROUTES.LOGIN, component: LoginFormComponent },
