@@ -162,7 +162,7 @@ export class EditDetailsComponent implements OnInit {
       };
       application.status = APPLICATION_STATUS.DRAFT;
       this.applicationService
-        .createApplication(application)
+        .patchApplication(this.applicationId, application)
         .pipe(catchError(this.handleError))
         .subscribe();
     }

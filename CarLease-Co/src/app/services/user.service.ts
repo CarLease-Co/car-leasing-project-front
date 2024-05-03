@@ -1,14 +1,16 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { BASE_URL, USER_PATH } from '../constants';
-import { NewUserForm, User } from '../types';
+import { LoginResponse, NewUserForm, User } from '../types';
+import { LocalStorageManagerService } from './local-storage-manager.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private readonly httpClient = inject(HttpClient);
+  private readonly localStorageService = inject(LocalStorageManagerService);
   private usersSubject: BehaviorSubject<User[]> = new BehaviorSubject<User[]>(
     [],
   );
@@ -18,6 +20,11 @@ export class UserService {
   >(undefined);
   public user$ = this.usersSubject.asObservable();
 
+  readonly userHeaders = new HttpHeaders({
+    userId: this.getCurrentUser().userId,
+    role: this.getCurrentUser().role,
+  });
+
   getUsers(): void {
     this.httpClient
       .get<User[]>(`${BASE_URL}${USER_PATH}`)
@@ -26,7 +33,9 @@ export class UserService {
   }
   createUser(newUser: NewUserForm): Observable<unknown> {
     return this.httpClient
-      .post<NewUserForm>(`${BASE_URL}${USER_PATH}`, newUser)
+      .post<NewUserForm>(`${BASE_URL}${USER_PATH}`, newUser, {
+        headers: this.userHeaders,
+      })
       .pipe(
         tap((response) => {
           response;
@@ -40,5 +49,9 @@ export class UserService {
         this.userSubject.next(user);
       }),
     );
+  }
+
+  getCurrentUser(): LoginResponse {
+    return this.localStorageService.getStoredUser()!;
   }
 }

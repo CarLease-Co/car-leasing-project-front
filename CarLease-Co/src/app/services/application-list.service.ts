@@ -58,7 +58,9 @@ export class ApplicationListService {
   }
   createApplication(application: LeaseApplicationForm): Observable<unknown> {
     return this.httpClient
-      .post(`${BASE_URL}${APPLICATIONS_PATH}`, application)
+      .post(`${BASE_URL}${APPLICATIONS_PATH}`, application, {
+        headers: this.userHeaders,
+      })
       .pipe(
         tap((response) => {
           response;
