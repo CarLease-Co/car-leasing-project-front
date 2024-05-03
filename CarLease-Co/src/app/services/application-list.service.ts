@@ -3,13 +3,13 @@ import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { APPLICATIONS_PATH, BASE_URL, CAR_PATH } from '../constants';
-import { ROUTES } from '../enums';
+import { APPLICATION_STATUS, ROUTES } from '../enums';
 import {
   Car,
   LeaseApplication,
   LeaseApplicationForm,
   LeaseApplications,
-  LoginResponse,
+  LoginResponse
 } from '../types';
 import { LocalStorageManagerService } from './local-storage-manager.service';
 
@@ -47,6 +47,15 @@ export class ApplicationListService {
       .pipe(tap((cars) => this.cars$.next(cars)))
       .subscribe();
   }
+
+  updateApplicationStatus(status: APPLICATION_STATUS, applicationId: number): Observable<unknown> {
+    const url = `${BASE_URL}${APPLICATIONS_PATH}/${applicationId}`;
+    const headers = this.userHeaders.set('Content-Type', 'application/json');
+
+    return this.httpClient.patch(url, JSON.stringify(status), { headers })
+
+  }
+
   createApplication(application: LeaseApplicationForm): Observable<unknown> {
     return this.httpClient
       .post(`${BASE_URL}${APPLICATIONS_PATH}`, application)
@@ -55,11 +64,15 @@ export class ApplicationListService {
           response;
           this.router.navigate([ROUTES.APPLICATIONS]);
         }),
+        tap((response) => {
+          response;
+          this.router.navigate([ROUTES.EDIT_APPLICATION_BY_ID])
+        })
       );
   }
   deleteApplication(id: number | undefined): Observable<unknown> {
     return this.httpClient
-      .delete(`${BASE_URL}${APPLICATIONS_PATH}/${id}`, {
+      .delete(`${BASE_URL}${APPLICATIONS_PATH} / ${id}`, {
         headers: this.userHeaders,
       })
       .pipe(

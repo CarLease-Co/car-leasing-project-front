@@ -6,7 +6,8 @@
 
         <div class="button-section">
             <form (submit)="submitForm()">
-                <mat-radio-group aria-label="Select an option" class="radio-buttons">
+                <mat-radio-group [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}"
+                    aria-label="Select an option" class="radio-buttons">
                     <mat-radio-button value="approve">Approve</mat-radio-button>
                     <mat-radio-button value="reject">Reject</mat-radio-button>
                 </mat-radio-group>
