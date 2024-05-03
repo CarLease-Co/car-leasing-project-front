@@ -13,7 +13,7 @@
                 </mat-radio-group>
 
 
-                <button type="submit" mat-raised-button class="submit-btn">Submit</button>
+                <button [disabled]="!selectedValue" type="submit" mat-raised-button class="submit-btn">Submit</button>
             </form>
 
         </div>

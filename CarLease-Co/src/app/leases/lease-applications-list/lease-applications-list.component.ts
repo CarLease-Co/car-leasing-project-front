@@ -89,7 +89,6 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
     const selectedApplication = this.leaseApplications.find(
       (application) => application.id === id,
     );
-    console.log([ROUTES.APPLICATION_DETAILS, selectedApplication?.id]);
     this.router.navigate([ROUTES.APPLICATION_DETAILS, selectedApplication?.id]);
   }
 }
