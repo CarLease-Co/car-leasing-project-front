@@ -99,3 +99,7 @@ export interface NewUserForm {
   email?: string;
   password?: string;
 }
+export interface LoginBody {
+  username: string;
+  password: string;
+}
