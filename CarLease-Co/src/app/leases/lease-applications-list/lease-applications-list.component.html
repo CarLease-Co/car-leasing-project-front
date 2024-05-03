@@ -36,7 +36,9 @@
         mat-row
         *matRowDef="let row; columns: displayedColumns"
         (click)="onApplication(row.id)"
-      ></tr>
+      >
+        >
+      </tr>
       <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="4">
           No data matching the filter "{{ input.value }}"

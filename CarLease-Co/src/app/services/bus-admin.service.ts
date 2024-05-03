@@ -38,12 +38,16 @@ export class BusAdminService {
       );
   }
   adjustCarPrices(car: CarPriceForm): Observable<unknown> {
-    return this.httpClient.patch<Car>(`${BASE_URL}${CAR_PATCH_PATH}`, car).pipe(
-      tap((response) => {
-        response;
-        this.router.navigate([ROUTES.HOME]);
-      }),
-    );
+    return this.httpClient
+      .patch<Car>(`${BASE_URL}${CAR_PATCH_PATH}`, car, {
+        headers: this.userHeaders,
+      })
+      .pipe(
+        tap((response) => {
+          response;
+          this.router.navigate([ROUTES.HOME]);
+        }),
+      );
   }
 
   getCurrentUser(): LoginResponse {
