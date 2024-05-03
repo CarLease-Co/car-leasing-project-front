@@ -22,6 +22,10 @@
   opacity: 1;
 }
 
+.material-symbols-sharp:not(.active) {
+  color: gray;
+}
+
 .suggestor-header {
   font-size: 2em;
   margin-right: 15px;
