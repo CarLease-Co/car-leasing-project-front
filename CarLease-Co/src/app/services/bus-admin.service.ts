@@ -15,19 +15,19 @@ export class BusAdminService {
   private readonly router = inject(Router);
   private readonly localStorageService = inject(LocalStorageManagerService);
 
-  readonly userHeaders = new HttpHeaders({
-    userId: this.getCurrentUser().userId,
-    role: this.getCurrentUser().role,
-  });
   adjustAutosuggestor(
     autosuggestorRanges: AutosuggestorForm,
   ): Observable<unknown> {
+    const userHeaders = new HttpHeaders({
+      userId: this.localStorageService.storedUser()()!.userId,
+      role: this.localStorageService.storedUser()()!.role,
+    });
     return this.httpClient
       .put<AutosuggestorForm>(
         `${BASE_URL}${AUTOSUGGESTOR_PATH}`,
         autosuggestorRanges,
         {
-          headers: this.userHeaders,
+          headers: userHeaders,
         },
       )
       .pipe(
@@ -38,9 +38,13 @@ export class BusAdminService {
       );
   }
   adjustCarPrices(car: CarPriceForm): Observable<unknown> {
+    const userHeaders = new HttpHeaders({
+      userId: this.localStorageService.storedUser()()!.userId,
+      role: this.localStorageService.storedUser()()!.role,
+    });
     return this.httpClient
       .patch<Car>(`${BASE_URL}${CAR_PATCH_PATH}`, car, {
-        headers: this.userHeaders,
+        headers: userHeaders,
       })
       .pipe(
         tap((response) => {

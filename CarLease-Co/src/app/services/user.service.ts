@@ -20,23 +20,26 @@ export class UserService {
   >(undefined);
   public user$ = this.usersSubject.asObservable();
 
-  readonly userHeaders = new HttpHeaders({
-    userId: this.getCurrentUser().userId,
-    role: this.getCurrentUser().role,
-  });
-
   getUsers(): void {
+    const userHeaders = new HttpHeaders({
+      userId: this.localStorageService.storedUser()()!.userId,
+      role: this.localStorageService.storedUser()()!.role,
+    });
     this.httpClient
       .get<User[]>(`${BASE_URL}${USER_PATH}`, {
-        headers: this.userHeaders,
+        headers: userHeaders,
       })
       .pipe(tap((users) => this.usersSubject.next(users)))
       .subscribe();
   }
   createUser(newUser: NewUserForm): Observable<unknown> {
+    const userHeaders = new HttpHeaders({
+      userId: this.localStorageService.storedUser()()!.userId,
+      role: this.localStorageService.storedUser()()!.role,
+    });
     return this.httpClient
       .post<NewUserForm>(`${BASE_URL}${USER_PATH}`, newUser, {
-        headers: this.userHeaders,
+        headers: userHeaders,
       })
       .pipe(
         tap((response) => {

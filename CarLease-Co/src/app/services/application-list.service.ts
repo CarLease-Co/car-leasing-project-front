@@ -14,7 +14,6 @@ import {
   LeaseApplication,
   LeaseApplicationForm,
   LeaseApplications,
-  LoginResponse,
 } from '../types';
 import { LocalStorageManagerService } from './local-storage-manager.service';
 
@@ -29,14 +28,15 @@ export class ApplicationListService {
   cars$ = new BehaviorSubject<Car[]>([]);
   applications$ = this.applicationsSubject.asObservable();
   application$ = new BehaviorSubject<LeaseApplication | null>(null);
-  readonly userHeaders = new HttpHeaders({
-    userId: this.getCurrentUser().userId,
-    role: this.getCurrentUser().role,
-  });
+
   getApplications(): void {
+    const userHeaders = new HttpHeaders({
+      userId: this.localStorageService.storedUser()()!.userId,
+      role: this.localStorageService.storedUser()()!.role,
+    });
     this.httpClient
       .get<LeaseApplications>(`${BASE_URL}${APPLICATIONS_PATH}`, {
-        headers: this.userHeaders,
+        headers: userHeaders,
       })
       .pipe(tap((applications) => this.applicationsSubject.next(applications)))
       .subscribe();
@@ -57,9 +57,13 @@ export class ApplicationListService {
       .subscribe();
   }
   createApplication(application: LeaseApplicationForm): Observable<unknown> {
+    const userHeaders = new HttpHeaders({
+      userId: this.localStorageService.storedUser()()!.userId,
+      role: this.localStorageService.storedUser()()!.role,
+    });
     return this.httpClient
       .post(`${BASE_URL}${APPLICATIONS_PATH}`, application, {
-        headers: this.userHeaders,
+        headers: userHeaders,
       })
       .pipe(
         tap((response) => {
@@ -69,9 +73,13 @@ export class ApplicationListService {
       );
   }
   deleteApplication(id: number | undefined): Observable<unknown> {
+    const userHeaders = new HttpHeaders({
+      userId: this.localStorageService.storedUser()()!.userId,
+      role: this.localStorageService.storedUser()()!.role,
+    });
     return this.httpClient
       .delete(`${BASE_URL}${APPLICATIONS_PATH}/${id}`, {
-        headers: this.userHeaders,
+        headers: userHeaders,
       })
       .pipe(
         tap((response) => {
@@ -84,12 +92,16 @@ export class ApplicationListService {
     applicationId: number,
     application: LeaseApplicationForm,
   ): Observable<unknown> {
+    const userHeaders = new HttpHeaders({
+      userId: this.localStorageService.storedUser()()!.userId,
+      role: this.localStorageService.storedUser()()!.role,
+    });
     return this.httpClient
       .patch(
         `${BASE_URL}${APPLICATIONS_PATH}${UPDATE_PATH}${applicationId}`,
         application,
         {
-          headers: this.userHeaders,
+          headers: userHeaders,
         },
       )
       .pipe(
@@ -98,8 +110,5 @@ export class ApplicationListService {
           this.router.navigate([ROUTES.APPLICATIONS]);
         }),
       );
-  }
-  getCurrentUser(): LoginResponse {
-    return this.localStorageService.getStoredUser()!;
   }
 }
