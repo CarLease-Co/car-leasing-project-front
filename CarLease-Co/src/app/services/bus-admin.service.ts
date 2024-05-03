@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { AUTOSUGGESTOR_PATH, BASE_URL, CAR_PATCH_PATH } from '../constants';
 import { ROUTES } from '../enums';
-import { AutosuggestorForm, Car, CarPriceForm, LoginResponse } from '../types';
+import { AutosuggestorForm, Car, CarPriceForm } from '../types';
 import { LocalStorageManagerService } from './local-storage-manager.service';
 
 @Injectable({
@@ -52,9 +52,5 @@ export class BusAdminService {
           this.router.navigate([ROUTES.HOME]);
         }),
       );
-  }
-
-  getCurrentUser(): LoginResponse {
-    return this.localStorageService.getStoredUser()!;
   }
 }

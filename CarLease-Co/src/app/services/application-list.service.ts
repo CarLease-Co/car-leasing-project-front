@@ -46,6 +46,7 @@ export class ApplicationListService {
       .get<LeaseApplication>(`${BASE_URL}${APPLICATIONS_PATH}/${id}`)
       .pipe(
         tap((application) => {
+          console.log('data', new Date().toISOString().split('T')[0]);
           this.application$.next(application);
         }),
       );
@@ -61,12 +62,19 @@ export class ApplicationListService {
       userId: this.localStorageService.storedUser()()!.userId,
       role: this.localStorageService.storedUser()()!.role,
     });
+    console.log(`${BASE_URL}${APPLICATIONS_PATH}`, application, {
+      headers: userHeaders,
+    });
     return this.httpClient
       .post(`${BASE_URL}${APPLICATIONS_PATH}`, application, {
         headers: userHeaders,
       })
       .pipe(
         tap((response) => {
+          console.log(`${BASE_URL}${APPLICATIONS_PATH}`, application, {
+            headers: userHeaders,
+          });
+          console.log(response);
           response;
           this.router.navigate([ROUTES.APPLICATIONS]);
         }),

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { BASE_URL, USER_PATH } from '../constants';
-import { LoginResponse, NewUserForm, User } from '../types';
+import { NewUserForm, User } from '../types';
 import { LocalStorageManagerService } from './local-storage-manager.service';
 
 @Injectable({
@@ -54,9 +54,5 @@ export class UserService {
         this.userSubject.next(user);
       }),
     );
-  }
-
-  getCurrentUser(): LoginResponse {
-    return this.localStorageService.getStoredUser()!;
   }
 }
