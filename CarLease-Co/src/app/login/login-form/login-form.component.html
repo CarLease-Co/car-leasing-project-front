@@ -1,12 +1,7 @@
 <mat-card class="login-welcome">
   <div class="welcome-wrapper">
     <h1>WELCOME BACK</h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-      voluptatum, id labore, quos facilis suscipit autem aut facere, dignissimos
-      assumenda totam magni nobis quis delectus fugit neque vitae nesciunt
-      cupiditate?
-    </p>
+    <app-loan-calculator></app-loan-calculator>
   </div>
   <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-wrapper">
     <div class="input-field-wrapper">

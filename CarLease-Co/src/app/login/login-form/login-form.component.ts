@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ERROR_MESSAGES, USER_PROPERTIES } from '../../enums';
 import { EMPTY, Observable, catchError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { LoanCalculatorComponent } from '../../loan-calculator/loan-calculator.component';
 
 @Component({
   selector: 'app-login-form',
@@ -34,6 +35,7 @@ import { HttpErrorResponse } from '@angular/common/http';
     MatCardModule,
     CommonModule,
     MatIconModule,
+    LoanCalculatorComponent
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
