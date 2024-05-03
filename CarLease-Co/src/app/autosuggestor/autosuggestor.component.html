@@ -1,13 +1,13 @@
 <div class="suggestor">
   <p class="suggestor-header">Suggestion:</p>
   <div class="icons">
-    <span class="material-symbols-sharp good" [ngClass]="{'active': currentStatus === AUTOSUGGESTOR_VALUES.GOOD}">
+    <span class="material-symbols-sharp good" matBadge="{{evaluation}}" [ngClass]="{'active': currentStatus === AUTOSUGGESTOR_VALUES.GOOD}">
       sentiment_satisfied
     </span>
-    <span class="material-symbols-sharp neutral" [ngClass]="{'active': currentStatus === AUTOSUGGESTOR_VALUES.MAYBE}">
+    <span class="material-symbols-sharp neutral" matBadge="{{evaluation}}" [ngClass]="{'active': currentStatus === AUTOSUGGESTOR_VALUES.MAYBE}">
       sentiment_neutral
     </span>
-    <span class="material-symbols-sharp bad" [ngClass]="{'active': currentStatus === AUTOSUGGESTOR_VALUES.BAD}">
+    <span class="material-symbols-sharp bad" matBadge="{{evaluation}}" [ngClass]="{'active': currentStatus === AUTOSUGGESTOR_VALUES.BAD}">
       sentiment_dissatisfied
     </span>
   </div>
