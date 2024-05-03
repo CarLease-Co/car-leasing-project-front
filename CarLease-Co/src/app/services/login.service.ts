@@ -1,11 +1,11 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, catchError, tap, throwError } from 'rxjs';
-import { LoginResponse } from '../types';
-import { LocalStorageManagerService } from './local-storage-manager.service';
 import { Router } from '@angular/router';
-import { ROUTES } from '../enums';
+import { Observable, tap } from 'rxjs';
 import { BASE_URL, LOGIN_PATH } from '../constants';
+import { ROUTES } from '../enums';
+import { LoginBody, LoginResponse } from '../types';
+import { LocalStorageManagerService } from './local-storage-manager.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,10 +16,9 @@ export class LoginService {
   private readonly localStorageService = inject(LocalStorageManagerService);
 
   login(username: string, password: string): Observable<LoginResponse> {
+    const loginBody: LoginBody = { username, password };
     return this.httpClient
-      .get<LoginResponse>(`${BASE_URL}${LOGIN_PATH}`, {
-        params: { username, password },
-      })
+      .post<LoginResponse>(`${BASE_URL}${LOGIN_PATH}`, loginBody)
       .pipe(
         tap(this.localStorageService.setUser),
         tap(() => this.router.navigate([ROUTES.HOME])),
