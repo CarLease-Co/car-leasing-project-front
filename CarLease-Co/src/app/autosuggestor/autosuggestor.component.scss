@@ -41,12 +41,12 @@
   display: flex;
   align-items: center;
 }
-::ng-deep span:hover .mat-badge-content {
+::ng-deep .icons:hover .mat-badge-content {
   background-color: $grey-background-badge;
   visibility: visible;
   transition: 0.5s;
 }
 
-::ng-deep span .mat-badge-content {
+::ng-deep .icons .mat-badge-content {
   visibility: hidden;
 }
