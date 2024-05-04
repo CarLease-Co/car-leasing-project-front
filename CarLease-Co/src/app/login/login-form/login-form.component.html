@@ -1,12 +1,9 @@
 <mat-card class="login-welcome">
   <div class="welcome-wrapper">
-    <h1>WELCOME BACK</h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
-      voluptatum, id labore, quos facilis suscipit autem aut facere, dignissimos
-      assumenda totam magni nobis quis delectus fugit neque vitae nesciunt
-      cupiditate?
-    </p>
+    <img src="/assets/motoring-car-svgrepo-com.svg" alt="My SVG Image" />
+    <h1>WELCOME</h1>
+    <h1>BACK</h1>
+    <p>Sign in to continue on CarLess™</p>
   </div>
   <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-wrapper">
     <div class="input-field-wrapper">
@@ -38,7 +35,7 @@
     </div>
     <div class="button-container">
       <button type="submit" mat-raised-button [disabled]="!loginForm.valid">
-        Submit
+        Sign In
       </button>
     </div>
   </form>
