@@ -81,7 +81,7 @@ h3:nth-child(even) {
   }
   .edit:hover {
     color: $grey-background;
-    background-color: transparent;
+    background-color: $primary-hover;
   }
   .delete {
     color: $warn;

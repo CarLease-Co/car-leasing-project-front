@@ -33,10 +33,20 @@
 }
 .welcome-wrapper,
 .login-wrapper {
-  padding: 3rem;
+  padding: 2rem;
   width: 50%;
   text-align: center;
   align-content: center;
+  h1 {
+    font-size: 3rem;
+    text-wrap: wrap;
+  }
+  p {
+    margin-top: 50px;
+  }
+  img {
+    width: 200px;
+  }
 }
 .welcome-wrapper {
   background-color: $primary-background;
@@ -48,11 +58,20 @@
   button[type="submit"] {
     padding: 0.5rem 5rem;
     margin-top: 0.5rem;
-    background-color: $primary-background;
-    color: white;
+    background-color: white;
+    outline: 2px solid $primary-background;
+    color: $primary-background;
   }
   button:hover {
-    background-color: $primary-hover;
+    cursor: pointer;
+    background-color: $primary-background;
+    outline: 2px solid $primary-background;
+    color: white;
+    transition: 0.5s;
+  }
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 .input-field-wrapper {
@@ -65,20 +84,23 @@
   .login-welcome {
     margin: 5rem auto 5rem;
     height: auto;
-    width: 80%;
+    width: fit-content;
     flex-direction: column;
   }
 
   .welcome-wrapper,
   .login-wrapper {
     padding: 2rem;
-    width: 80%;
+    width: auto;
 
     h1 {
       font-size: 2rem;
     }
     p {
       font-size: 1.2rem;
+    }
+    img {
+      width: 100px;
     }
   }
 

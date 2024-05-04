@@ -1,3 +1,4 @@
+@import "../../variables.scss";
 .container {
   display: flex;
   flex-direction: column;
@@ -21,10 +22,23 @@
   justify-content: center;
   margin-bottom: 10px;
 }
-
 .submit-btn {
   display: block;
   margin: 10px auto;
+  background-color: transparent;
+  outline: 2px solid $pink;
+  color: $pink;
+}
+.submit-btn:hover {
+  cursor: pointer;
+  background-color: $pink;
+  outline: 2px solid $pink;
+  color: white;
+  transition: 0.5s;
+}
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 mat-radio-button:first-child {

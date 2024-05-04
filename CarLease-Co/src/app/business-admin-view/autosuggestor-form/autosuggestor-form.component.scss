@@ -37,12 +37,24 @@
 
   .button-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: end;
     button[type="submit"] {
       padding: 5px 50px;
-      margin-top: 25px;
+      margin-top: 5px;
+      background-color: white;
+      outline: 2px solid $primary-background;
+      color: $primary-background;
+    }
+    button[type="submit"]:hover {
+      cursor: pointer;
       background-color: $primary-background;
+      outline: 2px solid $primary-background;
       color: white;
+      transition: 0.5s;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
   }
   .year-slider-container {

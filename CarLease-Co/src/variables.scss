@@ -18,6 +18,8 @@ $primary-50: mat.define-palette(mat.$indigo-palette, 50);
 $primary-100: mat.define-palette(mat.$indigo-palette, 100);
 $warn-600: mat.define-palette(mat.$red-palette, 600);
 $warn-200: mat.define-palette(mat.$red-palette, 200);
+$pink-200: mat.define-palette(mat.$pink-palette, 400);
+$pink-100: mat.define-palette(mat.$pink-palette, 100);
 
 $primary-background: mat.get-color-from-palette($primary-200);
 $primary-text-indigo: mat.get-color-from-palette($primary-text-800);
@@ -29,3 +31,5 @@ $primary-text: mat.get-color-from-palette($primary-text-700);
 $grey-background: mat.get-color-from-palette($grey-background-100);
 $grey-background-button: mat.get-color-from-palette($grey-background-700);
 $grey-background-badge: mat.get-color-from-palette($grey-background-600);
+$pink: mat.get-color-from-palette($pink-200);
+$pink-hover: mat.get-color-from-palette($pink-100);

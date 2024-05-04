@@ -1,36 +1,42 @@
-<div class="container1">
-  <mat-card class="login-welcome container">
-    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-wrapper">
-      <div class="input-field-wrapper">
-        <mat-form-field appearance="fill">
-          <mat-label>Username</mat-label>
-          <input
-            matInput
-            type="string"
-            placeholder="Enter Your Username"
-            formControlName="username"
-            required
-          />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Password</mat-label>
-          <input
-            matInput
-            type="password"
-            placeholder="Enter Your Password"
-            formControlName="password"
-            required
-          />
-        </mat-form-field>
-        @if (unauthorized) {
-          <mat-error>{{ ERROR_MESSAGES.WRONG_CREDENTIALS }}</mat-error>
-        }
-      </div>
-      <div class="button-container">
-        <button type="submit" mat-raised-button [disabled]="!loginForm.valid">
-          Submit
-        </button>
-      </div>
-    </form>
-  </mat-card>
-</div>
+<mat-card class="login-welcome">
+  <div class="welcome-wrapper">
+    <img src="/assets/motoring-car-svgrepo-com.svg" alt="My SVG Image" />
+    <h1>WELCOME</h1>
+    <h1>BACK</h1>
+    <p>Sign in to continue on CarLess™</p>
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-wrapper">
+    <div class="input-field-wrapper">
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          type="string"
+          placeholder="Enter Your Username"
+          formControlName="username"
+          required
+          autocomplete="off"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="Enter Your Password"
+          formControlName="password"
+          required
+          autocomplete="off"
+        />
+      </mat-form-field>
+      @if (unauthorized) {
+        <mat-error>{{ ERROR_MESSAGES.WRONG_CREDENTIALS }}</mat-error>
+      }
+    </div>
+    <div class="button-container">
+      <button type="submit" mat-raised-button [disabled]="!loginForm.valid">
+        Sign In
+      </button>
+    </div>
+  </form>
+</mat-card>
