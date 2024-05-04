@@ -3,7 +3,7 @@
 @include mat.core();
 @import "../../variables.scss";
 
-.container1 {
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,14 +12,6 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: transparent;
 }
 
 .loan-welcome {
@@ -31,24 +23,55 @@
   height: 30rem;
   border-radius: 4rem;
 }
+.welcome-wrapper,
 .loan-wrapper {
-  padding: 3rem;
+  padding: 2rem;
   width: 50%;
   text-align: center;
   align-content: center;
+  h1 {
+    font-size: 3rem;
+    text-wrap: wrap;
+  }
+  h2 {
+    color: $primary-background;
+    text-wrap: wrap;
+  }
+  p {
+    margin-top: 20px;
+    font-size: 1rem;
+  }
+  img {
+    width: 200px;
+  }
 }
-
+.welcome-wrapper {
+  background-color: $primary-background;
+  border-radius: 4rem;
+  text-align: center;
+  align-content: center;
+}
 .button-container {
   button[type="submit"] {
     padding: 0.5rem 5rem;
     margin-top: 0.5rem;
-    background-color: $primary-background;
-    color: white;
+    background-color: white;
+    outline: 2px solid $primary-background;
+    color: $primary-background;
   }
   button:hover {
-    background-color: $primary-hover;
+    cursor: pointer;
+    background-color: $primary-background;
+    outline: 2px solid $primary-background;
+    color: white;
+    transition: 0.5s;
+  }
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
+
 .input-field-wrapper {
   display: flex;
   flex-direction: column;
@@ -59,19 +82,23 @@
   .loan-welcome {
     margin: 5rem auto 5rem;
     height: auto;
-    width: 80%;
+    width: fit-content;
     flex-direction: column;
   }
 
+  .welcome-wrapper,
   .loan-wrapper {
     padding: 2rem;
-    width: 80%;
+    width: auto;
 
     h1 {
       font-size: 2rem;
     }
     p {
       font-size: 1.2rem;
+    }
+    img {
+      width: 100px;
     }
   }
 

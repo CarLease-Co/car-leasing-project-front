@@ -3,7 +3,7 @@
 @include mat.core();
 @import "../../../variables.scss";
 
-.container1 {
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,14 +12,6 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: transparent;
 }
 
 .login-welcome {

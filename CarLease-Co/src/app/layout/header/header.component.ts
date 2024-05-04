@@ -23,9 +23,7 @@ export class HeaderComponent {
   goHome(): void {
     this.router.navigate([ROUTES.HOME]);
   }
-  goLogin(): void {
-    this.router.navigate([ROUTES.LOGIN]);
-  }
+
   goToLeaseList(): void {
     this.router.navigate([ROUTES.APPLICATIONS]);
   }

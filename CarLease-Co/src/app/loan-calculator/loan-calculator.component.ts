@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { MatFormField } from '@angular/material/form-field';
 import { MatLabel } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
-
+import { Router } from '@angular/router';
+import { ROUTES } from '../enums';
 
 @Component({
   selector: 'app-loan-calculator',
@@ -24,6 +25,8 @@ import { MatCardModule } from '@angular/material/card';
   ],
 })
 export class LoanCalculatorComponent {
+  private readonly router = inject(Router);
+
   loanForm = new FormGroup({
     loanAmount: new FormControl(),
     loanDuration: new FormControl(),
@@ -48,4 +51,8 @@ export class LoanCalculatorComponent {
   }
 
   constructor() {}
+
+  goLogin(): void {
+    this.router.navigate([ROUTES.LOGIN]);
+  }
 }
