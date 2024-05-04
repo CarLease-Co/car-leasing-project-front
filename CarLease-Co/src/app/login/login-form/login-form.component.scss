@@ -2,9 +2,29 @@
 
 @include mat.core();
 @import "../../../variables.scss";
+
+.container1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("../../../assets/por.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: transparent;
+}
+
 .login-welcome {
   margin: 10rem auto;
-  width: 75%;
+  width: 50%;
   display: flex;
   flex-direction: row;
   color: white;
