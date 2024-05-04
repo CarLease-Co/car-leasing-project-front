@@ -4,14 +4,17 @@
   margin-bottom: 10px;
   padding: 5px 20px;
   border: none;
-  color: white;
-  background-color: $primary-background;
+  background-color: white;
+  outline: 2px solid $primary-background;
+  color: $primary-background;
   border-radius: var(--mdc-protected-button-container-shape);
   height: 40px;
 }
 .user-form-display:hover {
   cursor: pointer;
-  background-color: $primary-hover;
+  background-color: $primary-background;
+  outline: 2px solid $primary-background;
+  color: white;
   transition: 0.5s;
 }
 .button-wrapper {
@@ -76,12 +79,19 @@ mat-form-field {
   button[type="submit"] {
     padding: 5px 50px;
     margin-top: 5px;
-    background-color: $primary-background;
-    color: white;
+    background-color: white;
+    outline: 2px solid $primary-background;
+    color: $primary-background;
   }
   button:hover {
     cursor: pointer;
-    background-color: $primary-hover;
+    background-color: $primary-background;
+    outline: 2px solid $primary-background;
+    color: white;
     transition: 0.5s;
+  }
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }

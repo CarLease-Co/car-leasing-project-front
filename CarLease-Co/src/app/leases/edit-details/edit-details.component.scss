@@ -62,18 +62,39 @@
   .button-container {
     text-align: center;
     display: flex;
-    justify-content: center;
-    gap: 50px;
-    button[type="submit"],
+    justify-content: end;
+    gap: 5%;
+    button[type="submit"] {
+      padding: 5px 50px;
+      margin-top: 5px;
+      background-color: white;
+      outline: 2px solid $primary-background;
+      color: $primary-background;
+    }
     button[type="button"] {
       padding: 5px 50px;
       margin-top: 5px;
-      background-color: $primary-background;
-      color: white;
+      background-color: white;
+      outline: 2px solid $pink;
+      color: $pink;
     }
-    button:hover {
+    button[type="submit"]:hover {
       cursor: pointer;
-      background-color: $primary-hover;
+      background-color: $primary-background;
+      outline: 2px solid $primary-background;
+      color: white;
+      transition: 0.5s;
+    }
+    button[type="button"]:hover {
+      cursor: pointer;
+      background-color: $pink;
+      outline: 2px solid $pink;
+      color: white;
+      transition: 0.5s;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
   }
 
