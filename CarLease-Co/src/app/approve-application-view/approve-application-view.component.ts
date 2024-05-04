@@ -23,12 +23,12 @@ import { LeaseApplication } from '../types';
 })
 export class ApproveApplicationViewComponent {
   selectedValue: string = '';
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   readonly applicationService = inject(ApplicationListService);
   readonly APPLICATION_STATUS = APPLICATION_STATUS;
   application = input<LeaseApplication>();
   fetchedApplication?: LeaseApplication;
-  private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly router = inject(Router);
 
   applicationId = this.activatedRoute.snapshot.params[ID];
 

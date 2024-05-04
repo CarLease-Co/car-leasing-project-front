@@ -13,6 +13,7 @@ import { ApproveApplicationViewComponent } from '../../approve-application-view/
 import { AutosuggestorComponent } from '../../autosuggestor/autosuggestor.component';
 import { ID } from '../../constants';
 import { APPLICATION_STATUS, EMPLOYEE_ROLE, ROUTES } from '../../enums';
+import { SpinnerComponent } from '../../layout/spinner/spinner.component';
 import { ReviewApplicationViewComponent } from '../../review-application-view/review-application-view.component';
 import { ApplicationListService } from '../../services/application-list.service';
 import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
@@ -31,6 +32,7 @@ import { LeaseApplication } from '../../types';
     MatIconModule,
     ApproveApplicationViewComponent,
     ReviewApplicationViewComponent,
+    SpinnerComponent,
   ],
   templateUrl: './lease-details.component.html',
   styleUrl: './lease-details.component.scss',
@@ -45,13 +47,19 @@ export class LeaseDetailsComponent {
   application = input<LeaseApplication>();
   user = this.localStorageService.storedUser();
   fetchedApplication?: LeaseApplication;
+  isLoading = true;
 
   ngOnInit(): void {
     const applicationId = this.activatedRoute.snapshot.params[ID];
     if (applicationId) {
       this.applicationService
         .getApplicationById(applicationId)
-        .pipe(tap((application) => (this.fetchedApplication = application)))
+        .pipe(
+          tap((application) => {
+            this.fetchedApplication = application;
+            this.isLoading = false;
+          }),
+        )
         .subscribe();
     }
   }

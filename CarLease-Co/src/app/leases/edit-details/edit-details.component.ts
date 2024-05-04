@@ -18,6 +18,7 @@ import { ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable, catchError, map, of, tap } from 'rxjs';
 import { ID, LoanFormConfig } from '../../constants';
 import { APPLICATION_STATUS, ERROR_MESSAGES, FORM_FIELDS } from '../../enums';
+import { SpinnerComponent } from '../../layout/spinner/spinner.component';
 import { ApplicationListService } from '../../services/application-list.service';
 import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
 import { LeaseApplication, LeaseApplicationForm } from '../../types';
@@ -34,6 +35,7 @@ import { LeaseApplication, LeaseApplicationForm } from '../../types';
     MatSliderModule,
     MatButtonModule,
     AsyncPipe,
+    SpinnerComponent,
   ],
   templateUrl: './edit-details.component.html',
   styleUrl: './edit-details.component.scss',
@@ -55,6 +57,8 @@ export class EditDetailsComponent implements OnInit {
   unauthorized: boolean = false;
 
   fetchedApplication?: LeaseApplication;
+
+  isLoading = true;
 
   leaseEditForm = new FormGroup({
     userId: new FormControl(this.userId),
@@ -117,6 +121,7 @@ export class EditDetailsComponent implements OnInit {
         .subscribe((application) => {
           this.fetchedApplication = application;
           this.populateFormWithApplicationData();
+          this.isLoading = false;
         });
     }
     this.applicationService.getCars();

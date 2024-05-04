@@ -20,6 +20,9 @@ export class HeaderComponent {
   readonly EMPLOYEE_ROLE = EMPLOYEE_ROLE;
   user = this.localStorageService.storedUser();
 
+  goHome(): void {
+    this.router.navigate([ROUTES.HOME]);
+  }
   goToLeaseList(): void {
     this.router.navigate([ROUTES.APPLICATIONS]);
   }
