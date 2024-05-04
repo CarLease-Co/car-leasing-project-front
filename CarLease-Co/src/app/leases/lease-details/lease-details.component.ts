@@ -9,9 +9,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, Observable, catchError, tap } from 'rxjs';
+import { ApproveApplicationViewComponent } from '../../approve-application-view/approve-application-view.component';
 import { AutosuggestorComponent } from '../../autosuggestor/autosuggestor.component';
 import { ID } from '../../constants';
 import { APPLICATION_STATUS, EMPLOYEE_ROLE, ROUTES } from '../../enums';
+import { ReviewApplicationViewComponent } from '../../review-application-view/review-application-view.component';
 import { ApplicationListService } from '../../services/application-list.service';
 import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
 import { LeaseApplication } from '../../types';
@@ -27,6 +29,8 @@ import { LeaseApplication } from '../../types';
     MatInputModule,
     MatSelectModule,
     MatIconModule,
+    ApproveApplicationViewComponent,
+    ReviewApplicationViewComponent,
   ],
   templateUrl: './lease-details.component.html',
   styleUrl: './lease-details.component.scss',

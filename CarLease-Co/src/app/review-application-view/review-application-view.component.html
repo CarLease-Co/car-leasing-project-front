@@ -1,0 +1,28 @@
+<div class="container">
+  <p class="review-ui-header">Review application</p>
+  <div class="review-ui">
+    <div class="button-section">
+      <form (submit)="submitForm()">
+        <mat-radio-group
+          [(ngModel)]="selectedValue"
+          [ngModelOptions]="{ standalone: true }"
+          aria-label="Select an option"
+          class="radio-buttons"
+        >
+          <mat-radio-button value="approve">Approve</mat-radio-button>
+          <mat-radio-button value="reject">Reject</mat-radio-button>
+        </mat-radio-group>
+
+        <button
+          [disabled]="!selectedValue"
+          type="submit"
+          mat-raised-button
+          class="submit-btn"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="autosuggestor-container"></div>
+</div>

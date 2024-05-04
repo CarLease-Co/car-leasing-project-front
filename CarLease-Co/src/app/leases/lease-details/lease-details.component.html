@@ -1,5 +1,5 @@
 @if (applicationService.application$.getValue(); as application) {
-  <div class="example-card">
+  <div class="details-card">
     <mat-card class="status-card">
       <mat-card-title>{{ application.status }}</mat-card-title>
       @if (
@@ -113,13 +113,15 @@
     <div class="autosuggestor">
       @switch (user()?.role) {
         @case (EMPLOYEE_ROLE.REVIEWER) {
-          <mat-card-actions>
-            <app-autosuggestor />
+          <mat-card-actions class="review-container">
+            <app-autosuggestor class="autosuggestor" />
+            <app-review-application-view class="review-view" />
           </mat-card-actions>
         }
         @case (EMPLOYEE_ROLE.APPROVER) {
-          <mat-card-actions>
-            <app-autosuggestor />
+          <mat-card-actions class="approve-container">
+            <app-autosuggestor class="autosuggestor" />
+            <app-approve-application-view class="approve-view" />
           </mat-card-actions>
         }
       }

@@ -7,7 +7,7 @@
   >
     <div class="loan-section section">
       <mat-form-field class="full-width-form-field col" appearance="outline">
-        <mat-label>Loan Amount</mat-label>
+        <mat-label>Lease Amount</mat-label>
         <input
           matInput
           type="number"
@@ -18,7 +18,7 @@
         />
       </mat-form-field>
       <div class="slider-container col right-col">
-        <label class="slider-label" for="car">Duration of Loan (months)</label>
+        <label class="slider-label" for="car">Duration of Lease (months)</label>
         <mat-slider
           name="car"
           min="{{ LoanFormConfig.minLoanDuration }}"
@@ -107,7 +107,7 @@
         </div>
       </div>
       <mat-form-field class="full-width-form-field col" appearance="outline">
-        <mat-label>Detailed description</mat-label>
+        <mat-label>Other relevant information</mat-label>
         <textarea
           matInput
           placeholder="Enter Explanation (up to {{

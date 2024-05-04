@@ -2,7 +2,7 @@
 
 @include mat.core();
 @import "../../../variables.scss";
-.example-card {
+.details-card {
   max-width: $component-max-width;
   margin: $margin-top auto 25px;
 }
@@ -73,7 +73,7 @@ h3:nth-child(even) {
   height: 40px;
 }
 .autosuggestor {
-  margin-top: $margin-top;
+  margin-top: 20px;
 }
 .applicant-actions {
   button {
@@ -90,4 +90,26 @@ h3:nth-child(even) {
     color: $grey-background;
     background-color: $warn-background;
   }
+}
+.review-container,
+.approve-container {
+  padding-top: 0;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.autosuggestor {
+  margin-left: auto;
+}
+
+.review-view,
+.approve-view {
+  width: 100%;
+  margin: 0 auto;
+  border-top: 1px solid gray;
+  padding-top: 20px;
+  background-color: $primary-row;
 }
