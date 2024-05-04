@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ROUTES } from '../enums';
+import { environment } from '../environment';
 
 @Component({
   selector: 'app-home-page',
@@ -10,6 +11,8 @@ import { ROUTES } from '../enums';
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
+  environment = environment;
+
   constructor(private router: Router) {}
 
   redirectToLeaseApplicationForm() {
