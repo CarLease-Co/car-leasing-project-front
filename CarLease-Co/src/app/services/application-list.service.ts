@@ -8,7 +8,7 @@ import {
   CAR_PATH,
   UPDATE_PATH,
 } from '../constants';
-import { ROUTES } from '../enums';
+import { APPLICATION_STATUS, ROUTES } from '../enums';
 import {
   Car,
   LeaseApplication,
@@ -46,7 +46,6 @@ export class ApplicationListService {
       .get<LeaseApplication>(`${BASE_URL}${APPLICATIONS_PATH}/${id}`)
       .pipe(
         tap((application) => {
-          console.log('data', new Date().toISOString().split('T')[0]);
           this.application$.next(application);
         }),
       );
@@ -118,5 +117,19 @@ export class ApplicationListService {
           this.router.navigate([ROUTES.APPLICATIONS]);
         }),
       );
+  }
+
+  updateApplicationStatus(
+    status: APPLICATION_STATUS,
+    applicationId: number,
+  ): Observable<unknown> {
+    const userHeaders = new HttpHeaders({
+      userId: this.localStorageService.storedUser()()!.userId,
+      role: this.localStorageService.storedUser()()!.role,
+    });
+    const url = `${BASE_URL}${APPLICATIONS_PATH}/${applicationId}`;
+    const headers = userHeaders.set('Content-Type', 'application/json');
+
+    return this.httpClient.patch(url, JSON.stringify(status), { headers });
   }
 }
