@@ -47,3 +47,27 @@
     cursor: pointer;
   }
 }
+.menu-items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  button:hover {
+    background-color: transparent;
+    text-decoration: underline;
+    transition: 0.5s;
+  }
+}
+.logout {
+  margin-left: 20px;
+}
+.logout:hover {
+  background-color: $warn-background;
+  text-decoration: underline;
+  transition: 0.5s;
+}
+mat-divider {
+  transform: rotate(90deg);
+  width: 50px;
+  height: 1px;
+}
