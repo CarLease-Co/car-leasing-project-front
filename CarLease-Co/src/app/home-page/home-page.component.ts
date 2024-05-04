@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ROUTES } from '../enums';
 import { environment } from '../environment';
+import { UserService } from '../services/user.service';
+import { User } from '../types';
 
 @Component({
   selector: 'app-home-page',
@@ -10,12 +12,26 @@ import { environment } from '../environment';
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit {
+  userName: string = '';
   environment = environment;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private userService: UserService,
+  ) {}
 
   redirectToLeaseApplicationForm() {
     this.router.navigate([ROUTES.NEW_APPLICATION]);
+  }
+
+  ngOnInit(): void {
+    const loginResponse = localStorage.getItem('loginResponse');
+    if (loginResponse) {
+      const { userId } = JSON.parse(loginResponse);
+      this.userService.getUser(userId).subscribe((user: User) => {
+        this.userName = user.name;
+      });
+    }
   }
 }
