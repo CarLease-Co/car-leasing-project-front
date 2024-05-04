@@ -8,7 +8,7 @@ main {
   justify-content: center;
 }
 
-.content {
+.main-content {
   max-width: 100%;
   display: flex;
   justify-content: space-between;
@@ -17,7 +17,7 @@ main {
   animation: fade-in 0.5s ease-in-out forwards;
 }
 
-.left {
+.main-content__left {
   max-width: 50%;
   color: white;
   text-align: left;
@@ -58,7 +58,7 @@ main {
   }
 }
 
-.right {
+.main-content__right {
   position: relative;
 
   img {
@@ -99,12 +99,12 @@ main {
   main {
     background-position: left;
   }
-  .content {
+  .main-content {
     flex-direction: column;
     text-align: center;
   }
 
-  .left {
+  .main-content__left {
     margin-bottom: 40px;
     text-align: center;
 
