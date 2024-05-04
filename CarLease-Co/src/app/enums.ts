@@ -27,6 +27,7 @@ export enum ROUTES {
   EDIT_APPLICATION = 'applications/application-details/edit',
   // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
   EDIT_APPLICATION_BY_ID = 'applications/application-details/edit/:id',
+  LOGIN_PATH = '/login',
 }
 
 export enum USER_PROPERTIES {

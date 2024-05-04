@@ -1,130 +1,134 @@
-@if (applicationService.application$.getValue(); as application) {
-  <div class="details-card">
-    <mat-card class="status-card">
-      <mat-card-title>{{ application.status }}</mat-card-title>
-      @if (
-        user()?.role === EMPLOYEE_ROLE.APPLICANT &&
-        application.status === APPLICATION_STATUS.DRAFT
-      ) {
-        <mat-card-actions class="applicant-actions">
-          <button mat-button type="button" class="edit" (click)="edit()">
-            EDIT
-          </button>
-          <button mat-button type="button" class="delete" (click)="delete()">
-            DELETE
-          </button>
-        </mat-card-actions>
-      }
-    </mat-card>
-    <mat-tab-group>
-      <mat-tab label="Applicant">
-        <mat-card>
-          <mat-card-content class="details">
-            <div class="detail">
-              <h4>Applicant's identification number</h4>
-              <div class="detail-info">
-                <h2>{{ application.userId }}</h2>
-              </div>
-            </div>
-            <div class="detail">
-              <h4>Applicant's monthly income</h4>
-              <div class="detail-info">
-                <h2>€</h2>
-                <h2>{{ application.monthlyIncome }}</h2>
-              </div>
-            </div>
-
-            <div class="detail">
-              <h4>Applicant's financial obligations</h4>
-              <div class="detail-info">
-                <h2>€</h2>
-                <h2>
-                  {{ application.financialObligations }}
-                </h2>
-              </div>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </mat-tab>
-      <mat-tab label="Lease">
-        <mat-card>
-          <mat-card-content class="details">
-            <div class="detail">
-              <h4>Lease duration in months</h4>
-              <div class="detail-info">
-                <h2>{{ application.loanDuration }}</h2>
-              </div>
-            </div>
-            <div class="detail">
-              <h4>Lease amount</h4>
-              <div class="detail-info">
-                <h2>€</h2>
-                <h2>{{ application.loanAmount }}</h2>
-              </div>
-            </div>
-
-            <div class="detail">
-              <h4>Lease start date</h4>
-              <div class="detail-info">
-                <h2>
-                  {{ application.startDate }}
-                </h2>
-              </div>
-            </div>
-            <div class="detail">
-              <h4>Detailed description for lease (optional)</h4>
-              <div class="detail-info">
-                <h2>
-                  {{ application.textExplanation }}
-                </h2>
-              </div>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </mat-tab>
-      <mat-tab label="Car">
-        <mat-card>
-          <mat-card-content class="details">
-            <div class="detail">
-              <h4>Car brand</h4>
-              <div class="detail-info">
-                <h2>{{ application.carMake }}</h2>
-              </div>
-            </div>
-            <div class="detail">
-              <h4>Car model</h4>
-              <div class="detail-info">
-                <h2>{{ application.carModel }}</h2>
-              </div>
-            </div>
-
-            <div class="detail">
-              <h4>Car manufacture year</h4>
-              <div class="detail-info">
-                <h2>
-                  {{ application.manufactureDate }}
-                </h2>
-              </div>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </mat-tab>
-    </mat-tab-group>
-    <div class="autosuggestor">
-      @switch (user()?.role) {
-        @case (EMPLOYEE_ROLE.REVIEWER) {
-          <mat-card-actions class="review-container">
-            <app-autosuggestor class="autosuggestor" />
-            <app-review-application-view class="review-view" />
+@if (!isLoading) {
+  @if (applicationService.application$.getValue(); as application) {
+    <div class="details-card">
+      <mat-card class="status-card">
+        <mat-card-title>{{ application.status }}</mat-card-title>
+        @if (
+          user()?.role === EMPLOYEE_ROLE.APPLICANT &&
+          application.status === APPLICATION_STATUS.DRAFT
+        ) {
+          <mat-card-actions class="applicant-actions">
+            <button mat-button type="button" class="edit" (click)="edit()">
+              EDIT
+            </button>
+            <button mat-button type="button" class="delete" (click)="delete()">
+              DELETE
+            </button>
           </mat-card-actions>
         }
-        @case (EMPLOYEE_ROLE.APPROVER) {
-          <mat-card-actions class="approve-container">
-            <app-autosuggestor class="autosuggestor" />
-            <app-approve-application-view class="approve-view" />
-          </mat-card-actions>
+      </mat-card>
+      <mat-tab-group>
+        <mat-tab label="Applicant">
+          <mat-card>
+            <mat-card-content class="details">
+              <div class="detail">
+                <h4>Applicant's identification number</h4>
+                <div class="detail-info">
+                  <h2>{{ application.userId }}</h2>
+                </div>
+              </div>
+              <div class="detail">
+                <h4>Applicant's monthly income</h4>
+                <div class="detail-info">
+                  <h2>€</h2>
+                  <h2>{{ application.monthlyIncome }}</h2>
+                </div>
+              </div>
+
+              <div class="detail">
+                <h4>Applicant's financial obligations</h4>
+                <div class="detail-info">
+                  <h2>€</h2>
+                  <h2>
+                    {{ application.financialObligations }}
+                  </h2>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </mat-tab>
+        <mat-tab label="Lease">
+          <mat-card>
+            <mat-card-content class="details">
+              <div class="detail">
+                <h4>Lease duration in months</h4>
+                <div class="detail-info">
+                  <h2>{{ application.loanDuration }}</h2>
+                </div>
+              </div>
+              <div class="detail">
+                <h4>Lease amount</h4>
+                <div class="detail-info">
+                  <h2>€</h2>
+                  <h2>{{ application.loanAmount }}</h2>
+                </div>
+              </div>
+
+              <div class="detail">
+                <h4>Lease start date</h4>
+                <div class="detail-info">
+                  <h2>
+                    {{ application.startDate }}
+                  </h2>
+                </div>
+              </div>
+              <div class="detail">
+                <h4>Detailed description for lease (optional)</h4>
+                <div class="detail-info">
+                  <h2>
+                    {{ application.textExplanation }}
+                  </h2>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </mat-tab>
+        <mat-tab label="Car">
+          <mat-card>
+            <mat-card-content class="details">
+              <div class="detail">
+                <h4>Car brand</h4>
+                <div class="detail-info">
+                  <h2>{{ application.carMake }}</h2>
+                </div>
+              </div>
+              <div class="detail">
+                <h4>Car model</h4>
+                <div class="detail-info">
+                  <h2>{{ application.carModel }}</h2>
+                </div>
+              </div>
+
+              <div class="detail">
+                <h4>Car manufacture year</h4>
+                <div class="detail-info">
+                  <h2>
+                    {{ application.manufactureDate }}
+                  </h2>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </mat-tab>
+      </mat-tab-group>
+      <div class="autosuggestor">
+        @switch (user()?.role) {
+          @case (EMPLOYEE_ROLE.REVIEWER) {
+            <mat-card-actions class="review-container">
+              <app-autosuggestor class="autosuggestor" />
+              <app-review-application-view class="review-view" />
+            </mat-card-actions>
+          }
+          @case (EMPLOYEE_ROLE.APPROVER) {
+            <mat-card-actions class="approve-container">
+              <app-autosuggestor class="autosuggestor" />
+              <app-approve-application-view class="approve-view" />
+            </mat-card-actions>
+          }
         }
-      }
+      </div>
     </div>
-  </div>
+  }
+} @else {
+  <app-spinner></app-spinner>
 }

@@ -1,6 +1,13 @@
 <div color="primary" class="opacity-50 wrapper sticky">
   <mat-toolbar color="primary" class="opacity-50 width">
-    <h1>CarLess</h1>
+    <div class="home-button">
+      <img
+        src="/assets/motoring-car-svgrepo-com.svg"
+        alt="My SVG Image"
+        height="40px"
+      />
+      <button type="button" (click)="goHome()">CarLess</button>
+    </div>
     <span class="example-spacer"></span>
     @if (user()?.role) {
       <button
@@ -41,14 +48,14 @@
         }
         @case (EMPLOYEE_ROLE.REVIEWER) {
           <button mat-menu-item (click)="goToLeaseList()">
-            <mat-icon>home</mat-icon>
-            <span>My Leases</span>
+            <mat-icon>assignment</mat-icon>
+            <span>Leases</span>
           </button>
         }
         @case (EMPLOYEE_ROLE.APPROVER) {
           <button mat-menu-item (click)="goToLeaseList()">
-            <mat-icon>home</mat-icon>
-            <span>My Leases</span>
+            <mat-icon>assignment</mat-icon>
+            <span>Leases</span>
           </button>
         }
       }

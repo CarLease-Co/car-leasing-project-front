@@ -1,0 +1,8 @@
+@import "../../../variables.scss";
+.spinner {
+  display: flex;
+  flex-direction: column;
+  margin: 100px auto;
+  align-items: center;
+  color: $primary-text-indigo;
+}

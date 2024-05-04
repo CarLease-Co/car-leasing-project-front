@@ -8,6 +8,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { ROUTES } from '../../enums';
+import { SpinnerComponent } from '../../layout/spinner/spinner.component';
 import { ApplicationListService } from '../../services/application-list.service';
 import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
 import { LeaseApplication } from '../../types';
@@ -22,6 +23,7 @@ import { LeaseApplication } from '../../types';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    SpinnerComponent,
   ],
   templateUrl: './lease-applications-list.component.html',
   styleUrl: './lease-applications-list.component.scss',
@@ -43,6 +45,8 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
   role?: string;
   userId?: number;
 
+  isLoading = true;
+
   dataSource: MatTableDataSource<LeaseApplication> =
     new MatTableDataSource<LeaseApplication>();
 
@@ -53,12 +57,13 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
     const loginResponse = this.localStorageService.storedUser();
     this.role = loginResponse()!.role;
     this.userId = loginResponse()!.userId;
-    this.applicationsService.getApplications();
-    this.applicationsService.applications$
+    this.applicationsService
+      .getApplications()
       .pipe(
         tap((applications) => {
           this.dataSource.data = applications;
           this.leaseApplications = applications;
+          this.isLoading = false;
         }),
       )
       .subscribe();

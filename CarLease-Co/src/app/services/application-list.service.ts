@@ -29,17 +29,21 @@ export class ApplicationListService {
   applications$ = this.applicationsSubject.asObservable();
   application$ = new BehaviorSubject<LeaseApplication | null>(null);
 
-  getApplications(): void {
+  getApplications(): Observable<LeaseApplication[]> {
     const userHeaders = new HttpHeaders({
       userId: this.localStorageService.storedUser()()!.userId,
       role: this.localStorageService.storedUser()()!.role,
     });
-    this.httpClient
+    return this.httpClient
       .get<LeaseApplications>(`${BASE_URL}${APPLICATIONS_PATH}`, {
         headers: userHeaders,
       })
-      .pipe(tap((applications) => this.applicationsSubject.next(applications)))
-      .subscribe();
+      .pipe(
+        tap((applications) => {
+          this.applicationsSubject.next(applications);
+          applications;
+        }),
+      );
   }
   getApplicationById(id: number): Observable<LeaseApplication> {
     return this.httpClient
