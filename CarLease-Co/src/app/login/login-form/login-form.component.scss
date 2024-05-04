@@ -40,5 +40,35 @@
   flex-direction: column;
   margin-bottom: 3rem;
 }
+
 @media only screen and (max-width: 700px) {
+  .login-welcome {
+    margin: 5rem auto 5rem;
+    height: auto;
+    width: 80%;
+    flex-direction: column;
+  }
+
+  .welcome-wrapper,
+  .login-wrapper {
+    padding: 2rem;
+    width: 80%;
+
+    h1 {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+  }
+
+  .button-container {
+    button[type="submit"] {
+      margin-top: -1.5rem;
+      height: fit-content;
+      width: 80%;
+      padding: 1.6rem 5rem;
+      font-size: 1.5rem;
+    }
+  }
 }

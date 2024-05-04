@@ -1,3 +1,5 @@
+import { AsyncPipe } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import {
   AbstractControl,
@@ -6,19 +8,17 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatButtonModule } from '@angular/material/button';
-import { ApplicationListService } from '../../services/application-list.service';
 import { EMPTY, Observable, catchError, map, of, tap } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
-import { ERROR_MESSAGES, FORM_FIELDS } from '../../enums';
 import { LoanFormConfig } from '../../constants';
+import { CAR_FORM_FIELDS, ERROR_MESSAGES } from '../../enums';
+import { ApplicationListService } from '../../services/application-list.service';
 import { BusAdminService } from '../../services/bus-admin.service';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-car-price-modifier',
@@ -58,10 +58,10 @@ export class CarPriceModifierComponent {
   unauthorized: boolean = false;
 
   get makeControl(): AbstractControl<string | null, string | null> | null {
-    return this.carPriceForm.get(FORM_FIELDS.CAR_MAKE);
+    return this.carPriceForm.get(CAR_FORM_FIELDS.CAR_MAKE);
   }
   get modelControl(): AbstractControl<string | null, string | null> | null {
-    return this.carPriceForm.get(FORM_FIELDS.CAR_MODEL);
+    return this.carPriceForm.get(CAR_FORM_FIELDS.CAR_MODEL);
   }
 
   ngOnInit(): void {

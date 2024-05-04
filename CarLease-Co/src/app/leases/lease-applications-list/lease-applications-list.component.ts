@@ -7,7 +7,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
-import { APPLICATION_STATUS, EMPLOYEE_ROLE, ROUTES } from '../../enums';
+import { ROUTES } from '../../enums';
 import { ApplicationListService } from '../../services/application-list.service';
 import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
 import { LeaseApplication } from '../../types';
@@ -50,35 +50,23 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
-    const loginResponse = this.localStorageService.getStoredUser();
-    this.role = loginResponse?.role;
-    this.userId = loginResponse?.userId;
+    const loginResponse = this.localStorageService.storedUser();
+    this.role = loginResponse()!.role;
+    this.userId = loginResponse()!.userId;
     this.applicationsService.getApplications();
     this.applicationsService.applications$
-      .pipe(tap((applications) => this.filterApplications(applications)))
+      .pipe(
+        tap((applications) => {
+          this.dataSource.data = applications;
+          this.leaseApplications = applications;
+        }),
+      )
       .subscribe();
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-  }
-
-  filterApplications(applications: LeaseApplication[]): void {
-    if (this.role === EMPLOYEE_ROLE.APPLICANT) {
-      this.dataSource.data = applications.filter(
-        (application) => application.userId === +this.userId!,
-      );
-      this.leaseApplications = applications;
-    } else if (
-      this.role === EMPLOYEE_ROLE.REVIEWER ||
-      this.role === EMPLOYEE_ROLE.APPROVER
-    ) {
-      this.dataSource.data = applications.filter(
-        (application) => application.status !== APPLICATION_STATUS.DRAFT,
-      );
-      this.leaseApplications = applications;
-    }
   }
 
   applyFilter(event: Event): void {

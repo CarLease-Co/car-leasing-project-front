@@ -61,7 +61,11 @@
 
   .button-container {
     text-align: center;
-    button[type="submit"] {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    button[type="submit"],
+    button[type="button"] {
       padding: 5px 50px;
       margin-top: 5px;
       background-color: $primary-background;

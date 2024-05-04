@@ -39,9 +39,10 @@ import { LeaseApplicationForm } from '../../types';
 export class LeaseApplicationFormComponent {
   readonly applicationService = inject(ApplicationListService);
   private readonly localStorageService = inject(LocalStorageManagerService);
-  protected readonly LoanFormConfig = LoanFormConfig;
+  private readonly currentUser = this.localStorageService.storedUser();
 
-  private userId = this.localStorageService.getStoredUser()?.userId;
+  private userId = this.currentUser()?.userId;
+  protected readonly LoanFormConfig = LoanFormConfig;
 
   uniqueCarBrands$: Observable<string[]> = of([]);
   filteredModels$: Observable<string[]> = of([]);
@@ -69,6 +70,7 @@ export class LeaseApplicationFormComponent {
       Validators.min(LoanFormConfig.minCarYear),
       Validators.max(LoanFormConfig.maxCarYear),
     ]),
+    textExplanation: new FormControl(''),
     loanDuration: new FormControl(LoanFormConfig.minLoanDuration, [
       Validators.required,
       Validators.min(LoanFormConfig.minLoanDuration),
@@ -78,8 +80,7 @@ export class LeaseApplicationFormComponent {
       Validators.required,
       Validators.min(LoanFormConfig.minLoanAmount),
     ]),
-    textExplanation: new FormControl(''),
-    startDate: new FormControl(new Date().toISOString()),
+    startDate: new FormControl(new Date().toISOString().split('T')[0]),
   });
 
   get makeControl(): AbstractControl<string | null, string | null> | null {
@@ -128,8 +129,24 @@ export class LeaseApplicationFormComponent {
 
   onSubmit(): void {
     if (this.leaseForm.valid) {
-      const application: LeaseApplicationForm = { ...this.leaseForm.getRawValue(), ...{ status: APPLICATION_STATUS.PENDING } };
+      const application: LeaseApplicationForm = {
+        ...this.leaseForm.getRawValue(),
+        ...{ status: APPLICATION_STATUS.PENDING },
+      };
       application.status = APPLICATION_STATUS.PENDING;
+      this.applicationService
+        .createApplication(application)
+        .pipe(catchError(this.handleError))
+        .subscribe();
+    }
+  }
+  onSave(): void {
+    if (this.leaseForm.valid) {
+      const application: LeaseApplicationForm = {
+        ...this.leaseForm.getRawValue(),
+        ...{ status: APPLICATION_STATUS.DRAFT },
+      };
+      application.status = APPLICATION_STATUS.DRAFT;
       this.applicationService
         .createApplication(application)
         .pipe(catchError(this.handleError))
