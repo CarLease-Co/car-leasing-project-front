@@ -1,34 +1,87 @@
-div {
-  margin-bottom: 20px;
+@use "@angular/material" as mat;
+
+@include mat.core();
+@import "../../variables.scss";
+
+.container1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("../../assets/por.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-label {
-  display: inline-block;
-  width: 150px;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: transparent;
 }
 
-input {
-  width: 200px;
+.loan-welcome {
+  margin: 10rem auto;
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  height: 30rem;
+  border-radius: 4rem;
+}
+.loan-wrapper {
+  padding: 3rem;
+  width: 50%;
+  text-align: center;
+  align-content: center;
 }
 
-h2 {
-  margin-bottom: 20px;
+.button-container {
+  button[type="submit"] {
+    padding: 0.5rem 5rem;
+    margin-top: 0.5rem;
+    background-color: $primary-background;
+    color: white;
+  }
+  button:hover {
+    background-color: $primary-hover;
+  }
 }
-
-h3 {
-  margin-top: 20px;
-}
-
-.example-form {
+.input-field-wrapper {
   display: flex;
   flex-direction: column;
+  margin-bottom: 3rem;
 }
 
-.mat-form-field {
-  width: 100%;
-  margin-bottom: 10px; /* Adjust spacing between input fields */
-}
+@media only screen and (max-width: 700px) {
+  .loan-welcome {
+    margin: 5rem auto 5rem;
+    height: auto;
+    width: 80%;
+    flex-direction: column;
+  }
 
-.input-container {
-  margin-bottom: 10px; /* Adjust spacing between input fields */
+  .loan-wrapper {
+    padding: 2rem;
+    width: 80%;
+
+    h1 {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+  }
+
+  .button-container {
+    button[type="submit"] {
+      margin-top: -1.5rem;
+      height: fit-content;
+      width: 80%;
+      padding: 1.6rem 5rem;
+      font-size: 1.5rem;
+    }
+  }
 }

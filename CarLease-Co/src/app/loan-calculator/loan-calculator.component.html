@@ -1,29 +1,33 @@
-<form class="example-form" [formGroup]="loanForm">
-  <h1>Monthly payment calculator</h1>
-  <div class="input-container">
-    <mat-form-field class="example-full-width">
-      <mat-label>Loan Amount:</mat-label>
-      <input formControlName="loanAmount" matInput placeholder="15000" />
-    </mat-form-field>
-  </div>
+<div class="container1">
+  <mat-card class="loan-welcome container">
+    <form class="example-form" [formGroup]="loanForm" class="loan-wrapper">
+      <h1>Monthly payment calculator</h1>
+      <div class="input-container">
+        <mat-form-field class="example-full-width">
+          <mat-label>Loan Amount:</mat-label>
+          <input formControlName="loanAmount" matInput placeholder="15000" />
+        </mat-form-field>
+      </div>
 
-  <div class="input-container">
-    <mat-form-field class="example-full-width">
-      <mat-label>Loan Duration (months):</mat-label>
-      <input formControlName="loanDuration" matInput placeholder="24" />
-    </mat-form-field>
-  </div>
+      <div class="input-container">
+        <mat-form-field class="example-full-width">
+          <mat-label>Loan Duration (months):</mat-label>
+          <input formControlName="loanDuration" matInput placeholder="24" />
+        </mat-form-field>
+      </div>
 
-  <div class="input-container">
-    <mat-form-field class="example-full-width">
-      <mat-label>Interest Rate (%):</mat-label>
-      <input formControlName="interestRate" matInput placeholder="2.5" />
-    </mat-form-field>
-  </div>
+      <div class="input-container">
+        <mat-form-field class="example-full-width">
+          <mat-label>Interest Rate (%):</mat-label>
+          <input formControlName="interestRate" matInput placeholder="2.5" />
+        </mat-form-field>
+      </div>
 
-  <div class="input-container">
-    <div>
-      <h3>Monthly Payment: {{ monthlyPayment }}</h3>
-    </div>
-  </div>
-</form>
+      <div class="input-container">
+        <div>
+          <h3>Monthly Payment: {{ monthlyPayment }}</h3>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>

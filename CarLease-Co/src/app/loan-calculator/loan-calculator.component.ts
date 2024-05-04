@@ -4,6 +4,8 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { MatFormField } from '@angular/material/form-field';
 import { MatLabel } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+
 
 @Component({
   selector: 'app-loan-calculator',
@@ -18,6 +20,7 @@ import { MatLabel } from '@angular/material/form-field';
     MatFormField,
     LoanCalculatorComponent,
     MatLabel,
+    MatCardModule,
   ],
 })
 export class LoanCalculatorComponent {

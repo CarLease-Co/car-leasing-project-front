@@ -12,8 +12,13 @@ import { LeaseApplicationsListComponent } from './leases/lease-applications-list
 import { LeaseDetailsComponent } from './leases/lease-details/lease-details.component';
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import { SysAdminViewComponent } from './sys-admin-view/sys-admin-view/sys-admin-view.component';
+import { LoanCalculatorComponent } from './loan-calculator/loan-calculator.component';
 
 export const routes: Routes = [
+  {
+    path: ROUTES.HOME,
+    component: LoanCalculatorComponent,
+  },
   {
     path: ROUTES.HOME,
     component: AppComponent,
