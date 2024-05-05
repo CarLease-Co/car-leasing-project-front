@@ -2,7 +2,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
-import { AUTOSUGGESTOR_PATH, BASE_URL, CAR_PATCH_PATH } from '../constants';
+import {
+  AUTOSUGGESTOR_PATH,
+  BASE_URL,
+  CAR_PATCH_PATH,
+  CAR_PATH,
+} from '../constants';
 import { ROUTES } from '../enums';
 import { AutosuggestorForm, Car, CarPriceForm } from '../types';
 import { LocalStorageManagerService } from './local-storage-manager.service';
@@ -14,6 +19,16 @@ export class BusAdminService {
   private readonly httpClient = inject(HttpClient);
   private readonly router = inject(Router);
   private readonly localStorageService = inject(LocalStorageManagerService);
+
+  getAutosuggestorValues(): Observable<AutosuggestorForm[]> {
+    return this.httpClient.get<AutosuggestorForm[]>(
+      `${BASE_URL}${AUTOSUGGESTOR_PATH}`,
+    );
+  }
+
+  getCarPrices(): Observable<Car[]> {
+    return this.httpClient.get<Car[]>(`${BASE_URL}${CAR_PATH}`);
+  }
 
   adjustAutosuggestor(
     autosuggestorRanges: AutosuggestorForm,

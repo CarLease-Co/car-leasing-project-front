@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { EMPLOYEE_ROLE, ROUTES } from '../enums';
 import { environment } from '../environment';
 import { UserService } from '../services/user.service';
-import { User } from '../types';
+import { AutosuggestorForm, Car, User } from '../types';
 import { ApplicationListService } from '../services/application-list.service';
 import { SpinnerComponent } from '../layout/spinner/spinner.component';
+import { BusAdminService } from '../services/bus-admin.service';
 
 @Component({
   selector: 'app-home-page',
@@ -22,10 +23,14 @@ export class HomePageComponent implements OnInit {
   environment = environment;
   loading: boolean = true;
 
+  autosuggestorData: AutosuggestorForm = {};
+  carPriceData: Car[] = [];
+
   constructor(
     private router: Router,
     private userService: UserService,
     private applicationListService: ApplicationListService,
+    private busAdminService: BusAdminService,
   ) {}
 
   redirectToLeaseApplicationForm() {
@@ -54,6 +59,20 @@ export class HomePageComponent implements OnInit {
               this.numberOfApplications = applications.length;
               this.loading = false;
             });
+        }
+
+        if (this.userRole === EMPLOYEE_ROLE.BUSINESS_ADMIN) {
+          this.busAdminService
+            .getAutosuggestorValues()
+            .subscribe((data: AutosuggestorForm[]) => {
+              if (data.length > 0) {
+                this.autosuggestorData = data[0];
+              }
+            });
+
+          this.busAdminService.getCarPrices().subscribe((data: Car[]) => {
+            this.carPriceData = data;
+          });
         }
         this.loading = false;
       });
