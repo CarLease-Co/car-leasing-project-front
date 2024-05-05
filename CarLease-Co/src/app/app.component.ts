@@ -23,7 +23,7 @@ export class AppComponent {
       filter((event) => event instanceof NavigationEnd)
     ).subscribe((event) => {
       const navEndEvent = event as NavigationEnd;
-      const hiddenFooterRoutes = ['/login', '/home'];
+      const hiddenFooterRoutes = ['/login'];
       this.showFooter = !hiddenFooterRoutes.includes(navEndEvent.urlAfterRedirects);
     });
   }
