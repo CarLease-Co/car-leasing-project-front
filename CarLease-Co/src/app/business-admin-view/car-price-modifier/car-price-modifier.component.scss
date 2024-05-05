@@ -4,7 +4,6 @@
 
 .car-price-modifier-view {
   padding: 50px;
-  min-height: 100vh;
   margin-top: $margin-top;
 }
 
@@ -27,9 +26,11 @@
   .full-width-form-field {
     width: calc(100%);
     margin-bottom: 20px;
+
     .half-width-form-field {
       width: calc(50% - 5px);
     }
+
     .half-width-form-field:first-child {
       margin-right: 10px;
     }
@@ -38,6 +39,7 @@
   .button-container {
     display: flex;
     justify-content: end;
+
     button[type="submit"] {
       padding: 5px 50px;
       margin-top: 5px;
@@ -45,6 +47,7 @@
       outline: 2px solid $primary-background;
       color: $primary-background;
     }
+
     button[type="submit"]:hover {
       cursor: pointer;
       background-color: $primary-background;
@@ -52,11 +55,13 @@
       color: white;
       transition: 0.5s;
     }
+
     button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
   }
+
   .unauthorized {
     text-align: center;
   }

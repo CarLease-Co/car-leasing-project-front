@@ -2,6 +2,7 @@
 
 @include mat.core();
 @import "../../../variables.scss";
+
 .login-welcome {
   margin: 10rem auto;
   width: 75%;
@@ -10,30 +11,37 @@
   color: white;
   height: 30rem;
   border-radius: 4rem;
+  margin-bottom: 12rem;
 }
+
 .welcome-wrapper,
 .login-wrapper {
   padding: 2rem;
   width: 50%;
   text-align: center;
   align-content: center;
+
   h1 {
     font-size: 3rem;
     text-wrap: wrap;
   }
+
   p {
     margin-top: 50px;
   }
+
   img {
     width: 200px;
   }
 }
+
 .welcome-wrapper {
   background-color: $primary-background;
   border-radius: 4rem;
   text-align: center;
   align-content: center;
 }
+
 .button-container {
   button[type="submit"] {
     padding: 0.5rem 5rem;
@@ -42,6 +50,7 @@
     outline: 2px solid $primary-background;
     color: $primary-background;
   }
+
   button:hover {
     cursor: pointer;
     background-color: $primary-background;
@@ -49,11 +58,13 @@
     color: white;
     transition: 0.5s;
   }
+
   button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
 }
+
 .input-field-wrapper {
   display: flex;
   flex-direction: column;
@@ -76,9 +87,11 @@
     h1 {
       font-size: 2rem;
     }
+
     p {
       font-size: 1.2rem;
     }
+
     img {
       width: 100px;
     }
