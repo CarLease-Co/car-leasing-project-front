@@ -50,7 +50,6 @@ export class ApproveApplicationViewComponent {
       this.selectedValue === 'decline' &&
       currentStatus === APPLICATION_STATUS.REVIEW_APPROVED
     ) {
-      console.log('3', this.selectedValue, currentStatus);
       newStatus = APPLICATION_STATUS.PENDING;
     } else {
       newStatus = APPLICATION_STATUS.PENDING;
