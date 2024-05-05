@@ -1,13 +1,11 @@
 <div class="page-container">
-    <app-header></app-header>
+  <app-header></app-header>
+  <app-crumbs></app-crumbs>
 
-    <main class="content-container">
-        <router-outlet></router-outlet>
-    </main>
-    @if(showFooter) {
+  <main class="content-container">
+    <router-outlet></router-outlet>
+  </main>
+  @if (showFooter) {
     <app-footer></app-footer>
-
-    }
-
+  }
 </div>
-

@@ -17,15 +17,17 @@ export class AppComponent {
 
   showFooter: boolean = true;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   ngOnInit() {
-    this.router.events.pipe(
-      filter((event) => event instanceof NavigationEnd)
-    ).subscribe((event) => {
-      const navEndEvent = event as NavigationEnd;
-      const hiddenFooterRoutes = ['/login'];
-      this.showFooter = !hiddenFooterRoutes.includes(navEndEvent.urlAfterRedirects);
-    });
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        const navEndEvent = event as NavigationEnd;
+        const hiddenFooterRoutes = ['/login'];
+        this.showFooter = !hiddenFooterRoutes.includes(
+          navEndEvent.urlAfterRedirects,
+        );
+      });
   }
 }
