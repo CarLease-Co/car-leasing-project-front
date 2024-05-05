@@ -27,7 +27,7 @@
       </button>
     </div>
     <form [formGroup]="newUserForm" (ngSubmit)="createUser()" class="user-form">
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input
           matInput
@@ -37,7 +37,7 @@
           required
         />
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Role</mat-label>
         <mat-select placeholder="Select Role" formControlName="role" required>
           @for (role of EMPLOYEE_ROLE | keyvalue; track EMPLOYEE_ROLE) {
@@ -45,7 +45,7 @@
           }
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
         <input
           matInput
@@ -55,7 +55,7 @@
           required
         />
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Surname</mat-label>
         <input
           matInput
@@ -65,7 +65,7 @@
           required
         />
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
         <input
           matInput
@@ -75,7 +75,7 @@
           required
         />
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
         <input
           matInput

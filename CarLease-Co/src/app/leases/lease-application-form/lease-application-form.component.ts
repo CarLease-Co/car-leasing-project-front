@@ -14,11 +14,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { EMPTY, Observable, catchError, map, of, tap } from 'rxjs';
 import { LoanFormConfig } from '../../constants';
 import { APPLICATION_STATUS, ERROR_MESSAGES, FORM_FIELDS } from '../../enums';
 import { ApplicationListService } from '../../services/application-list.service';
 import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
+import { SavedSuccessfullyComponent } from '../../snackbars/saved-successfully/saved-successfully.component';
+import { SubmittedSuccessfullyComponent } from '../../snackbars/submitted-successfully/submitted-successfully.component';
 import { LeaseApplicationForm } from '../../types';
 @Component({
   selector: 'app-lease-application-form',
@@ -40,6 +43,7 @@ export class LeaseApplicationFormComponent {
   readonly applicationService = inject(ApplicationListService);
   private readonly localStorageService = inject(LocalStorageManagerService);
   private readonly currentUser = this.localStorageService.storedUser();
+  private readonly _snackBar = inject(MatSnackBar);
 
   private userId = this.currentUser()?.userId;
   protected readonly LoanFormConfig = LoanFormConfig;
@@ -49,6 +53,8 @@ export class LeaseApplicationFormComponent {
 
   ERROR_MESSAGES = ERROR_MESSAGES;
   unauthorized: boolean = false;
+
+  durationInSeconds = 5;
 
   leaseForm = new FormGroup({
     userId: new FormControl(this.userId),
@@ -139,6 +145,7 @@ export class LeaseApplicationFormComponent {
         .pipe(catchError(this.handleError))
         .subscribe();
     }
+    this.openSubmittedSnackBar();
   }
   onSave(): void {
     if (this.leaseForm.valid) {
@@ -152,6 +159,7 @@ export class LeaseApplicationFormComponent {
         .pipe(catchError(this.handleError))
         .subscribe();
     }
+    this.openSavedSnackBar();
   }
   private handleError = (error: HttpErrorResponse): Observable<never> => {
     if (error) {
@@ -160,4 +168,14 @@ export class LeaseApplicationFormComponent {
     }
     return EMPTY;
   };
+  private openSavedSnackBar(): void {
+    this._snackBar.openFromComponent(SavedSuccessfullyComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
+  private openSubmittedSnackBar(): void {
+    this._snackBar.openFromComponent(SubmittedSuccessfullyComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
 }

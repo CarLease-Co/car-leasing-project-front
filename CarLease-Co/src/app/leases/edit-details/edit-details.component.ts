@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable, catchError, map, of, tap } from 'rxjs';
 import { ID, LoanFormConfig } from '../../constants';
@@ -21,6 +22,8 @@ import { APPLICATION_STATUS, ERROR_MESSAGES, FORM_FIELDS } from '../../enums';
 import { SpinnerComponent } from '../../layout/spinner/spinner.component';
 import { ApplicationListService } from '../../services/application-list.service';
 import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
+import { SavedSuccessfullyComponent } from '../../snackbars/saved-successfully/saved-successfully.component';
+import { SubmittedSuccessfullyComponent } from '../../snackbars/submitted-successfully/submitted-successfully.component';
 import { LeaseApplication, LeaseApplicationForm } from '../../types';
 
 @Component({
@@ -43,6 +46,7 @@ import { LeaseApplication, LeaseApplicationForm } from '../../types';
 export class EditDetailsComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly localStorageService = inject(LocalStorageManagerService);
+  private readonly _snackBar = inject(MatSnackBar);
   protected readonly LoanFormConfig = LoanFormConfig;
   private readonly applicationId = this.activatedRoute.snapshot.params[ID];
   private readonly currentUser = this.localStorageService.storedUser();
@@ -55,6 +59,8 @@ export class EditDetailsComponent implements OnInit {
 
   ERROR_MESSAGES = ERROR_MESSAGES;
   unauthorized: boolean = false;
+
+  durationInSeconds = 5;
 
   fetchedApplication?: LeaseApplication;
 
@@ -158,6 +164,8 @@ export class EditDetailsComponent implements OnInit {
         .pipe(catchError(this.handleError))
         .subscribe();
     }
+
+    this.openSubmittedSnackBar();
   }
 
   onSave(): void {
@@ -172,6 +180,8 @@ export class EditDetailsComponent implements OnInit {
         .pipe(catchError(this.handleError))
         .subscribe();
     }
+
+    this.openSavedSnackBar();
   }
   private populateFormWithApplicationData() {
     if (this.fetchedApplication) {
@@ -205,4 +215,15 @@ export class EditDetailsComponent implements OnInit {
     }
     return EMPTY;
   };
+
+  private openSavedSnackBar(): void {
+    this._snackBar.openFromComponent(SavedSuccessfullyComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
+  private openSubmittedSnackBar(): void {
+    this._snackBar.openFromComponent(SubmittedSuccessfullyComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
 }
