@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ERROR_MESSAGES, USER_PROPERTIES } from '../../enums';
 import { EMPTY, Observable, catchError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SpinnerComponent } from '../../layout/spinner/spinner.component';
 
 @Component({
   selector: 'app-login-form',
@@ -34,6 +35,7 @@ import { HttpErrorResponse } from '@angular/common/http';
     MatCardModule,
     CommonModule,
     MatIconModule,
+    SpinnerComponent,
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
@@ -46,8 +48,10 @@ export class LoginFormComponent {
   });
   ERROR_MESSAGES = ERROR_MESSAGES;
   unauthorized: boolean = false;
+  loading: boolean = false;
 
   login(): void {
+    this.loading = true;
     const usernameInputValue = this.loginForm.get(
       USER_PROPERTIES.USERNAME,
     )?.value;
@@ -58,10 +62,13 @@ export class LoginFormComponent {
       this.loginService
         .login(usernameInputValue, passwordInputValue)
         .pipe(catchError(this.checkErrorStatus))
-        .subscribe();
+        .subscribe(() => {
+          this.loading = false;
+        });
     }
   }
   private checkErrorStatus = (error: HttpErrorResponse): Observable<never> => {
+    this.loading = false;
     if (error.status == 401) {
       this.unauthorized = true;
       this.loginForm.reset();
