@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, Observable, catchError, tap } from 'rxjs';
@@ -17,6 +18,7 @@ import { SpinnerComponent } from '../../layout/spinner/spinner.component';
 import { ReviewApplicationViewComponent } from '../../review-application-view/review-application-view.component';
 import { ApplicationListService } from '../../services/application-list.service';
 import { LocalStorageManagerService } from '../../services/local-storage-manager.service';
+import { DeletedSuccessfullyComponent } from '../../snackbars/deleted-successfully/deleted-successfully.component';
 import { LeaseApplication } from '../../types';
 @Component({
   selector: 'app-lease-details',
@@ -42,12 +44,14 @@ export class LeaseDetailsComponent {
   private readonly localStorageService = inject(LocalStorageManagerService);
   private readonly router = inject(Router);
   readonly applicationService = inject(ApplicationListService);
+  private readonly _snackBar = inject(MatSnackBar);
   readonly EMPLOYEE_ROLE = EMPLOYEE_ROLE;
   readonly APPLICATION_STATUS = APPLICATION_STATUS;
   application = input<LeaseApplication>();
   user = this.localStorageService.storedUser();
   fetchedApplication?: LeaseApplication;
   isLoading = true;
+  durationInSeconds = 5;
 
   ngOnInit(): void {
     const applicationId = this.activatedRoute.snapshot.params[ID];
@@ -68,6 +72,7 @@ export class LeaseDetailsComponent {
       .deleteApplication(this.applicationService.application$.getValue()?.id)
       .pipe(catchError(this.handleError))
       .subscribe();
+    this.openDeletedSnackBar();
   }
   edit(): void {
     this.router.navigate([
@@ -82,4 +87,10 @@ export class LeaseDetailsComponent {
     }
     return EMPTY;
   };
+
+  private openDeletedSnackBar(): void {
+    this._snackBar.openFromComponent(DeletedSuccessfullyComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
 }
