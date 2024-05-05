@@ -1,55 +1,40 @@
-<div class="container">
-  <mat-card class="loan-welcome">
-    <div class="welcome-wrapper">
-      <h1>WELCOME</h1>
-      <br/>
-      <h3>Experience our effortless car leasing app.</h3>
-      <p>Apply for your dream car now!</p>
-      <div class="button-container">
-        <button type="submit" mat-raised-button (click)="goLogin()">
-          Log In
-        </button>
+<form [formGroup]="loanForm" class="loan-wrapper">
+  <div class="input-field-wrapper">
+    <h2>Monthly payment calculator</h2>
+    <div class="input-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Loan Amount:</mat-label>
+        <input
+          formControlName="loanAmount"
+          matInput
+          placeholder="Enter loan amount"
+        />
+      </mat-form-field>
+    </div>
+    <div class="input-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Loan Duration (months):</mat-label>
+        <input
+          formControlName="loanDuration"
+          matInput
+          placeholder="Enter loan duration"
+        />
+      </mat-form-field>
+    </div>
+    <div class="input-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Interest Rate (%):</mat-label>
+        <input
+          formControlName="interestRate"
+          matInput
+          placeholder="Enter interest rate"
+        />
+      </mat-form-field>
+    </div>
+    <div class="input-container">
+      <div>
+        <h2>Monthly Payment: {{ monthlyPayment }}</h2>
       </div>
     </div>
-    <form [formGroup]="loanForm" class="loan-wrapper">
-      <div class="input-field-wrapper">
-        <h2>Monthly payment calculator</h2>
-        <div class="input-container">
-          <mat-form-field appearance="fill">
-            <mat-label>Loan Amount:</mat-label>
-            <input
-              formControlName="loanAmount"
-              matInput
-              placeholder="Enter loan amount"
-            />
-          </mat-form-field>
-        </div>
-        <div class="input-container">
-          <mat-form-field appearance="fill">
-            <mat-label>Loan Duration (months):</mat-label>
-            <input
-              formControlName="loanDuration"
-              matInput
-              placeholder="Enter loan duration"
-            />
-          </mat-form-field>
-        </div>
-        <div class="input-container">
-          <mat-form-field appearance="fill">
-            <mat-label>Interest Rate (%):</mat-label>
-            <input
-              formControlName="interestRate"
-              matInput
-              placeholder="Enter interest rate"
-            />
-          </mat-form-field>
-        </div>
-        <div class="input-container">
-          <div>
-            <h2>Monthly Payment: {{ monthlyPayment }}</h2>
-          </div>
-        </div>
-      </div>
-    </form>
-  </mat-card>
-</div>
+  </div>
+</form>

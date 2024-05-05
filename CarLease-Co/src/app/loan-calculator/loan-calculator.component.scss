@@ -8,21 +8,32 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url("../../assets/por.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 .loan-welcome {
   margin: 10rem auto;
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   color: white;
   height: 30rem;
   border-radius: 4rem;
+  justify-content: center; 
+  align-items: center; 
 }
+
+.loan-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: 3rem; 
+}
+
+
 .welcome-wrapper,
 .loan-wrapper {
   padding: 2rem;
@@ -34,6 +45,10 @@
     text-wrap: wrap;
   }
   h2 {
+    color: $primary-background;
+    text-wrap: wrap;
+  }
+  h3 {
     color: $primary-background;
     text-wrap: wrap;
   }
@@ -76,6 +91,9 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 3rem;
+  margin-left: 8rem;
+  width: 500px;
+  
 }
 
 @media only screen and (max-width: 700px) {
