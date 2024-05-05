@@ -14,20 +14,19 @@ export enum APPLICATION_STATUS {
   DECLINED = 'DECLINED',
 }
 export enum ROUTES {
-  HOME = '',
+  LANDING = '',
+  HOME = 'home',
   LOGIN = 'login',
   SYS_ADMIN_VIEW = 'sysadmin-view',
   AUTOSUGGESTOR_FORM = 'autosuggestor-form',
   CAR_PRICE_MODIFIER = 'car-price-modifier',
   APPLICATIONS = 'applications',
-  APPLICATION_DETAILS_BY_ID = 'applications/application-details/:id',
+  APPLICATION_DETAILS_ID = 'application-details/:id',
   APPLICATION_DETAILS = 'applications/application-details',
   NEW_APPLICATION = 'new-application',
-  NEW_APPLICATION_BY_ID = 'new-application/:id',
   EDIT_APPLICATION = 'applications/application-details/edit',
   // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
-  EDIT_APPLICATION_BY_ID = 'applications/application-details/edit/:id',
-  LOGIN_PATH = '/login',
+  EDIT_APPLICATION_ID = 'application-details/edit/:id',
 }
 
 export enum USER_PROPERTIES {
@@ -63,4 +62,14 @@ export enum ERROR_MESSAGES {
 export enum DISPLAY_OPTIONS {
   NONE = 'none',
   BLOCK = 'block',
+}
+export enum BREADCRUMBS {
+  HOME = 'Home',
+  USERS = 'Users',
+  AUTOSUGGESTOR_FORM = 'Autosuggestor form',
+  CAR_PRICE_MODIFIER = 'Car price form',
+  APPLICATIONS = 'Applications',
+  APPLICATIONS_DETAILS = 'Application details',
+  EDIT_APPLICATION = 'Edit application',
+  NEW_APPLICATION = 'New application',
 }

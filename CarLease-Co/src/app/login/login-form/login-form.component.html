@@ -7,6 +7,7 @@
       <p>Sign in to continue on CarLess™</p>
     </div>
     <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-wrapper">
+      @if (!loading) {
       <div class="input-field-wrapper">
         <mat-form-field appearance="fill">
           <mat-label>Username</mat-label>
@@ -39,6 +40,8 @@
           Sign In
         </button>
       </div>
-    </form>
-  </mat-card>
-</div>
+    } @else {
+      <app-spinner [isLoading]="loading"></app-spinner>
+    }
+  </form>
+</mat-card>

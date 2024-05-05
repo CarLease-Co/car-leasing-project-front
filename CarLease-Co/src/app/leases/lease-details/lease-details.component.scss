@@ -4,7 +4,7 @@
 @import "../../../variables.scss";
 .details-card {
   max-width: $component-max-width;
-  margin: $margin-top auto 25px;
+  margin: 0 auto 25px;
 }
 .content-wrapper {
   margin-top: 10px;
@@ -54,6 +54,7 @@ h3:nth-child(even) {
   border-radius: $form-border-radius;
   text-align: start;
   padding: $form-padding;
+  color: $grey-background-text;
 }
 .details {
   margin-top: $margin-top;

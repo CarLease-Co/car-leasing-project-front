@@ -22,30 +22,37 @@
   color: white;
   height: 30rem;
   border-radius: 4rem;
+  margin-bottom: 12rem;
 }
+
 .welcome-wrapper,
 .login-wrapper {
   padding: 2rem;
   width: 50%;
   text-align: center;
   align-content: center;
+
   h1 {
     font-size: 3rem;
     text-wrap: wrap;
   }
+
   p {
     margin-top: 50px;
   }
+
   img {
     width: 200px;
   }
 }
+
 .welcome-wrapper {
   background-color: $primary-background;
   border-radius: 4rem;
   text-align: center;
   align-content: center;
 }
+
 .button-container {
   button[type="submit"] {
     padding: 0.5rem 5rem;
@@ -54,6 +61,7 @@
     outline: 2px solid $primary-background;
     color: $primary-background;
   }
+
   button:hover {
     cursor: pointer;
     background-color: $primary-background;
@@ -61,11 +69,13 @@
     color: white;
     transition: 0.5s;
   }
+
   button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
 }
+
 .input-field-wrapper {
   display: flex;
   flex-direction: column;
@@ -74,7 +84,7 @@
 
 @media only screen and (max-width: 700px) {
   .login-welcome {
-    margin: 5rem auto 5rem;
+    margin: 2rem auto 5rem;
     height: auto;
     width: fit-content;
     flex-direction: column;
@@ -88,9 +98,11 @@
     h1 {
       font-size: 2rem;
     }
+
     p {
       font-size: 1.2rem;
     }
+
     img {
       width: 100px;
     }
@@ -101,7 +113,7 @@
       margin-top: -1.5rem;
       height: fit-content;
       width: 80%;
-      padding: 1.6rem 5rem;
+      padding: 1.6rem 2rem;
       font-size: 1.5rem;
     }
   }
