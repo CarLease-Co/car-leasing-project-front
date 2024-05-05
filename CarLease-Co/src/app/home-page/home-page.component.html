@@ -4,8 +4,10 @@
       <h1>Welcome, {{ userName }}!</h1>
       <hr />
       @if (userRole === "REVIEWER" || userRole === "APPROVER") {
-        <h2>The applications are awaiting for review</h2>
-        <p>Number of applications: {{ numberOfApplications }}</p>
+        <h2>
+          Currently, there are {{ numberOfApplications }} applications awaiting
+          your review.
+        </h2>
       } @else {
         <h2>Cheapest and easiest way to lease a car on the planet earth</h2>
         <p>Try CarLess and see how much fun car leasing can be.</p>
