@@ -14,6 +14,7 @@ import { User } from '../types';
 })
 export class HomePageComponent implements OnInit {
   userName: string = '';
+  userRole: string = '';
   environment = environment;
 
   constructor(
@@ -25,12 +26,17 @@ export class HomePageComponent implements OnInit {
     this.router.navigate([ROUTES.NEW_APPLICATION]);
   }
 
+  redirectToLeaseList() {
+    this.router.navigate([ROUTES.APPLICATIONS]);
+  }
+
   ngOnInit(): void {
     const loginResponse = localStorage.getItem('loginResponse');
     if (loginResponse) {
-      const { userId } = JSON.parse(loginResponse);
+      const { userId, role } = JSON.parse(loginResponse);
       this.userService.getUser(userId).subscribe((user: User) => {
         this.userName = user.name;
+        this.userRole = role;
       });
     }
   }

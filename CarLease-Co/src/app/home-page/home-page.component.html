@@ -1,14 +1,37 @@
 <main>
   <div class="main-content">
     <div class="main-content__left">
-      <h1>Welcome, {{ userName }} !</h1>
+      <h1>Welcome, {{ userName }}!</h1>
       <hr />
-      <h2>Cheapest and easiest way to lease a car on the planet earth</h2>
-      <p>Try CarLess and see how much fun car leasing can be.</p>
-      <button (click)="redirectToLeaseApplicationForm()">Get Started</button>
+      @if (userRole === "REVIEWER" || userRole === "APPROVER") {
+        <h2>The applications are awaiting for review</h2>
+      } @else {
+        <h2>Cheapest and easiest way to lease a car on the planet earth</h2>
+        <p>Try CarLess and see how much fun car leasing can be.</p>
+      }
+      <button
+        (click)="
+          userRole === 'REVIEWER' || userRole === 'APPROVER'
+            ? redirectToLeaseList()
+            : redirectToLeaseApplicationForm()
+        "
+      >
+        Get Started
+      </button>
     </div>
     <div class="main-content__right">
-      <img [src]="environment.pathToPorsche" alt="Porsche" />
+      <img
+        [src]="
+          userRole === 'REVIEWER' || userRole === 'APPROVER'
+            ? environment.pathToFile
+            : environment.pathToPorsche
+        "
+        [alt]="
+          userRole === 'REVIEWER' || userRole === 'APPROVER'
+            ? 'File'
+            : 'Porsche'
+        "
+      />
     </div>
   </div>
 </main>
