@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ROUTES } from '../enums';
+import { EMPLOYEE_ROLE, ROUTES } from '../enums';
 import { environment } from '../environment';
 import { UserService } from '../services/user.service';
 import { User } from '../types';
@@ -15,7 +15,8 @@ import { ApplicationListService } from '../services/application-list.service';
 })
 export class HomePageComponent implements OnInit {
   userName: string = '';
-  userRole: string = '';
+  readonly EMPLOYEE_ROLE = EMPLOYEE_ROLE;
+  userRole: EMPLOYEE_ROLE = EMPLOYEE_ROLE.APPLICANT;
   numberOfApplications: number = 0;
   environment = environment;
 
@@ -39,9 +40,12 @@ export class HomePageComponent implements OnInit {
       const { userId, role } = JSON.parse(loginResponse);
       this.userService.getUser(userId).subscribe((user: User) => {
         this.userName = user.name;
-        this.userRole = role;
+        this.userRole = role as EMPLOYEE_ROLE;
 
-        if (this.userRole === 'REVIEWER' || this.userRole === 'APPROVER') {
+        if (
+          this.userRole === EMPLOYEE_ROLE.REVIEWER ||
+          this.userRole === EMPLOYEE_ROLE.APPROVER
+        ) {
           this.applicationListService
             .getApplications()
             .subscribe((applications) => {

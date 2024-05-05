@@ -3,7 +3,10 @@
     <div class="main-content__left">
       <h1>Welcome, {{ userName }}!</h1>
       <hr />
-      @if (userRole === "REVIEWER" || userRole === "APPROVER") {
+      @if (
+        userRole === EMPLOYEE_ROLE.REVIEWER ||
+        userRole === EMPLOYEE_ROLE.APPROVER
+      ) {
         <h2>
           Currently, there are {{ numberOfApplications }} applications awaiting
           your review.
@@ -14,7 +17,8 @@
       }
       <button
         (click)="
-          userRole === 'REVIEWER' || userRole === 'APPROVER'
+          userRole === EMPLOYEE_ROLE.REVIEWER ||
+          userRole === EMPLOYEE_ROLE.APPROVER
             ? redirectToLeaseList()
             : redirectToLeaseApplicationForm()
         "
@@ -25,12 +29,14 @@
     <div class="main-content__right">
       <img
         [src]="
-          userRole === 'REVIEWER' || userRole === 'APPROVER'
+          userRole === EMPLOYEE_ROLE.REVIEWER ||
+          userRole === EMPLOYEE_ROLE.APPROVER
             ? environment.pathToFile
             : environment.pathToPorsche
         "
         [alt]="
-          userRole === 'REVIEWER' || userRole === 'APPROVER'
+          userRole === EMPLOYEE_ROLE.REVIEWER ||
+          userRole === EMPLOYEE_ROLE.APPROVER
             ? 'File'
             : 'Porsche'
         "
