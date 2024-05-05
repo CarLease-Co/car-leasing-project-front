@@ -4,6 +4,7 @@
 
 .autosuggestor-view {
   padding: 50px;
+  margin-top: $margin-top;
   min-height: 100vh;
 }
 
@@ -26,9 +27,11 @@
   .full-width-form-field {
     width: calc(100%);
     margin-bottom: 20px;
+
     .half-width-form-field {
       width: calc(50% - 5px);
     }
+
     .half-width-form-field:first-child {
       margin-right: 10px;
     }
@@ -37,6 +40,7 @@
   .button-container {
     display: flex;
     justify-content: end;
+
     button[type="submit"] {
       padding: 5px 50px;
       margin-top: 5px;
@@ -44,6 +48,7 @@
       outline: 2px solid $primary-background;
       color: $primary-background;
     }
+
     button[type="submit"]:hover {
       cursor: pointer;
       background-color: $primary-background;
@@ -51,11 +56,13 @@
       color: white;
       transition: 0.5s;
     }
+
     button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
   }
+
   .year-slider-container {
     margin: auto;
     max-width: calc(100%);
@@ -69,6 +76,7 @@
       font-size: 16px;
       color: $grey-background-text;
     }
+
     .slider-info {
       display: flex;
       justify-content: space-between;
@@ -79,6 +87,7 @@
       color: $grey-background-text;
     }
   }
+
   .unauthorized {
     text-align: center;
   }

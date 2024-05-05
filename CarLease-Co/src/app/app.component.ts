@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs';
 import { CrumbsComponent } from './layout/crumbs/crumbs.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HeaderComponent } from './layout/header/header.component';
@@ -13,4 +14,18 @@ import { HeaderComponent } from './layout/header/header.component';
 })
 export class AppComponent {
   title = 'CarLease-Co';
+
+  showFooter: boolean = true;
+
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd)
+    ).subscribe((event) => {
+      const navEndEvent = event as NavigationEnd;
+      const hiddenFooterRoutes = ['/login'];
+      this.showFooter = !hiddenFooterRoutes.includes(navEndEvent.urlAfterRedirects);
+    });
+  }
 }

@@ -5,6 +5,8 @@
 .container {
   position: relative;
   padding: 50px;
+  margin-bottom: 20px;
+  margin-top: 50px;
 }
 
 .lease-form-header {
@@ -39,6 +41,7 @@
       font-size: 16px;
       color: $grey-background-text;
     }
+
     .slider-info {
       display: flex;
       justify-content: space-between;
@@ -61,6 +64,7 @@
     display: flex;
     justify-content: end;
     gap: 5%;
+
     button[type="submit"] {
       padding: 5px 50px;
       margin-top: 5px;
@@ -69,6 +73,7 @@
       color: $primary-background;
       background-color: white;
     }
+
     button[type="button"] {
       padding: 5px 50px;
       margin-top: 5px;
@@ -77,18 +82,21 @@
       color: $pink;
       background-color: white;
     }
+
     button[type="submit"]:hover {
       cursor: pointer;
       background-color: $primary-background;
       outline: 2px solid $primary-background;
       color: white;
     }
+
     button[type="button"]:hover {
       cursor: pointer;
       background-color: $pink;
       outline: 2px solid $pink;
       color: white;
     }
+
     button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
@@ -110,10 +118,12 @@
     flex-basis: 45%;
     box-sizing: border-box;
   }
+
   mat-form-field {
     width: 100%;
     padding: 0;
   }
+
   .unauthorized {
     text-align: center;
   }
