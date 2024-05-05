@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -28,7 +28,7 @@ import { LeaseApplication } from '../../types';
   templateUrl: './lease-applications-list.component.html',
   styleUrl: './lease-applications-list.component.scss',
 })
-export class LeaseApplicationsListComponent implements AfterViewInit {
+export class LeaseApplicationsListComponent {
   private readonly router = inject(Router);
   private readonly localStorageService = inject(LocalStorageManagerService);
   private readonly applicationsService = inject(ApplicationListService);
@@ -49,9 +49,12 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
 
   dataSource: MatTableDataSource<LeaseApplication> =
     new MatTableDataSource<LeaseApplication>();
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatSort) set matSort(sort: MatSort) {
+    this.dataSource.sort = sort;
+  }
+  @ViewChild(MatPaginator) set paginator(paginator: MatPaginator) {
+    this.dataSource.paginator = paginator;
+  }
 
   ngOnInit(): void {
     const loginResponse = this.localStorageService.storedUser();
@@ -67,11 +70,6 @@ export class LeaseApplicationsListComponent implements AfterViewInit {
         }),
       )
       .subscribe();
-  }
-
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event): void {

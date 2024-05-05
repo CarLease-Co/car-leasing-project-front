@@ -15,9 +15,11 @@ import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { EMPTY, Observable, catchError } from 'rxjs';
 import { DISPLAY_OPTIONS, EMPLOYEE_ROLE, ERROR_MESSAGES } from '../../enums';
 import { UserService } from '../../services/user.service';
+import { UserCreatedSuccessfullyComponent } from '../../snackbars/user-created-successfully/user-created-successfully.component';
 
 @Component({
   selector: 'app-user-form',
@@ -39,6 +41,7 @@ import { UserService } from '../../services/user.service';
 })
 export class UserFormComponent {
   private readonly userService = inject(UserService);
+  private readonly _snackBar = inject(MatSnackBar);
   newUserForm = inject(NonNullableFormBuilder).group({
     username: ['', [Validators.required, Validators.min(3)]],
     password: ['', [Validators.required]],
@@ -52,6 +55,7 @@ export class UserFormComponent {
   DISPLAY_OPTIONS = DISPLAY_OPTIONS;
   unauthorized: boolean = false;
   displayNewUserForm: boolean = false;
+  durationInSeconds = 5;
 
   userForm(): void {
     this.displayNewUserForm = !this.displayNewUserForm;
@@ -66,6 +70,7 @@ export class UserFormComponent {
       this.newUserForm.reset();
       this.displayNewUserForm = !this.displayNewUserForm;
     }
+    this.openUserCreatedSnackBar();
   }
 
   private handleError = (error: HttpErrorResponse): Observable<never> => {
@@ -75,4 +80,9 @@ export class UserFormComponent {
     }
     return EMPTY;
   };
+  private openUserCreatedSnackBar(): void {
+    this._snackBar.openFromComponent(UserCreatedSuccessfullyComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
 }

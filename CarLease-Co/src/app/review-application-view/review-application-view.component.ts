@@ -2,11 +2,13 @@ import { Component, inject, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AutosuggestorComponent } from '../autosuggestor/autosuggestor.component';
 import { ID } from '../constants';
 import { APPLICATION_STATUS, ROUTES } from '../enums';
 import { ApplicationListService } from '../services/application-list.service';
+import { ReviewedSuccessfullyComponent } from '../snackbars/reviewed-successfully/reviewed-successfully.component';
 import { LeaseApplication } from '../types';
 
 @Component({
@@ -22,13 +24,15 @@ import { LeaseApplication } from '../types';
   ],
 })
 export class ReviewApplicationViewComponent {
-  selectedValue: string = '';
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly _snackBar = inject(MatSnackBar);
   readonly applicationService = inject(ApplicationListService);
   readonly APPLICATION_STATUS = APPLICATION_STATUS;
   application = input<LeaseApplication>();
   fetchedApplication?: LeaseApplication;
-  private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly router = inject(Router);
+  selectedValue: string = '';
+  durationInSeconds = 5;
 
   submitForm() {
     const applicationId = this.activatedRoute.snapshot.params[ID];
@@ -47,5 +51,11 @@ export class ReviewApplicationViewComponent {
           this.router.navigate([ROUTES.APPLICATIONS]);
         },
       });
+    this.openReviewedSnackBar();
+  }
+  private openReviewedSnackBar(): void {
+    this._snackBar.openFromComponent(ReviewedSuccessfullyComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
   }
 }

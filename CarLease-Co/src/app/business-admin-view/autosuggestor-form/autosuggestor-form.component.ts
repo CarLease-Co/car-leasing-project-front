@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { EMPTY, Observable, catchError } from 'rxjs';
 import {
   AutosuggestorFormConfig,
@@ -19,6 +20,7 @@ import {
 } from '../../constants';
 import { ERROR_MESSAGES } from '../../enums';
 import { BusAdminService } from '../../services/bus-admin.service';
+import { SubmittedSuccessfullyComponent } from '../../snackbars/submitted-successfully/submitted-successfully.component';
 
 @Component({
   selector: 'app-autosuggestor-form',
@@ -37,6 +39,7 @@ import { BusAdminService } from '../../services/bus-admin.service';
 })
 export class AutosuggestorFormComponent {
   private readonly busAdminService = inject(BusAdminService);
+  private readonly _snackBar = inject(MatSnackBar);
   autosuggestorForm = inject(NonNullableFormBuilder).group({
     rate: [
       undefined as undefined | number,
@@ -82,6 +85,8 @@ export class AutosuggestorFormComponent {
   ERROR_MESSAGES = ERROR_MESSAGES;
   unauthorized: boolean = false;
 
+  durationInSeconds = 5;
+
   onSubmit(): void {
     if (this.autosuggestorForm.valid) {
       this.updateInterestRate();
@@ -90,6 +95,8 @@ export class AutosuggestorFormComponent {
         .pipe(catchError(this.handleError))
         .subscribe();
     }
+
+    this.openSubmittedSnackBar();
   }
   updateInterestRate() {
     this.autosuggestorForm.value.interestFrom = this.getInterestDecimal(
@@ -117,4 +124,9 @@ export class AutosuggestorFormComponent {
     }
     return EMPTY;
   };
+  private openSubmittedSnackBar(): void {
+    this._snackBar.openFromComponent(SubmittedSuccessfullyComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
 }

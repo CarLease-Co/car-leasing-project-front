@@ -14,11 +14,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { EMPTY, Observable, catchError, map, of, tap } from 'rxjs';
 import { LoanFormConfig } from '../../constants';
 import { CAR_FORM_FIELDS, ERROR_MESSAGES } from '../../enums';
 import { ApplicationListService } from '../../services/application-list.service';
 import { BusAdminService } from '../../services/bus-admin.service';
+import { SubmittedSuccessfullyComponent } from '../../snackbars/submitted-successfully/submitted-successfully.component';
 
 @Component({
   selector: 'app-car-price-modifier',
@@ -38,6 +40,7 @@ import { BusAdminService } from '../../services/bus-admin.service';
 })
 export class CarPriceModifierComponent {
   private readonly busAdminService = inject(BusAdminService);
+  private readonly _snackBar = inject(MatSnackBar);
   readonly applicationService = inject(ApplicationListService);
   uniqueCarBrands$: Observable<string[]> = of([]);
   filteredModels$: Observable<string[]> = of([]);
@@ -56,6 +59,7 @@ export class CarPriceModifierComponent {
 
   ERROR_MESSAGES = ERROR_MESSAGES;
   unauthorized: boolean = false;
+  durationInSeconds = 5;
 
   get makeControl(): AbstractControl<string | null, string | null> | null {
     return this.carPriceForm.get(CAR_FORM_FIELDS.CAR_MAKE);
@@ -93,6 +97,7 @@ export class CarPriceModifierComponent {
         .pipe(catchError(this.handleError))
         .subscribe();
     }
+    this.openSubmittedSnackBar();
   }
   private handleError = (error: HttpErrorResponse): Observable<never> => {
     if (error) {
@@ -101,4 +106,9 @@ export class CarPriceModifierComponent {
     }
     return EMPTY;
   };
+  private openSubmittedSnackBar(): void {
+    this._snackBar.openFromComponent(SubmittedSuccessfullyComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
 }
