@@ -3,7 +3,7 @@
 @include mat.core();
 @import "../../../variables.scss";
 .login-welcome {
-  margin: 10rem auto;
+  margin: 10em auto;
   width: 75%;
   display: flex;
   flex-direction: row;
@@ -62,7 +62,7 @@
 
 @media only screen and (max-width: 700px) {
   .login-welcome {
-    margin: 5rem auto 5rem;
+    margin: 2rem auto 5rem;
     height: auto;
     width: fit-content;
     flex-direction: column;
@@ -89,7 +89,7 @@
       margin-top: -1.5rem;
       height: fit-content;
       width: 80%;
-      padding: 1.6rem 5rem;
+      padding: 1.6rem 2rem;
       font-size: 1.5rem;
     }
   }
