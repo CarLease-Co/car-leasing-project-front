@@ -14,7 +14,8 @@ export enum APPLICATION_STATUS {
   DECLINED = 'DECLINED',
 }
 export enum ROUTES {
-  HOME = '',
+  LANDING = '',
+  HOME = 'home',
   LOGIN = 'login',
   SYS_ADMIN_VIEW = 'sysadmin-view',
   AUTOSUGGESTOR_FORM = 'autosuggestor-form',

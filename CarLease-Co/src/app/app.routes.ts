@@ -6,6 +6,7 @@ import { ROUTES } from './enums';
 import { busAdminLoginGuard } from './guards/busadmin-login.guard';
 import { loginAccessGuard } from './guards/login-access.guard';
 import { sysAdminLoginGuard } from './guards/sysadmin-login.guard';
+import { HomePageComponent } from './home-page/home-page.component';
 import { EditDetailsComponent } from './leases/edit-details/edit-details.component';
 import { LeaseApplicationFormComponent } from './leases/lease-application-form/lease-application-form.component';
 import { LeaseApplicationsListComponent } from './leases/lease-applications-list/lease-applications-list.component';
@@ -15,8 +16,13 @@ import { SysAdminViewComponent } from './sys-admin-view/sys-admin-view/sys-admin
 
 export const routes: Routes = [
   {
-    path: ROUTES.HOME,
+    path: ROUTES.LANDING,
     component: AppComponent,
+    canActivate: [loginAccessGuard],
+  },
+  {
+    path: ROUTES.HOME,
+    component: HomePageComponent,
     canActivate: [loginAccessGuard],
   },
   { path: ROUTES.LOGIN, component: LoginFormComponent },
