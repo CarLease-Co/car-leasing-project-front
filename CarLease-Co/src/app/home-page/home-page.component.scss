@@ -1,0 +1,148 @@
+@import "../../variables.scss";
+main {
+  height: 100vh;
+  background-image: url("../../assets/background.png");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-content {
+  width: $component-max-width;
+  margin: $margin-x-auto;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  animation: fade-in 0.5s ease-in-out forwards;
+}
+
+.main-content__left {
+  max-width: 50%;
+  color: white;
+  text-align: left;
+  opacity: 0;
+  animation: text-fade-in 0.5s ease-in-out forwards;
+
+  h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    line-height: 1;
+  }
+
+  hr {
+    border: 1px solid white;
+    margin-bottom: 30px;
+  }
+
+  h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    line-height: 1;
+  }
+
+  p {
+    font-size: 24px;
+    margin-bottom: 40px;
+  }
+
+  button {
+    background-color: white;
+    color: #3fcbfe;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease-in-out;
+
+    &:hover {
+      background-color: #3fcbfe;
+      color: white;
+      outline: 2px solid white;
+    }
+  }
+}
+
+.main-content__right {
+  position: relative;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    animation: slide-in 0.5s ease-in-out forwards;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes text-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    background-position: left;
+  }
+  .main-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .main-content__left {
+    margin-bottom: 40px;
+    text-align: center;
+
+    h1 {
+      width: 90%;
+      font-size: 32px;
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+
+    p {
+      width: 90%;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 22px;
+
+      &:active {
+        background-color: #3fcbfe;
+        color: white;
+        outline: 2px solid white;
+      }
+    }
+  }
+}

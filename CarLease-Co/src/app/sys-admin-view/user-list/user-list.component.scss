@@ -29,6 +29,13 @@ th,
 tr {
   text-align: start;
 }
+::ng-deep {
+  .mat-mdc-text-field-wrapper {
+    margin-top: 1rem;
+    border-radius: 50px;
+    background-color: white;
+  }
+}
 @media only screen and (max-width: 700px) {
   .table-width {
     max-width: 100%;
