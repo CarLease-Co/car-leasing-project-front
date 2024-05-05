@@ -1,46 +1,50 @@
-<main>
-  <div class="main-content">
-    <div class="main-content__left">
-      <h1>Welcome, {{ userName }}!</h1>
-      <hr />
-      @if (
-        userRole === EMPLOYEE_ROLE.REVIEWER ||
-        userRole === EMPLOYEE_ROLE.APPROVER
-      ) {
-        <h2>
-          Currently, there are {{ numberOfApplications }} applications awaiting
-          your review.
-        </h2>
-      } @else {
-        <h2>Cheapest and easiest way to lease a car on the planet earth</h2>
-        <p>Try CarLess and see how much fun car leasing can be.</p>
-      }
-      <button
-        (click)="
+@if (!loading) {
+  <main>
+    <div class="main-content">
+      <div class="main-content__left">
+        <h1>Welcome, {{ userName }}!</h1>
+        <hr />
+        @if (
           userRole === EMPLOYEE_ROLE.REVIEWER ||
           userRole === EMPLOYEE_ROLE.APPROVER
-            ? redirectToLeaseList()
-            : redirectToLeaseApplicationForm()
-        "
-      >
-        Get Started
-      </button>
+        ) {
+          <h2>
+            Currently, there are {{ numberOfApplications }} applications
+            awaiting your review.
+          </h2>
+        } @else {
+          <h2>Cheapest and easiest way to lease a car on the planet earth</h2>
+          <p>Try CarLess and see how much fun car leasing can be.</p>
+        }
+        <button
+          (click)="
+            userRole === EMPLOYEE_ROLE.REVIEWER ||
+            userRole === EMPLOYEE_ROLE.APPROVER
+              ? redirectToLeaseList()
+              : redirectToLeaseApplicationForm()
+          "
+        >
+          Get Started
+        </button>
+      </div>
+      <div class="main-content__right">
+        <img
+          [src]="
+            userRole === EMPLOYEE_ROLE.REVIEWER ||
+            userRole === EMPLOYEE_ROLE.APPROVER
+              ? environment.pathToFile
+              : environment.pathToPorsche
+          "
+          [alt]="
+            userRole === EMPLOYEE_ROLE.REVIEWER ||
+            userRole === EMPLOYEE_ROLE.APPROVER
+              ? 'File'
+              : 'Porsche'
+          "
+        />
+      </div>
     </div>
-    <div class="main-content__right">
-      <img
-        [src]="
-          userRole === EMPLOYEE_ROLE.REVIEWER ||
-          userRole === EMPLOYEE_ROLE.APPROVER
-            ? environment.pathToFile
-            : environment.pathToPorsche
-        "
-        [alt]="
-          userRole === EMPLOYEE_ROLE.REVIEWER ||
-          userRole === EMPLOYEE_ROLE.APPROVER
-            ? 'File'
-            : 'Porsche'
-        "
-      />
-    </div>
-  </div>
-</main>
+  </main>
+} @else {
+  <app-spinner [isLoading]="loading"></app-spinner>
+}
