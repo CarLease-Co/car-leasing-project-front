@@ -34,7 +34,7 @@
 }
 .user-form-wrapper {
   position: fixed;
-  height: 50%;
+  height: 55%;
   width: 50%;
   top: 50%;
   left: 50%;
@@ -63,7 +63,7 @@ mat-form-field {
     height: fit-content;
     width: fit-content;
     background-color: white;
-    outline: 2px solid $pink;
+    outline: 2px solid transparent;
     color: $pink;
     padding: 0;
     mat-icon {
@@ -71,7 +71,7 @@ mat-form-field {
     }
     mat-icon:hover {
       color: white;
-      background-color: $primary-hover;
+      background-color: $pink;
       transition: 0.5s;
     }
   }
