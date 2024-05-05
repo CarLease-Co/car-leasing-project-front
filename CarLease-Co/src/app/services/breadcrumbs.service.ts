@@ -1,6 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -8,6 +9,7 @@ import { filter } from 'rxjs/operators';
 export class BreadcrumbsService {
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly destroyed$ = new Subject<boolean>();
   private readonly _breadcrumbs = signal<
     { label: string; url: string }[] | undefined
   >(undefined);
@@ -15,10 +17,17 @@ export class BreadcrumbsService {
 
   constructor() {
     this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntil(this.destroyed$),
+      )
       .subscribe(() => {
         this._breadcrumbs.set(this.createBreadcrumbs(this.activatedRoute.root));
       });
+  }
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
   private createBreadcrumbs(

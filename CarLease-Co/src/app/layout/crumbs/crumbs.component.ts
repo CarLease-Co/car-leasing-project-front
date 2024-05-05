@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Signal, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { BreadcrumbsService } from '../../services/breadcrumbs.service';
@@ -12,5 +12,6 @@ import { BreadcrumbsService } from '../../services/breadcrumbs.service';
 })
 export class CrumbsComponent {
   private readonly breadcrumbService = inject(BreadcrumbsService);
-  breadcrumbs = this.breadcrumbService.breadcrumbs();
+  breadcrumbs: Signal<{ label: string; url: string }[] | undefined> =
+    this.breadcrumbService.breadcrumbs();
 }
