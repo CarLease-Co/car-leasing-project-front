@@ -4,6 +4,7 @@ import { ROUTES } from '../enums';
 import { environment } from '../environment';
 import { UserService } from '../services/user.service';
 import { User } from '../types';
+import { ApplicationListService } from '../services/application-list.service';
 
 @Component({
   selector: 'app-home-page',
@@ -15,11 +16,13 @@ import { User } from '../types';
 export class HomePageComponent implements OnInit {
   userName: string = '';
   userRole: string = '';
+  numberOfApplications: number = 0;
   environment = environment;
 
   constructor(
     private router: Router,
     private userService: UserService,
+    private applicationListService: ApplicationListService,
   ) {}
 
   redirectToLeaseApplicationForm() {
@@ -37,6 +40,14 @@ export class HomePageComponent implements OnInit {
       this.userService.getUser(userId).subscribe((user: User) => {
         this.userName = user.name;
         this.userRole = role;
+
+        if (this.userRole === 'REVIEWER' || this.userRole === 'APPROVER') {
+          this.applicationListService
+            .getApplications()
+            .subscribe((applications) => {
+              this.numberOfApplications = applications.length;
+            });
+        }
       });
     }
   }
