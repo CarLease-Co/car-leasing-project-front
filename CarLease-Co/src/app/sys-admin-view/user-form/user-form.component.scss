@@ -1,6 +1,6 @@
 @import "../../../variables.scss";
 .user-form-display {
-  margin-top: calc($margin-top + 10px);
+  margin-top: calc(10px);
   margin-bottom: 10px;
   padding: 5px 20px;
   border: none;
@@ -58,11 +58,13 @@ mat-form-field {
 .header {
   display: flex;
   justify-content: space-between;
-  button {
+  button[type="button"] {
     border: none;
     height: fit-content;
     width: fit-content;
-    background-color: transparent;
+    background-color: white;
+    outline: 2px solid $pink;
+    color: $pink;
     padding: 0;
     mat-icon {
       border-radius: 15px;

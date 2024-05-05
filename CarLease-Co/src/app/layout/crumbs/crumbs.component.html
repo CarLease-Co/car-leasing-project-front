@@ -1,0 +1,11 @@
+<nav class="crumbs">
+  @for (breadcrumb of breadcrumbs(); track breadcrumbs) {
+    @if (!!breadcrumb.label) {
+      <ng-container class="crumb">
+        <a [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a>
+
+        <mat-icon>arrow_right</mat-icon>
+      </ng-container>
+    }
+  }
+</nav>
