@@ -7,16 +7,62 @@
   >
     <div class="loan-section section">
       <mat-form-field class="full-width-form-field col" appearance="outline">
-        <mat-label>Lease Amount</mat-label>
+        <mat-label>Monthly Income after Taxes</mat-label>
         <input
           matInput
           type="number"
-          placeholder="Enter Leasing Amount"
-          formControlName="loanAmount"
+          placeholder="Enter Monthly Income"
+          formControlName="monthlyIncome"
           required
         />
       </mat-form-field>
-      <div class="slider-container col right-col">
+      <mat-form-field
+        class="full-width-form-field col right col"
+        appearance="outline"
+      >
+        <mat-label>Car Brand</mat-label>
+        <mat-select
+          placeholder="Select Car Brand"
+          formControlName="carMake"
+          required
+        >
+          @for (make of uniqueCarBrands$ | async; track make) {
+            <mat-option [value]="make">{{ make }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="personal-info-section section">
+      <mat-form-field class="full-width-form-field col" appearance="outline">
+        <mat-label>Monthly Financial Obligations</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Enter Monthly Financial Obligations"
+          formControlName="financialObligations"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field
+        class="full-width-form-field col right-col"
+        appearance="outline"
+      >
+        <mat-label>Car Model</mat-label>
+        <mat-select
+          placeholder="Select Car Model"
+          formControlName="carModel"
+          required
+        >
+          @for (model of filteredModels$ | async; track model) {
+            <mat-option [value]="model">{{ model }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="loan-section section">
+      <div class="slider-container col">
         <label class="slider-label" for="car">Duration of Lease (months)</label>
         <mat-slider
           name="car"
@@ -36,63 +82,7 @@
           >
         </div>
       </div>
-    </div>
-    <div class="personal-info-section section">
-      <mat-form-field class="full-width-form-field col" appearance="outline">
-        <mat-label>Monthly Income after Taxes</mat-label>
-        <input
-          matInput
-          type="number"
-          placeholder="Enter Monthly Income"
-          formControlName="monthlyIncome"
-          required
-        />
-      </mat-form-field>
-      <mat-form-field
-        class="full-width-form-field col right-col"
-        appearance="outline"
-      >
-        <mat-label>Monthly Financial Obligations</mat-label>
-        <input
-          matInput
-          type="number"
-          placeholder="Enter Monthly Financial Obligations"
-          formControlName="financialObligations"
-          required
-        />
-      </mat-form-field>
-    </div>
-    <div class="car-section section">
-      <mat-form-field class="full-width-form-field col" appearance="outline">
-        <mat-label>Car Brand</mat-label>
-        <mat-select
-          placeholder="Select Car Brand"
-          formControlName="carMake"
-          required
-        >
-          @for (make of uniqueCarBrands$ | async; track make) {
-            <mat-option [value]="make">{{ make }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field
-        class="full-width-form-field col right-col"
-        appearance="outline"
-      >
-        <mat-label>Car Model</mat-label>
-        <mat-select
-          placeholder="Select Car Model"
-          formControlName="carModel"
-          required
-        >
-          @for (model of filteredModels$ | async; track model) {
-            <mat-option [value]="model">{{ model }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-
-      <div class="slider-container col">
+      <div class="slider-container col right-col">
         <label class="slider-label" for="year">Car Year</label>
         <mat-slider
           min="{{ LoanFormConfig.minCarYear }}"
@@ -105,7 +95,24 @@
           <span class="slider-max">{{ LoanFormConfig.maxCarYear }}</span>
         </div>
       </div>
+    </div>
+
+    <div class="car-section section">
       <mat-form-field class="full-width-form-field col" appearance="outline">
+        <mat-label>Lease Amount</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Enter Leasing Amount"
+          formControlName="loanAmount"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field
+        class="full-width-form-field col right-col"
+        appearance="outline"
+      >
         <mat-label>Other relevant information</mat-label>
         <textarea
           matInput
@@ -117,6 +124,7 @@
         ></textarea>
       </mat-form-field>
     </div>
+
     @if (unauthorized) {
       <mat-error class="unauthorized">{{
         ERROR_MESSAGES.GENERIC_ERROR
