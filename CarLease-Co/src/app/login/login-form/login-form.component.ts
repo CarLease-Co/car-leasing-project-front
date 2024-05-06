@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ERROR_MESSAGES, USER_PROPERTIES } from '../../enums';
 import { EMPTY, Observable, catchError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { LoanCalculatorComponent } from '../../loan-calculator/loan-calculator.component';
 import { SpinnerComponent } from '../../layout/spinner/spinner.component';
 
 @Component({
@@ -35,6 +36,7 @@ import { SpinnerComponent } from '../../layout/spinner/spinner.component';
     MatCardModule,
     CommonModule,
     MatIconModule,
+    LoanCalculatorComponent,
     SpinnerComponent,
   ],
   templateUrl: './login-form.component.html',
