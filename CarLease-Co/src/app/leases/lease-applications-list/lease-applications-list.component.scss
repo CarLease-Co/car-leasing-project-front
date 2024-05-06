@@ -3,24 +3,35 @@
 @include mat.core();
 @import "../../../styles.scss";
 @import "../../../variables.scss";
+
 .max-width {
   max-width: $component-max-width;
   display: flex;
   flex-direction: column;
   margin: auto;
 }
+
 tr:hover {
   background-color: $primary-row;
   transition: 0.5s;
   cursor: pointer;
 }
+
 table {
   max-width: 100%;
 }
+
 th,
 tr {
   text-align: start;
 }
+
+td,
+th {
+  min-width: 200px;
+  max-width: 250px;
+}
+
 ::ng-deep {
   .mat-mdc-text-field-wrapper {
     margin-top: 1rem;
@@ -28,6 +39,7 @@ tr {
     background-color: white;
   }
 }
+
 @media only screen and (max-width: 700px) {
   .table-width {
     max-width: 100%;

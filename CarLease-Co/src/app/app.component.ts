@@ -17,7 +17,7 @@ export class AppComponent {
 
   showFooter: boolean = true;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.router.events
