@@ -22,6 +22,9 @@
   justify-content: end;
   max-width: $component-max-width;
   margin: $margin-x-auto;
+  button {
+    color: $primary-text;
+  }
 }
 .new-user {
   position: fixed;
