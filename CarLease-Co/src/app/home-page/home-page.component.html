@@ -1,82 +1,77 @@
 @if (!loading) {
-  <main>
-    <div class="main-content">
-      @if (userRole === EMPLOYEE_ROLE.BUSINESS_ADMIN) {
-        <div class="main-content__autosuggestor">
-          <h2>Autosuggestor Values</h2>
-          <div class="autosuggestor-values">
-            <p><strong>Rate:</strong> {{ autosuggestorData.rate }}</p>
-            <p>
-              <strong>Interest From:</strong>
-              {{ autosuggestorData.interestFrom }}
-            </p>
-            <p>
-              <strong>Interest To:</strong> {{ autosuggestorData.interestTo }}
-            </p>
-            <p><strong>Year From:</strong> {{ autosuggestorData.yearFrom }}</p>
-            <p><strong>Year To:</strong> {{ autosuggestorData.yearTo }}</p>
-          </div>
-        </div>
+<main>
+  <div class="main-content">
+    @if (userRole === EMPLOYEE_ROLE.BUSINESS_ADMIN) {
+    <div class="main-content__autosuggestor">
+      <h2>Autosuggestor Values</h2>
+      <div class="autosuggestor-values">
+        <p><strong>Rate:</strong> {{ autosuggestorData.rate }}</p>
+        <p>
+          <strong>Interest From:</strong>
+          {{ autosuggestorData.interestFrom }}
+        </p>
+        <p>
+          <strong>Interest To:</strong> {{ autosuggestorData.interestTo }}
+        </p>
+        <p><strong>Year From:</strong> {{ autosuggestorData.yearFrom }}</p>
+        <p><strong>Year To:</strong> {{ autosuggestorData.yearTo }}</p>
+      </div>
+    </div>
 
-        <div class="main-content__cars">
-          <h2>Car Prices</h2>
-          <div class="car-list">
-            @for (car of carPriceData; track $index) {
-              <div class="car-item">
-                <p><strong>Make:</strong> {{ car.make }}</p>
-                <p><strong>Model:</strong> {{ car.model }}</p>
-                <p><strong>Price From:</strong> {{ car.priceFrom }}</p>
-                <p><strong>Price To:</strong> {{ car.priceTo }}</p>
-              </div>
-            }
-          </div>
+    <div class="main-content__cars">
+      <h2>Car Prices</h2>
+      <div class="car-list">
+        @for (car of carPriceData; track $index) {
+        <div class="car-item">
+          <p><strong>Make:</strong> {{ car.make }}</p>
+          <p><strong>Model:</strong> {{ car.model }}</p>
+          <p><strong>Price From:</strong> {{ car.priceFrom }}</p>
+          <p><strong>Price To:</strong> {{ car.priceTo }}</p>
         </div>
+        }
+      </div>
+    </div>
+    } @else {
+    <div class="main-content__left">
+      <h1>Welcome, {{ userName }}!</h1>
+      <hr />
+      @if (
+      userRole === EMPLOYEE_ROLE.REVIEWER ||
+      userRole === EMPLOYEE_ROLE.APPROVER
+      ) {
+      <h2>
+        Currently, there are {{ numberOfApplications }} applications
+        awaiting your review.
+      </h2>
       } @else {
-        <div class="main-content__left">
-          <h1>Welcome, {{ userName }}!</h1>
-          <hr />
-          @if (
-            userRole === EMPLOYEE_ROLE.REVIEWER ||
-            userRole === EMPLOYEE_ROLE.APPROVER
-          ) {
-            <h2>
-              Currently, there are {{ numberOfApplications }} applications
-              awaiting your review.
-            </h2>
-          } @else {
-            <h2>Cheapest and easiest way to lease a car on the planet earth</h2>
-            <p>Try CarLess and see how much fun car leasing can be.</p>
-          }
-          <button
-            (click)="
+      <h2>Cheapest and easiest way to lease a car on the planet earth</h2>
+      <p>Try CarLess and see how much fun car leasing can be.</p>
+      }
+      <button (click)="
               userRole === EMPLOYEE_ROLE.REVIEWER ||
               userRole === EMPLOYEE_ROLE.APPROVER
                 ? redirectToLeaseList()
                 : redirectToLeaseApplicationForm()
-            "
-          >
-            Get Started
-          </button>
-        </div>
-        <div class="main-content__right">
-          <img
-            [src]="
+            ">
+        Get Started
+      </button>
+    </div>
+    <div class="main-content__right">
+      <img [src]="
               userRole === EMPLOYEE_ROLE.REVIEWER ||
               userRole === EMPLOYEE_ROLE.APPROVER
                 ? environment.pathToFile
                 : environment.pathToPorsche
-            "
-            [alt]="
+            " [alt]="
               userRole === EMPLOYEE_ROLE.REVIEWER ||
               userRole === EMPLOYEE_ROLE.APPROVER
                 ? 'File'
                 : 'Porsche'
-            "
-          />
-        </div>
-      }
+            " />
     </div>
-  </main>
+    }
+  </div>
+</main>
 } @else {
-  <app-spinner [isLoading]="loading"></app-spinner>
+<app-spinner [isLoading]="loading"></app-spinner>
 }

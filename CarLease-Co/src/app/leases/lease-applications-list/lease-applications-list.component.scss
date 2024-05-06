@@ -11,6 +11,10 @@
   margin: auto;
 }
 
+.margin-top {
+  margin-top: $margin-top;
+}
+
 tr:hover {
   background-color: $primary-row;
   transition: 0.5s;
@@ -26,8 +30,8 @@ tr {
   text-align: start;
 }
 
-td,
-th {
+th,
+td {
   min-width: 200px;
   max-width: 250px;
 }

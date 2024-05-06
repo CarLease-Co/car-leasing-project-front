@@ -76,6 +76,7 @@ export class LeaseApplicationsListComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
   onApplication(id: number): void {
     const selectedApplication = this.leaseApplications.find(
       (application) => application.id === id,

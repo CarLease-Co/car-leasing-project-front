@@ -5,30 +5,36 @@
 
 .user-list {
   width: $component-max-width;
-
+  height: 100vh;
   margin: auto;
 }
+
 .max-width {
   max-width: $component-max-width;
   display: flex;
   flex-direction: column;
   margin: auto;
 }
+
 .mat-mdc-form-field {
   font-size: 14px;
   width: 100%;
 }
+
 tr:hover {
   background-color: $primary-row;
   transition: 0.5s;
 }
+
 table {
   max-width: 100%;
 }
+
 th,
 tr {
   text-align: start;
 }
+
 ::ng-deep {
   .mat-mdc-text-field-wrapper {
     margin-top: 1rem;
@@ -36,6 +42,7 @@ tr {
     background-color: white;
   }
 }
+
 @media only screen and (max-width: 700px) {
   .table-width {
     max-width: 100%;
