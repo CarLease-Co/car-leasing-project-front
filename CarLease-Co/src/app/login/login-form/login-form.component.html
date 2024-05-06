@@ -1,12 +1,13 @@
-<mat-card class="login-welcome">
-  <div class="welcome-wrapper">
-    <img src="/assets/motoring-car-svgrepo-com.svg" alt="My SVG Image" />
-    <h1>WELCOME</h1>
-    <h1>BACK</h1>
-    <p>Sign in to continue on CarLess™</p>
-  </div>
-  <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-wrapper">
-    @if (!loading) {
+<div class="container">
+  <mat-card class="login-welcome">
+    <div class="welcome-wrapper">
+      <img src="/assets/motoring-car-svgrepo-com.svg" alt="My SVG Image" />
+      <h1>WELCOME</h1>
+      <h1>BACK</h1>
+      <p>Sign in to continue on CarLess™</p>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-wrapper">
+      @if (!loading) {
       <div class="input-field-wrapper">
         <mat-form-field appearance="fill">
           <mat-label>Username</mat-label>

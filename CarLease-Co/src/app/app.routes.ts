@@ -13,19 +13,21 @@ import { LeaseApplicationsListComponent } from './leases/lease-applications-list
 import { LeaseDetailsComponent } from './leases/lease-details/lease-details.component';
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import { SysAdminViewComponent } from './sys-admin-view/sys-admin-view/sys-admin-view.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 export const routes: Routes = [
   {
     path: ROUTES.LANDING,
-    component: AppComponent,
-    canActivate: [loginAccessGuard],
+    component: LandingPageComponent,
+  },
+  { path: ROUTES.LOGIN, 
+    component: LoginFormComponent 
   },
   {
     path: ROUTES.HOME,
     component: HomePageComponent,
     canActivate: [loginAccessGuard],
   },
-  { path: ROUTES.LOGIN, component: LoginFormComponent },
   {
     path: ROUTES.SYS_ADMIN_VIEW,
     component: SysAdminViewComponent,
